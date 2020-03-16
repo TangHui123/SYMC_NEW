@@ -2,11 +2,11 @@ package cn.com.sany.symc.zg.serialport;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.serialport.SerialPort;
 import android.text.TextUtils;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,7 +23,6 @@ import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
-
 import cn.com.sany.symc.zg.entity.DownDataEntity;
 import cn.com.sany.symc.zg.entity.MultipleStateInfo;
 import cn.com.sany.symc.zg.help.IConstant;
@@ -31,8 +30,9 @@ import cn.com.sany.symc.zg.ui.CameraInterface;
 import cn.com.sany.symc.zg.util.CacheData;
 import cn.com.sany.symc.zg.util.LogUtil;
 import cn.com.sany.symc.zg.util.NumberBytes;
-
 import cn.com.sany.symc.zg.ui.MainActivity;
+
+
 
 /**
  *
@@ -48,6 +48,7 @@ public class SerialHelper {
 	private SerialPort mSerialPort;
 	private OutputStream mOutputStream;
 	private InputStream mInputStream;
+
 
 	private String sPort="/dev/ttyS1";   //外放:mcu2ttyS1  深圳:ttyS1
 	//	private int iBaudRate = 115200;
@@ -803,7 +804,7 @@ public class SerialHelper {
 //							+ "" + NumberBytes.byteToInt(content[0]),null,false);
 					//下发成功、通知到UI界面
 					if(IConstant.COMMAND_DOWN_CAMERA == content[1] || IConstant.COMMAND_DOWN_HISTORY_VIDEO_LOOK == content[1] ){
-						setMessage(content[1],null);
+						setMessage(content[1],null,null);
 					}
 				}else {
 					//消息下发失败，重新下发
@@ -835,6 +836,7 @@ public class SerialHelper {
 		}
 
 	}
+
 
 	/***
 	 *
@@ -1002,14 +1004,13 @@ public class SerialHelper {
 
 		if(content_size>35){
 			System.arraycopy(content,32,temp_1,0,1);
-			multipleStateInfo.setBattery_electricity(binary(temp_1,10));//电池流量
+			multipleStateInfo.setBattery_electricity(binary(temp_1,10));  //电池流量
 
 			System.arraycopy(content,33,temp_1,0,1);
 			multipleStateInfo.setSignal_strength(bytes2int(temp_1));//信号强度
 
 			System.arraycopy(content,34,temp_1,0,1);
-			multipleStateInfo.setWireless_link_status(binary(temp_1,10));//无线连接状态
-
+			multipleStateInfo.setWireless_link_status(binary(temp_1,10));  //无线连接状态
 		}
 
 		if(content_size>37){
@@ -1025,7 +1026,7 @@ public class SerialHelper {
 		}
 
 		//发送消息,更新UI
-		setMessage(IConstant.COMMAND_MULTIPLE_POSTION_INFO,multipleStateInfo);
+		setMessage(IConstant.COMMAND_MULTIPLE_POSTION_INFO,multipleStateInfo,content);
 
 		//LogUtil.d(TAG,"===========initSerial=============start=================dealMultiplePosInfo===end===================");
 		CacheData.setMsg_info("===========initSerial==================start====dealMultiplePosInfo===end=================",1);
@@ -1059,10 +1060,13 @@ public class SerialHelper {
 	 * @param what：命令字    object：更新的数据对象
 	 *
 	 */
-	private void setMessage(int what,Object object){
+	private void setMessage(int what,Object object,byte[] content){
 		Message message = new Message();
 		message.what = what;
 		message.obj = object;
+		Bundle bundle = new Bundle();
+		bundle.putByteArray("content",content);
+		message.setData(bundle);
 		mHandler.sendMessage(message);
 	}
 

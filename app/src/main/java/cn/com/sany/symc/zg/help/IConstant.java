@@ -366,4 +366,16 @@ public class IConstant {
     public static final String ERR_CODE_47 = "47";  //泡沫罐液位传感器故障
     public static final String ERR_CODE_48 = "48";  //臂架靠近高压线警告
 
+    public static final String STATE_00 = "00";   //中间位置
+
+    public static final String STATE_10 = "10";   //上面位置
+
+    public static final String STATE_01 = "01";   //下面位置
+
+    public static final String STATE_100 = "010";   //中间位置
+
+    public static final String STATE_010 = "100";   //上面位置
+
+    public static final String STATE_001 = "001";   //下面位置
+
 }
