@@ -684,9 +684,9 @@
                            <ImageView
                                android:id="@+id/ivMid2111"
                                android:layout_width="37dp"
-                               android:layout_height="34dp"
+                               android:layout_height="32dp"
                                android:scaleType="fitXY"
-                               android:src="@drawable/ic_22_up_red"/>
+                               android:src="@drawable/ic_22_up_red" />
 
                            <ImageView
                                android:id="@+id/ivMid2112"

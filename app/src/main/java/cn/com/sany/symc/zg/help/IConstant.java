@@ -372,9 +372,9 @@ public class IConstant {
 
     public static final String STATE_01 = "01";   //下面位置
 
-    public static final String STATE_100 = "010";   //中间位置
+    public static final String STATE_100 = "100";   //中间位置
 
-    public static final String STATE_010 = "100";   //上面位置
+    public static final String STATE_010 = "010";   //上面位置
 
     public static final String STATE_001 = "001";   //下面位置
 

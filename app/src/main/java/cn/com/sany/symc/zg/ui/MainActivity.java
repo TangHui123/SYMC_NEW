@@ -579,6 +579,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         signalStrengthLayout1.setOnClickListener(this);
         waterLLayout = (LinearLayout) findViewById(R.id.waterLLayout);
         waterLLayout.setOnClickListener(this);
+
+        tvLeftXz.setOnClickListener(this);
+        tvRightXz.setOnClickListener(this);
+
 //        startLLayout = (LinearLayout) findViewById(R.id.startLLayout);
 //        startLLayout.setOnClickListener(this);
 
@@ -688,16 +692,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         try {
             switch (id) {
 
-                //打开摄像头
-//                case R.id.waterLevel: {
-//                    //往linux发送视频摄像头打开指令
-//                    if (serialhelp != null) {
-//                        //打开预览
-//                        OpenCameraInfo();
-//                        //serialhelp.sendDisplayVideo(NumberBytes.intToByte(CacheData.getSerial_id()), CacheData.content_display,true);
-//                    }
-//                    break;
-//                }
+                //左边园圈
+                case R.id.tvLeftXz: {
+                    //弹出调试信息显示框
+                    if(messageShowFragment == null){
+                        messageShowFragment = new MessageShowFragment();
+                    }
+
+                    if(!messageShowFragment.isAdded() && !messageShowFragment.isVisible()&& !messageShowFragment.isRemoving()){
+                        messageShowFragment.show(getSupportFragmentManager(), "messageLogId");
+                    }
+                    break;
+                }
+                //右边园圈
+                case R.id.tvRightXz: {
+                    //往linux发送视频摄像头打开指令
+                    changePage(1);
+                    break;
+                }
 
 
 
@@ -894,7 +906,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 }
             }catch (Exception e){
-                LogUtil.e(TAG,"===================handleMessage===========================>"+e.getMessage());
+               // LogUtil.e(TAG,"===================handleMessage===========================>"+e.getMessage());
                 e.printStackTrace();
             }
 
@@ -911,7 +923,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      */
     private void dealOtherData(byte [] content) {
 
-        CacheData.setMsg_info("============ReadSerialDataThread=========content===================>" + NumberBytes.byteArrayToHexStr(content), IConstant.MESSAGE_INFO_ALL);
+       // CacheData.setMsg_info("============ReadSerialDataThread=========content===================>" + NumberBytes.byteArrayToHexStr(content), IConstant.MESSAGE_INFO_ALL);
         //B40对应181_b0 遥控启动
         //181数据解析
         if (content.length > 40) {
@@ -1058,14 +1070,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
 
             //回转对中
-            if (tmp_0 == 1) {
+            if (tmp_6 == 1) {
                 ivLeft2.setImageResource(R.drawable.ic_round_red);
             } else {
                 ivLeft2.setImageResource(R.drawable.ic_round_white);
             }
 
             //快档 1
-            if (tmp_1 == 1) {
+            if (tmp_7 == 1) {
                 ivMid3211.setImageResource(R.drawable.ic_22_up_red);
                 ivMid3212.setImageResource(R.drawable.ic_22_do_wh);
             } else {
@@ -1354,21 +1366,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         System.arraycopy(content,53,temp_1,0,1);
         int jkhxh = bytes2int(temp_1);
         if(jkhxh  <= 127){   //  1为上，0为下  图片的设置
-            ivMidFour1133.setImageResource(R.drawable.ic_up_default);
+            ivMidFour1133.setImageResource(R.drawable.ic_left_default);
             tvMidFour1133.setText("");
-            ivMidFour1144.setImageResource(R.drawable.ic_down_select);
+            ivMidFour1144.setImageResource(R.drawable.ic_right_select);
             tvMidFour1144.setText("" + jkhxh);
 
         }else if(jkhxh > 127){
-            ivMidFour1133.setImageResource(R.drawable.ic_up_select);
+            ivMidFour1133.setImageResource(R.drawable.ic_left_select);
             tvMidFour1133.setText("-" + (256-jkhxh));
-            ivMidFour1144.setImageResource(R.drawable.ic_down_default);
+            ivMidFour1144.setImageResource(R.drawable.ic_right_default);
             tvMidFour1144.setText("");
         }
         if(jkhxh==0){
-            ivMidFour1144.setImageResource(R.drawable.ic_down_default);
+            ivMidFour1144.setImageResource(R.drawable.ic_right_default);
             tvMidFour1144.setText("");
         }
+
 
         //备用信号
         System.arraycopy(content,39,temp_1,0,1);

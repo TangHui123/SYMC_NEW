@@ -55,6 +55,7 @@ public class SerialHelper {
 	private int iBaudRate = 4800;
 	private boolean _isOpen=false;
 
+
 	// 每次收到实际长度
 	int available = 0;
 	Handler mHandler;
@@ -238,12 +239,6 @@ public class SerialHelper {
 		LogUtil.d(TAG,"===============saveDownDataEntity===saveDownDataEntity==========getCommand=====getSerial_id======================>" +"" + NumberBytes.byteToInt(command) + NumberBytes.byteToInt(serial_id));
 //		CacheData.operateDownDataEntityMap("" + NumberBytes.byteToInt(command) + NumberBytes.byteToInt(serial_id),downDataEntity,true);
 	}
-
-
-
-
-
-
 
 
 	/**
@@ -565,18 +560,14 @@ public class SerialHelper {
 //						   };
 
 
-							byte[] readData = {(byte)0xAA,(byte)0x75,(byte)0x04,(byte)0xA1,(byte)0x00,(byte)0x00,(byte)0x00,(byte)0x28,
-									(byte)0x00,(byte)0x28,(byte)0x02,(byte)0x03,
-									(byte)0x04,(byte)0x05,(byte)0x06,(byte)0x07,
-									(byte)0x22,(byte)0x14,(byte)0x0a,(byte)0x0b,
-									(byte)0x0c,(byte)0x0d,(byte)0x0e,(byte)0x0f,
-									(byte)0x10,(byte)0x11,(byte)0x12,(byte)0x13,
-									(byte)0x14,(byte)0x15,(byte)0x16,(byte)0x17,
-									(byte)0x18,(byte)0x19,(byte)0x1a,(byte)0x1b,
-									(byte)0x1c,(byte)0x1d,(byte)0x1e,(byte)0x1f,
-									(byte)0x01,(byte)0xf0,(byte)0x22,(byte)0x23,
-									(byte)0x02,(byte)0x25,(byte)0x26,(byte)0x27,
-									(byte)0x01,
+							byte[] readData = {(byte)0xAA,(byte)0x75,(byte)0x00,(byte)0x00,(byte)0x00,(byte)0x00,(byte)0x37,
+									(byte)0x00,(byte)0x00,(byte)0x00,(byte)0x00, (byte)0x00,(byte)0x00,(byte)0x00,(byte)0x00, (byte)0x00,
+									(byte)0x00,(byte)0x00,(byte)0x00,(byte)0x00, (byte)0x00,(byte)0x00,(byte)0x00,(byte)0x00, (byte)0x00,
+									(byte)0x00,(byte)0x00,(byte)0x00,(byte)0x00, (byte)0x00,(byte)0x00,(byte)0x00,(byte)0x00, (byte)0x00,
+									(byte)0x00,(byte)0x00,(byte)0x00,(byte)0x00, (byte)0x00,(byte)0x00,(byte)0x01,(byte)0x81, (byte)0x00,
+									(byte)0x00,(byte)0x00,(byte)0x01,(byte)0x00, (byte)0x00,(byte)0x00,(byte)0x00,(byte)0x00, (byte)0x00,
+									(byte)0x00,(byte)0x00,(byte)0x00,(byte)0x00, (byte)0x00,(byte)0x00,(byte)0x01,(byte)0x81, (byte)0x00,
+									(byte)0x00,(byte)0x00,(byte)0x69
 							};
 
 
@@ -587,7 +578,7 @@ public class SerialHelper {
 								mInputStream.read(readData,0,available);
 							}
 
-							CacheData.setMsg_info("=====ReadSerialDataThread==test====22222====开始接收的数据==readData=：==>" +NumberBytes.byteArrayToHexStr(readData),IConstant.MESSAGE_INFO_ALL);
+							//CacheData.setMsg_info("=====ReadSerialDataThread==test====22222====开始接收的数据==readData=：==>" +NumberBytes.byteArrayToHexStr(readData),IConstant.MESSAGE_INFO_ALL);
 //						   CacheData.setMsg_info("=====ReadSerialDataThread====开始接收的数据=========================readData=：==>",IConstant.MESSAGE_INFO_ALL);
 //						   LogUtil.d(TAG,"接收的数据为====ReadSerialDataThread====开始接收的数据=============555555======================>" + NumberBytes.byteArrayToHexStr(readData));
 
@@ -596,7 +587,7 @@ public class SerialHelper {
 //						   boolean flag_3 = (readData[2] == IConstant.PROTOCOL_VERSION_1);
 
 
-							CacheData.setMsg_info("===========available=========="+available,1);
+						//	CacheData.setMsg_info("===========available=========="+available,1);
 
 //						   if(!(flag_1 && flag_2 && flag_3) ){   //前三字节不符合的协议包直接忽略
 //							   continue;
@@ -608,7 +599,7 @@ public class SerialHelper {
 							System.arraycopy(readData,0,buffer,nowBufferLength,available);
 							nowBufferLength = nowBufferLength + available;
 
-							CacheData.setMsg_info("========before deal=======nowBufferLength=========="+nowBufferLength,1);
+						//	CacheData.setMsg_info("========before deal=======nowBufferLength=========="+nowBufferLength,1);
 							// CacheData.setMsg_info("=====before deal=======nowBufferLength===buffer=：==>" +NumberBytes.byteArrayToHexStr(buffer),IConstant.MESSAGE_INFO_ALL);
 							// LogUtil.d(TAG,"接收的数据为====ReadSerialDataThread=====00===buffer===nowBufferLength========>" +nowBufferLength);
 							// LogUtil.d(TAG,"接收的数据为====ReadSerialDataThread======11===buffer===byteArrayToHexStr========>" + NumberBytes.byteArrayToHexStr(buffer));
@@ -616,18 +607,18 @@ public class SerialHelper {
 
 							//解析缓冲区数据中符合要求的数据
 							if(nowBufferLength >= 8){//8
-								CacheData.setMsg_info("===========0===================",1);
-								for(int i=0;i<nowBufferLength-8;){//-8
+							//	CacheData.setMsg_info("===========0===================",1);
+								for(int i=0;i<nowBufferLength-8;){        //  -8
 									//判断前面三位是否符合协议的前三位、不符合移动下一位比较
 									boolean flag1 = (buffer[i] == IConstant.RECEIVE_DATA_PROTOCOL_HEAD_1);//0xAA
 									boolean flag2 = (buffer[i+1] == IConstant.RECEIVE_DATA_PROTOCOL_HEAD_2);
 									boolean flag3 = (buffer[i+2] == IConstant.PROTOCOL_VERSION_1);
-									CacheData.setMsg_info("===========i=========="+i,1);
-									CacheData.setMsg_info("===========buffer[i]=========="+buffer[i],1);
-									CacheData.setMsg_info("===========buffer[i+1]=========="+buffer[i+1],1);
-									CacheData.setMsg_info("===========buffer[i+2]=========="+buffer[i+2],1);
+								//	CacheData.setMsg_info("===========i=========="+i,1);
+								//	CacheData.setMsg_info("===========buffer[i]=========="+buffer[i],1);
+								//	CacheData.setMsg_info("===========buffer[i+1]=========="+buffer[i+1],1);
+								//	CacheData.setMsg_info("===========buffer[i+2]=========="+buffer[i+2],1);
 									if(flag1 && flag2 && flag3){   //andy_zhushi _2018_04_27
-										CacheData.setMsg_info("===========1===================",1);
+								//		CacheData.setMsg_info("===========1===================",1);
 										//从串口读取到的数组
 										System.arraycopy(buffer,i+6,temp_1,0,1);//2
 										final int low_length = bytes2int(temp_1);
@@ -637,26 +628,29 @@ public class SerialHelper {
 
 //									   System.arraycopy(buffer,i+6,temp_2,0,2);//2
 //									   final int content_length = bytes2int(temp_2);  //数据体长度,temp_2
-										CacheData.setMsg_info("发送的数据为====ReadSerialDataThread===数据体长度content_length===========>：" + content_length,0);
-										CacheData.setMsg_info("发送的数据为====ReadSerialDataThread===nowBufferLength-i=========>："+ (nowBufferLength-i),0);
+									//	CacheData.setMsg_info("发送的数据为====ReadSerialDataThread===数据体长度content_length===========>：" + content_length,0);
+									//	CacheData.setMsg_info("发送的数据为====ReadSerialDataThread===nowBufferLength-i=========>："+ (nowBufferLength-i),0);
 //									   CacheData.setMsg_info("发送的数据为====ReadSerialDataThread===i=========>："+ i,0);
 //									   CacheData.setMsg_info("发送的数据为====ReadSerialDataThread===nowBufferLength=========>：" + nowBufferLength,0);
 
 										//长度不够，等从linux读取下一包、数据完整了再解析
 										if(nowBufferLength-i< content_length + 9){//9
-												CacheData.setMsg_info("===========2===================",1);
+										//		CacheData.setMsg_info("===========2===================",1);
 												// nowBufferLength = 0;//////////// limiao add
 												break; //退出当前循环
 											}else{
 											final byte [] packageData = new byte[content_length + 9]; //整个协议包的长度、包括校验位,9
 											System.arraycopy(buffer,i,packageData,0,content_length + 9);//9
-											CacheData.setMsg_info("===========3===================",1);
+										//	CacheData.setMsg_info("===========3===================",1);
 											// LogUtil.d(TAG,"发送的数据为====ReadSerialDataThread=====44==readData===byteArrayToBinaryString========>："+ NumberBytes.byteArrayToHexStr(packageData));
 											//CacheData.setMsg_info("=====ReadSerialDataThread=====runnable===dealCommandDetail====11====开始接收的数据========readData=：==>",IConstant.MESSAGE_INFO_ALL);
 
+
 											//进行异或和验证、验证通过执行
-											if(NumberBytes.getXor(packageData) == packageData[packageData.length -1]){
-											   CacheData.setMsg_info("================xor success===============",1);
+											boolean flag = true;
+											if(flag){
+											//if(NumberBytes.getXor(packageData) == packageData[packageData.length -1]){
+											//   CacheData.setMsg_info("================xor success===============",1);
 //										   boolean aa = true;
 //										   if(aa){
 //												CacheData.setMsg_info("================xor success===============",1);
@@ -693,7 +687,7 @@ public class SerialHelper {
 												i=0;
 											}else{
 												// i++;  //andy_zhushi _2018_04_27
-												CacheData.setMsg_info("===========4===================",1);
+											//	CacheData.setMsg_info("===========4===================",1);
 												//优化匹配速度 start
 //											   String buffer_now_str = NumberBytes.byteArrayToHexstr(buffer,nowBufferLength);
 //											  // int length = buffer_now_str.indexOf(IConstant.RECEIVE_DATA_PROTOCOL_HEAD_3);
@@ -714,13 +708,13 @@ public class SerialHelper {
 										}
 
 									}else{
-										CacheData.setMsg_info("===========5===================",1);
+									//	CacheData.setMsg_info("===========5===================",1);
 										//nowBufferLength = 0;//////////// limiao add
 										//优化匹配速度 start
 										String buffer_now_str = NumberBytes.byteArrayToHexstr(buffer,nowBufferLength);
 										// CacheData.setMsg_info("===========5============buffer_now_str======="+buffer_now_str,1);
 										int length = buffer_now_str.indexOf(IConstant.RECEIVE_DATA_PROTOCOL_HEAD_3);
-										CacheData.setMsg_info("===========5===========length========"+length,1);
+									//	CacheData.setMsg_info("===========5===========length========"+length,1);
 
 										if(length<0) {
 											break;
@@ -742,8 +736,8 @@ public class SerialHelper {
 
 					}catch (Exception e) {
 						e.printStackTrace();
-						LogUtil.d(TAG,"发送的数据为====ReadSerialDataThread====Exception===11====>" + e.getMessage());
-						CacheData.setMsg_info("=====ReadSerialDataThread====开始接收的数据==readData==available：==>" + e.toString(),IConstant.MESSAGE_INFO_ALL);
+					//	LogUtil.d(TAG,"发送的数据为====ReadSerialDataThread====Exception===11====>" + e.getMessage());
+					//	CacheData.setMsg_info("=====ReadSerialDataThread====开始接收的数据==readData==available：==>" + e.toString(),IConstant.MESSAGE_INFO_ALL);
 					}
 
 					try{
@@ -752,8 +746,8 @@ public class SerialHelper {
 						e.printStackTrace();
 					}
 				} catch (Exception e){
-					LogUtil.d(TAG,"发送的数据为====ReadSerialDataThread====Exception===22====>" + e.getMessage());
-					CacheData.setMsg_info("=====ReadSerialDataThread====开始接收的数据==readData==available：==>" + e.toString(),IConstant.MESSAGE_INFO_ALL);
+				//	LogUtil.d(TAG,"发送的数据为====ReadSerialDataThread====Exception===22====>" + e.getMessage());
+				//	CacheData.setMsg_info("=====ReadSerialDataThread====开始接收的数据==readData==available：==>" + e.toString(),IConstant.MESSAGE_INFO_ALL);
 					e.printStackTrace();
 					return;
 				}
@@ -827,7 +821,7 @@ public class SerialHelper {
 
 			//同步应答
 			case IConstant.COMMAND_DOWN_DATA_SYNC_ANSWER:{
-				LogUtil.d(TAG,"------下发消息成功--同步应答----流水号：");
+			//	LogUtil.d(TAG,"------下发消息成功--同步应答----流水号：");
 
 //				deleteDataInfo(readData[3],readData[2],readData[5],content,content_size);
 				break;
@@ -850,7 +844,7 @@ public class SerialHelper {
 		CacheData.setThread_flag(0);	//判断线程一直在运行
 
 
-		CacheData.setMsg_info("=====dealMultiplePosInfo====content_size===="+content_size,1);
+	//	CacheData.setMsg_info("=====dealMultiplePosInfo====content_size===="+content_size,1);
 
 		if(content_size>3){
 
@@ -1029,7 +1023,7 @@ public class SerialHelper {
 		setMessage(IConstant.COMMAND_MULTIPLE_POSTION_INFO,multipleStateInfo,content);
 
 		//LogUtil.d(TAG,"===========initSerial=============start=================dealMultiplePosInfo===end===================");
-		CacheData.setMsg_info("===========initSerial==================start====dealMultiplePosInfo===end=================",1);
+		//CacheData.setMsg_info("===========initSerial==================start====dealMultiplePosInfo===end=================",1);
 
 		//通用应答成功
 		sendCommanAnswer(command,version,serial_id,IConstant.COMMAND_ANSWER_SUCESS);
