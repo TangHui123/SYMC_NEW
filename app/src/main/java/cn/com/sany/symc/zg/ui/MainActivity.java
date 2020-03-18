@@ -391,8 +391,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         initCameraInfo();
 
         // OpenCameraInfo();
+
+
         SystemBrightManager.stopAutoBrightness(this);
-        SystemBrightManager.setBrightness(this,100);
+        SharedPreferences share = getSharedPreferences("Acitivity", Context.MODE_WORLD_READABLE);
+        int val = share.getInt("value", 100);
+        SystemBrightManager.setBrightness(this, val);
+
+        SharedPreferences.Editor editor = share.edit();//获取编辑器
+        editor.putInt("value", val);
+        editor.commit();//提交修改
 
     }
 
@@ -426,7 +434,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ivLeft1 = (ImageView)findViewById(R.id.ivLeft1);
         ivLeft2 = (ImageView)findViewById(R.id.ivLeft2);
         ivLeft3 = (ImageView)findViewById(R.id.ivLeft3);
-        ivLeft4  = (ImageView)findViewById(R.id.ivLeft3);
+        ivLeft4  = (ImageView)findViewById(R.id.ivLeft4);
 
         ivRight1 = (ImageView)findViewById(R.id.ivRight1);
         ivRight2 = (ImageView)findViewById(R.id.ivRight2);
@@ -440,7 +448,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         tvLeftFour1111 = (TextView)findViewById(R.id.tvLeftFour1111);
         tvLeftFour1122 = (TextView)findViewById(R.id.tvLeftFour1122);
+
         tvLeftFour1133 = (TextView)findViewById(R.id.tvLeftFour1133);
+
         tvLeftFour1144 = (TextView)findViewById(R.id.tvLeftFour1144);
 
         ivRightFour1111 = (ImageView)findViewById(R.id.ivRightFour1111);
@@ -670,6 +680,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     mainLLayout.setVisibility(View.VISIBLE);
                     testB98LLayout.setVisibility(View.GONE);
                 }
+
+
 //                SharedPreferences.Editor editor = share.edit();//获取编辑器
 //                editor.putInt("page", page);
 //                editor.commit();
@@ -692,7 +704,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         try {
             switch (id) {
 
-                //左边园圈
+                //左边圆圈
                 case R.id.tvLeftXz: {
                     //弹出调试信息显示框
                     if(messageShowFragment == null){
@@ -704,7 +716,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
                     break;
                 }
-                //右边园圈
+                //右边圆圈
                 case R.id.tvRightXz: {
                     //往linux发送视频摄像头打开指令
                     changePage(1);
@@ -1040,13 +1052,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 ivMid2112.setImageResource(R.drawable.ic_22_do_red);
             }
 
-            //遥控器照明
-            if (tmp_2 == 1) {
-                ivRight3.setImageResource(R.drawable.ic_round_red);
-            } else {
-                ivRight3.setImageResource(R.drawable.ic_round_white);
-            }
-
             //急停
             if(tmp_3 == 1) {
                 // ivRight3.setImageResource(R.drawable.ic_round_red);
@@ -1088,6 +1093,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         if (content.length > 42) {
             temp = content[42];
+            //temp = 0x10;
             tmp_0 = (temp >> 0) & 0x1;
             tmp_1 = (temp >> 1) & 0x1;
             tmp_2 = (temp >> 2) & 0x1;
@@ -1283,6 +1289,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //三臂手柄信号
         System.arraycopy(content,48,temp_1,0,1);
         int sanbsb = bytes2int(temp_1);
+       // CacheData.setMsg_info("==========sanbsb=======temp_1=======收到数据======>" + temp_1 ,0);
+       // CacheData.setMsg_info("==========sanbsb=======sanbsb=======收到数据======>" + sanbsb ,0);
         if(sanbsb <= 127){     // 1为上，0为下
             ivLeftFour1133.setImageResource(R.drawable.ic_left_default);
             tvLeftFour1133.setText("");
@@ -1384,15 +1392,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
         //备用信号
-        System.arraycopy(content,39,temp_1,0,1);
+        System.arraycopy(content,54,temp_1,0,1);
         int byxh = bytes2int(temp_1);
         if(byxh  <= 127){
-            tvLeftXz.setText("" + byxh);
+            tvRightXz.setText("" + byxh);
         }else if(byxh > 127){
-            tvLeftXz.setText("-" + (256-byxh));
+            tvRightXz.setText("-" + (256-byxh));
         }
         if(byxh==0){
-            tvLeftXz.setText("");
+            tvRightXz.setText("");
         }
 
    }
@@ -1572,18 +1580,36 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             noSignal.setVisibility(LinearLayout.VISIBLE);
             haveSignal.setVisibility(LinearLayout.GONE);
             signalStrength.setVisibility(View.GONE);
+
+            signalStrengthLayoutTest.setVisibility(FrameLayout.VISIBLE);
+            signalStrengthLayout1Test.setVisibility(FrameLayout.GONE);
+            noSignalTest.setVisibility(LinearLayout.VISIBLE);
+            haveSignalTest.setVisibility(LinearLayout.GONE);
+            signalStrengthTest.setVisibility(View.GONE);
+
         }else if (IConstant.WIRELESS_LINK_1.equals(wireless_link_status)){
             signalStrengthLayout.setVisibility(FrameLayout.VISIBLE);
             signalStrengthLayout1.setVisibility(FrameLayout.GONE);
             noSignal.setVisibility(LinearLayout.GONE);
             haveSignal.setVisibility(LinearLayout.VISIBLE);
             signalStrength.setVisibility(View.VISIBLE);
+
+            signalStrengthLayoutTest.setVisibility(FrameLayout.VISIBLE);
+            signalStrengthLayout1Test.setVisibility(FrameLayout.GONE);
+            noSignalTest.setVisibility(LinearLayout.GONE);
+            haveSignalTest.setVisibility(LinearLayout.VISIBLE);
+            signalStrengthTest.setVisibility(View.VISIBLE);
         } else if (IConstant.WIRELESS_LINK_2.equals(wireless_link_status)){
             signalStrengthLayout.setVisibility(FrameLayout.GONE);
             signalStrengthLayout1.setVisibility(FrameLayout.VISIBLE);
             noSignal.setVisibility(LinearLayout.GONE);
             haveSignal.setVisibility(LinearLayout.GONE);
             signalStrength.setVisibility(View.GONE);
+
+            signalStrengthLayoutTest.setVisibility(FrameLayout.GONE);
+            signalStrengthLayout1Test.setVisibility(FrameLayout.VISIBLE);
+            noSignalTest.setVisibility(LinearLayout.GONE);
+            haveSignalTest.setVisibility(LinearLayout.GONE);
         }
 
 
@@ -1797,16 +1823,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //        }
         if ((remote_ctrl_status & 0x2) == 0x2) {
             RemoteCtrlStatus.setText(getString(R.string.scram));
+            tvStartStaTest.setText(getString(R.string.scram));
+            tvStop1111.setText(getString(R.string.scram));
+            ivStop1111.setImageResource(R.drawable.ic_jt_use);
         } else if((remote_ctrl_status & 0x1) == 0x1) {
             RemoteCtrlStatus.setText(getString(R.string.started));
+            tvStartStaTest.setText(getString(R.string.started));
+            tvStop1111.setText(getString(R.string.shut_stop));
+            ivStop1111.setImageResource(R.drawable.ic_jt_stop);
         } else if ((remote_ctrl_status & 0x1) == 0x0) {
             RemoteCtrlStatus.setText(getString(R.string.not_started));
+            tvStartStaTest.setText(getString(R.string.not_started));
+            tvStop1111.setText(getString(R.string.shut_stop));
+            ivStop1111.setImageResource(R.drawable.ic_jt_stop);
         }
 
 //        CacheData.setMsg_info("==========displayMultipleState=======6=======收到数据======>" ,0);
         if (IConstant.BATTARY_STATUS_0.equals(battery_electricity)) {
             lowBattery.setVisibility(LinearLayout.VISIBLE);
             haveBattery.setVisibility(LinearLayout.GONE);
+
+            lowBatteryTest.setVisibility(LinearLayout.GONE);
+            haveBatteryTest.setVisibility(LinearLayout.GONE);
         } else if (IConstant.BATTARY_STATUS_1.equals(battery_electricity)) {
             haveBattery.setVisibility(LinearLayout.VISIBLE);
             lowBattery.setVisibility(LinearLayout.GONE);
@@ -1814,6 +1852,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Battery2.setVisibility(View.INVISIBLE);
             Battery3.setVisibility(View.INVISIBLE);
             Battery4.setVisibility(View.INVISIBLE);
+
+            haveBatteryTest.setVisibility(LinearLayout.VISIBLE);
+            lowBatteryTest.setVisibility(LinearLayout.GONE);
+            tvBatteryTest1.setVisibility(View.VISIBLE);
+            tvBatteryTest2.setVisibility(View.INVISIBLE);
+            tvBatteryTest3.setVisibility(View.INVISIBLE);
+            tvBatteryTest4.setVisibility(View.INVISIBLE);
         } else if (IConstant.BATTARY_STATUS_2.equals(battery_electricity)) {
             haveBattery.setVisibility(LinearLayout.VISIBLE);
             lowBattery.setVisibility(LinearLayout.GONE);
@@ -1821,6 +1866,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Battery2.setVisibility(View.VISIBLE);
             Battery3.setVisibility(View.INVISIBLE);
             Battery4.setVisibility(View.INVISIBLE);
+
+            haveBatteryTest.setVisibility(LinearLayout.VISIBLE);
+            lowBatteryTest.setVisibility(LinearLayout.GONE);
+            tvBatteryTest1.setVisibility(View.VISIBLE);
+            tvBatteryTest2.setVisibility(View.VISIBLE);
+            tvBatteryTest3.setVisibility(View.INVISIBLE);
+            tvBatteryTest4.setVisibility(View.INVISIBLE);
         } else if (IConstant.BATTARY_STATUS_3.equals(battery_electricity)) {
             haveBattery.setVisibility(LinearLayout.VISIBLE);
             lowBattery.setVisibility(LinearLayout.GONE);
@@ -1828,6 +1880,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Battery2.setVisibility(View.VISIBLE);
             Battery3.setVisibility(View.VISIBLE);
             Battery4.setVisibility(View.INVISIBLE);
+
+            haveBatteryTest.setVisibility(LinearLayout.VISIBLE);
+            lowBatteryTest.setVisibility(LinearLayout.GONE);
+            tvBatteryTest1.setVisibility(View.VISIBLE);
+            tvBatteryTest2.setVisibility(View.VISIBLE);
+            tvBatteryTest3.setVisibility(View.VISIBLE);
+            tvBatteryTest4.setVisibility(View.INVISIBLE);
         } else if (IConstant.BATTARY_STATUS_4.equals(battery_electricity)) {
             haveBattery.setVisibility(LinearLayout.VISIBLE);
             lowBattery.setVisibility(LinearLayout.GONE);
@@ -1835,6 +1894,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Battery2.setVisibility(View.VISIBLE);
             Battery3.setVisibility(View.VISIBLE);
             Battery4.setVisibility(View.VISIBLE);
+
+            haveBatteryTest.setVisibility(LinearLayout.VISIBLE);
+            lowBatteryTest.setVisibility(LinearLayout.GONE);
+            tvBatteryTest1.setVisibility(View.VISIBLE);
+            tvBatteryTest2.setVisibility(View.VISIBLE);
+            tvBatteryTest3.setVisibility(View.VISIBLE);
+            tvBatteryTest4.setVisibility(View.VISIBLE);
         }
 
 //        if (IConstant.WATER_PUMP_START.equals(water_pump_status)){
@@ -1945,13 +2011,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             ErrCode.setText(getString(R.string.err_code_48));
         }
 
+
         if(signal_strength > 127){
             signal_strength = 256 - signal_strength;
 //            CacheData.setMsg_info("==========signal_strength=====+++====== > 127======>"+signal_strength ,0);
             signalStrength.setText(("-" + signal_strength));
+            signalStrengthTest.setText(("-" + signal_strength));
         }else{
 //            CacheData.setMsg_info("==========signal_strength=====+++====== <= 127======>"+signal_strength ,0);
             signalStrength.setText("" + signal_strength);
+            signalStrengthTest.setText(("" + signal_strength));
         }
 
         brightNess(brightness);
@@ -2087,15 +2156,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }else{
                     val = val + 50;
                 }
+
                 // CacheData.setMsg_info("=================brightNess==========tvBright=============="+"" + (val*100)/250 + "%",1);
                // tvBright.setText("" + (val*100)/250 + "%");
                 SharedPreferences.Editor editor = share.edit();//获取编辑器
                 editor.putInt("value", val);
                 editor.commit();//提交修改
                 SystemBrightManager.setBrightness(this, val);
+
             }
             change_bright_old = 1;
+            ivRight3.setImageResource(R.drawable.ic_round_red);
         }else{
+            ivRight3.setImageResource(R.drawable.ic_round_white);
             change_bright_old = 0;
         }
 

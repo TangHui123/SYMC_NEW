@@ -44,6 +44,7 @@ public class SerialHelper {
 
 	//    private boolean debug = true;
 	private boolean debug = false;
+
 	public static final String TAG = "SerialHelper.class";
 	private SerialPort mSerialPort;
 	private OutputStream mOutputStream;
@@ -52,8 +53,9 @@ public class SerialHelper {
 
 	private String sPort="/dev/ttyS1";   //外放:mcu2ttyS1  深圳:ttyS1
 	//	private int iBaudRate = 115200;
-	private int iBaudRate = 4800;
+	private int iBaudRate = 115200;
 	private boolean _isOpen=false;
+
 
 
 	// 每次收到实际长度
@@ -81,6 +83,7 @@ public class SerialHelper {
 	private byte [] temp_64 = new byte[64];
 
 	private byte[] send_common = new byte[12];
+
 
 	private String rail_id = "";
 
@@ -236,7 +239,7 @@ public class SerialHelper {
 		downDataEntity.setCommand(command);
 		downDataEntity.setSerial_id(serial_id);
 		downDataEntity.setTime(new Date());
-		LogUtil.d(TAG,"===============saveDownDataEntity===saveDownDataEntity==========getCommand=====getSerial_id======================>" +"" + NumberBytes.byteToInt(command) + NumberBytes.byteToInt(serial_id));
+		//LogUtil.d(TAG,"===============saveDownDataEntity===saveDownDataEntity==========getCommand=====getSerial_id======================>" +"" + NumberBytes.byteToInt(command) + NumberBytes.byteToInt(serial_id));
 //		CacheData.operateDownDataEntityMap("" + NumberBytes.byteToInt(command) + NumberBytes.byteToInt(serial_id),downDataEntity,true);
 	}
 
@@ -647,9 +650,9 @@ public class SerialHelper {
 
 
 											//进行异或和验证、验证通过执行
-											boolean flag = true;
-											if(flag){
-											//if(NumberBytes.getXor(packageData) == packageData[packageData.length -1]){
+//											boolean flag = true;
+//											if(flag){
+											if(NumberBytes.getXor(packageData) == packageData[packageData.length -1]){
 											//   CacheData.setMsg_info("================xor success===============",1);
 //										   boolean aa = true;
 //										   if(aa){
