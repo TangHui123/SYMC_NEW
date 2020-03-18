@@ -149,8 +149,9 @@ public class SerialHelper {
 	 *
 	 */
 	public SerialHelper(Handler mHandler, Context context){
+
 //		this("/dev/ttyS1",115200);   //ttyS1  mcu2ttyS1
-		this("/dev/ttyS1",4800);   //ttyS1  mcu2ttyS1
+		this("/dev/ttyS1",115200);   //ttyS1  mcu2ttyS1
 		this.mHandler= mHandler;
 		this.context = context;
 	}
@@ -162,6 +163,7 @@ public class SerialHelper {
 	 *
 	 */
 	public void open() throws SecurityException, IOException,InvalidParameterException {
+
 
 		if (!debug){
 			File f = new File(sPort);

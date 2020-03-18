@@ -392,10 +392,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         // OpenCameraInfo();
 
-
         SystemBrightManager.stopAutoBrightness(this);
         SharedPreferences share = getSharedPreferences("Acitivity", Context.MODE_WORLD_READABLE);
-        int val = share.getInt("value", 100);
+        int val = share.getInt("value", 200);
         SystemBrightManager.setBrightness(this, val);
 
         SharedPreferences.Editor editor = share.edit();//获取编辑器
@@ -2146,25 +2145,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
         if((flag&0x4) == 0x4) {
-            if(change_bright_old == 0){
-                SharedPreferences share = getSharedPreferences("Acitivity", Context.MODE_WORLD_READABLE);
-                val = share.getInt("value", 100);
-                if (val >= 250) {
-                    val = 2;
-                }else if(val >= 200){
-                    val = 250;
-                }else{
-                    val = val + 50;
-                }
-
-                // CacheData.setMsg_info("=================brightNess==========tvBright=============="+"" + (val*100)/250 + "%",1);
-               // tvBright.setText("" + (val*100)/250 + "%");
-                SharedPreferences.Editor editor = share.edit();//获取编辑器
-                editor.putInt("value", val);
-                editor.commit();//提交修改
-                SystemBrightManager.setBrightness(this, val);
-
-            }
+//            if(change_bright_old == 0){
+//                SharedPreferences share = getSharedPreferences("Acitivity", Context.MODE_WORLD_READABLE);
+//                val = share.getInt("value", 100);
+//                if (val >= 250) {
+//                    val = 2;
+//                }else if(val >= 200){
+//                    val = 250;
+//                }else{
+//                    val = val + 50;
+//                }
+//
+//                // CacheData.setMsg_info("=================brightNess==========tvBright=============="+"" + (val*100)/250 + "%",1);
+//               // tvBright.setText("" + (val*100)/250 + "%");
+//                SharedPreferences.Editor editor = share.edit();//获取编辑器
+//                editor.putInt("value", val);
+//                editor.commit();//提交修改
+//                SystemBrightManager.setBrightness(this, val);
+//
+//            }
             change_bright_old = 1;
             ivRight3.setImageResource(R.drawable.ic_round_red);
         }else{
