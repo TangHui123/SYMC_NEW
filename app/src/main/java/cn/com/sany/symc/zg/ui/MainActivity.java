@@ -1842,7 +1842,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             lowBattery.setVisibility(LinearLayout.VISIBLE);
             haveBattery.setVisibility(LinearLayout.GONE);
 
-            lowBatteryTest.setVisibility(LinearLayout.GONE);
+            lowBatteryTest.setVisibility(LinearLayout.VISIBLE);
             haveBatteryTest.setVisibility(LinearLayout.GONE);
         } else if (IConstant.BATTARY_STATUS_1.equals(battery_electricity)) {
             haveBattery.setVisibility(LinearLayout.VISIBLE);
