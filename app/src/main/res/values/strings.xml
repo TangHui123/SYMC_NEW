@@ -20,8 +20,8 @@
     <string name="err_code_17">2臂臂架干涉</string>
     <string name="err_code_18">3臂臂架干涉</string>
     <string name="err_code_19">4臂臂架干涉</string>
-    <string name="err_code_20">5臂臂架干涉</string>
-    <string name="err_code_21">分动箱测速故障</string>
+    <string name="err_code_20">附具连杆干涉</string>
+    <string name="err_code_21">水炮未缩到位</string>
     <string name="err_code_22">紧急停止</string>
     <string name="err_code_23">超速故障</string>
     <string name="err_code_24">臂架达到最远距离</string>

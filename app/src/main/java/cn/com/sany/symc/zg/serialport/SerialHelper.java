@@ -51,6 +51,7 @@ public class SerialHelper {
 	private InputStream mInputStream;
 
 
+
 	private String sPort="/dev/ttyS1";   //外放:mcu2ttyS1  深圳:ttyS1
 	//	private int iBaudRate = 115200;
 	private int iBaudRate = 115200;
