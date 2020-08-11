@@ -1990,26 +1990,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             ErrCode.setText(getString(R.string.err_code_38));
         } else if (IConstant.ERR_CODE_39.equals(err_code)) {
             ErrCode.setText(getString(R.string.err_code_39));
-        } else if (IConstant.ERR_CODE_40.equals(err_code)) {
-            ErrCode.setText(getString(R.string.err_code_40));
-        } else if (IConstant.ERR_CODE_41.equals(err_code)) {
-            ErrCode.setText(getString(R.string.err_code_41));
-        } else if (IConstant.ERR_CODE_42.equals(err_code)) {
-            ErrCode.setText(getString(R.string.err_code_42));
-        } else if (IConstant.ERR_CODE_43.equals(err_code)) {
-            ErrCode.setText(getString(R.string.err_code_43));
-        } else if (IConstant.ERR_CODE_44.equals(err_code)) {
-            ErrCode.setText(getString(R.string.err_code_44));
-        } else if (IConstant.ERR_CODE_45.equals(err_code)) {
-            ErrCode.setText(getString(R.string.err_code_45));
-        } else if (IConstant.ERR_CODE_46.equals(err_code)) {
-            ErrCode.setText(getString(R.string.err_code_46));
-        } else if (IConstant.ERR_CODE_47.equals(err_code)) {
-            ErrCode.setText(getString(R.string.err_code_47));
-        } else if (IConstant.ERR_CODE_48.equals(err_code)) {
-            ErrCode.setText(getString(R.string.err_code_48));
+        }else{
+            ErrCode.setText("");
         }
-
 
         if(signal_strength > 127){
             signal_strength = 256 - signal_strength;
@@ -2024,7 +2007,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         brightNess(brightness);
         changePage(brightness);
-
 
 //        CacheData.setMsg_info("==========displayMultipleState=======8=======收到数据======>" ,0);
     }
