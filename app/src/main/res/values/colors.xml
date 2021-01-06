@@ -96,5 +96,7 @@
     <color name="market_title_limit">#800080</color>
     <color name="market_title_xie">#339999</color>
     <color name="market_title_stop">#0000FF</color>
+    
+    <color name="main_text_color">#ffffffff</color>
 
 </resources>

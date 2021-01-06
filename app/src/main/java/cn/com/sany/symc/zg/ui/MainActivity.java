@@ -255,6 +255,47 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private FrameLayout signalStrengthLayoutTest;
     private FrameLayout signalStrengthLayout1Test;
 
+    //tanghui add for SYMC new
+    private TextView mTextView_1_1;
+    private TextView mTextView_1_2;
+    private TextView mTextView_1_3;
+    private TextView mTextView_1_4;
+    
+    private TextView mTextView_2_1;
+    private TextView mTextView_2_2;
+    private TextView mTextView_2_3;
+    private TextView mTextView_2_4;
+    
+    private TextView mTextView_3_1;
+    private TextView mTextView_3_2;
+    private TextView mTextView_3_3;
+    private TextView mTextView_3_4;
+    
+    private TextView mTextView_4_1;
+    private TextView mTextView_4_2;
+    private TextView mTextView_4_3;
+    private TextView mTextView_4_4;
+    
+    private TextView mTextView_5_1;
+    private TextView mTextView_5_2;
+    private TextView mTextView_5_3;
+    private TextView mTextView_5_4;
+    
+    private TextView mTextView_6_1;
+    private TextView mTextView_6_2;
+    private TextView mTextView_6_3;
+    private TextView mTextView_6_4;
+    
+    private TextView mTextView_7_1;
+    private TextView mTextView_7_2;
+    private TextView mTextView_7_3;
+    private TextView mTextView_7_4;
+    
+    private TextView mTextView_8_1;
+    private TextView mTextView_8_2;
+    private TextView mTextView_8_3;
+    private TextView mTextView_8_4;
+    //tanghui add en
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -343,6 +384,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void initView(Bundle savedInstanceState) {
 
         //初始化控件基本信息
+        initMainView();
         initBaseInfo();
 
         //初始化摄像头信息
@@ -359,6 +401,48 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         editor.putInt("value", val);
         editor.commit();//提交修改
 
+    }
+    
+    private void initMainView() {
+        mTextView_1_1 = (TextView) findViewById(R.id.oil_danwei_1_1);
+        mTextView_1_2 = (TextView) findViewById(R.id.oil_youwei_1_2);
+        mTextView_1_3 = (TextView) findViewById(R.id.water_temper_1_3);
+        mTextView_1_4 = (TextView) findViewById(R.id.presure_youwen_1_4);
+
+        mTextView_2_1 = (TextView) findViewById(R.id.oil_temper_2_1);
+        mTextView_2_2 = (TextView) findViewById(R.id.power_mode_2_2);
+        mTextView_2_3 = (TextView) findViewById(R.id.work_mode_2_3);
+        mTextView_2_4 = (TextView) findViewById(R.id.engine_mode_2_4);
+
+        mTextView_3_1 = (TextView) findViewById(R.id.pump_pressure_3_1);
+        mTextView_3_2 = (TextView) findViewById(R.id.pump_pressure_3_2);
+        mTextView_3_3 = (TextView) findViewById(R.id.pump_ele_3_3);
+        mTextView_3_4 = (TextView) findViewById(R.id.pump_ele_3_4);
+
+        mTextView_4_1 = (TextView) findViewById(R.id.fisrt_pressure_4_1);
+        mTextView_4_2 = (TextView) findViewById(R.id.work_displacement_4_2);
+        mTextView_4_3 = (TextView) findViewById(R.id.stick_displacement_4_3);
+        mTextView_4_4 = (TextView) findViewById(R.id.shovel_displacement_4_4);
+
+        mTextView_5_1 = (TextView) findViewById(R.id.reve_displackement_5_1);
+        mTextView_5_2 = (TextView) findViewById(R.id.left_displackement_5_2);
+        mTextView_5_3 = (TextView) findViewById(R.id.right_displackement_5_3);
+        mTextView_5_4 = (TextView) findViewById(R.id.work_angle_5_4);
+
+        mTextView_6_1 = (TextView) findViewById(R.id.stick_angle_6_1);
+        mTextView_6_2 = (TextView) findViewById(R.id.shovel_angle_6_2);
+        mTextView_6_3 = (TextView) findViewById(R.id.reve_angle_6_3);
+        mTextView_6_4 = (TextView) findViewById(R.id.front_back_angle_6_4);
+
+        mTextView_7_1 = (TextView) findViewById(R.id.left_riht_angle_7_1);
+        mTextView_7_2 = (TextView) findViewById(R.id.fault_warn_7_2);
+        mTextView_7_3 = (TextView) findViewById(R.id.battery_7_3);
+        mTextView_7_4 = (TextView) findViewById(R.id.oil_pressure_7_4);
+
+        mTextView_8_1 = (TextView) findViewById(R.id.water_temper_high_8_1);
+        mTextView_8_2 = (TextView) findViewById(R.id.air_block_8_2);
+        mTextView_8_3 = (TextView) findViewById(R.id.oil_water_high_8_3);
+        mTextView_8_4 = (TextView) findViewById(R.id.null_8_4);
     }
 
     private String stringSub(String pa_str, String son_str) {
@@ -503,38 +587,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         signalStrengthLayout = (FrameLayout) findViewById(R.id.signalStrengthLayout);
         signalStrengthLayout1 = (FrameLayout) findViewById(R.id.signalStrengthLayout1);
-        TurretAngle = (TextView) findViewById(R.id.TurretAngle);
-        EngineSpeed = (TextView) findViewById(R.id.EngineSpeed);
-        HydraulicPress = (TextView) findViewById(R.id.HydraulicPress);
-        PumpVentPress = (TextView) findViewById(R.id.PumpVentPress);
-        ErrCode = (TextView) findViewById(R.id.ErrCode);
-        ArmAngle1 = (TextView) findViewById(R.id.ArmAngle1);
-        ArmAngle2 = (TextView) findViewById(R.id.ArmAngle2);
-        ArmAngle3 = (TextView) findViewById(R.id.ArmAngle3);
-        ArmAngle4 = (TextView) findViewById(R.id.ArmAngle4);
-        ArmAngle5 = (TextView) findViewById(R.id.ArmAngle5);
         
-        WaterFlow = (TextView) findViewById(R.id.WaterFlow);
-
         signalStrength = (TextView) findViewById(R.id.signalStrength);
         RemoteCtrlStatus = (TextView) findViewById(R.id.RemoteCtrlStatus);
 
         signalStrengthLayout.setOnClickListener(this);
         signalStrengthLayout1.setOnClickListener(this);
-        waterLLayout = (LinearLayout) findViewById(R.id.waterLLayout);
-        waterLLayout.setOnClickListener(this);
+//        waterLLayout.setOnClickListener(this);
 
         tvLeftXz.setOnClickListener(this);
         tvRightXz.setOnClickListener(this);
-
-        turretHitok = (LinearLayout) findViewById(R.id.TurretHitok);
-        turretHitfail = (LinearLayout) findViewById(R.id.TurretHitfail);
-
-        urgentStopok = (LinearLayout) findViewById(R.id.UrgentStopok);
-        urgentStopfail = (LinearLayout) findViewById(R.id.UrgentStopfail);
-
-        waterPumpok = (LinearLayout) findViewById(R.id.WaterPumpok);
-        waterPumpfail = (LinearLayout) findViewById(R.id.WaterPumpfail);
 
         noSignal = (LinearLayout) findViewById(R.id.tvSignal2);
         haveSignal = (LinearLayout) findViewById(R.id.tvSignal1);
@@ -555,9 +617,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      */
     private void initCameraInfo() {
         //摄像头控件
-        cameraView = (CameraSurfaceView) findViewById(R.id.cameraView);
-        cameraView.setVisibility(View.VISIBLE);
-
     }
 
     /**
@@ -655,12 +714,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     break;
 
-                }
-
-                case R.id.waterLLayout: {
-                    //进入文件系统目录
-                    dealPasswordValidate(IConstant.SOURCE_SETTING);
-                    break;
                 }
 
 
