@@ -6,10 +6,9 @@
     android:background="@android:color/black"
     android:baselineAligned="false">
     <include android:id="@+id/testB98LLayout"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="visible"
-        android:layout_weight="15"
+        android:visibility="gone"
         android:orientation="horizontal"
         layout="@layout/main_test_b98"
         />
@@ -17,7 +16,7 @@
         android:id="@+id/mainLLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
+        android:visibility="visible"
         >
 
         <LinearLayout

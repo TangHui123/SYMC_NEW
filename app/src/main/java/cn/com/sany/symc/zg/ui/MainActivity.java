@@ -64,36 +64,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private String str_temp;
     private int res_id;
     private TextView TurretAngle;
-    //    private TextView EngineSpeedLow;
-//    private TextView EngineSpeedHigh;
     private TextView EngineSpeed;
     private TextView HydraulicPress;
     private TextView PumpVentPress;
     private TextView ErrCode;
-
-    //    private TextView ArmAngle1L;
-//    private TextView ArmAngle1H;
+    
     private TextView ArmAngle1;
-    //    private TextView ArmAngle2L;
-//    private TextView ArmAngle2H;
     private TextView ArmAngle2;
-    //    private TextView ArmAngle3L;
-//    private TextView ArmAngle3H;
     private TextView ArmAngle3;
-    //    private TextView ArmAngle4L;
-//    private TextView ArmAngle4H;
     private TextView ArmAngle4;
-    //    private TextView ArmAngle5L;
-//    private TextView ArmAngle5H;
     private TextView ArmAngle5;
-    //    private TextView ArmAngle6L;
-//    private TextView ArmAngle6H;
     private TextView ArmAngle6;
-    //    private TextView WaterFlowLow;
-//    private TextView WaterFlowHigh;
     private TextView WaterFlow;
-    //    private TextView WindSpeedLow;
-//    private TextView WindSpeedHigh;
     private TextView WindSpeed;
 
     private TextView signalStrength;
@@ -338,21 +320,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
         }, 1000);
-//
-//        new Handler() {
-//        }.postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                try {
-//                    CacheData.setMsg_info("==========cameraIndex5=======cameraIndex=======收到数据======>" + cameraIndex ,0);
-//                    cameraIndex = 5;
-//                    CameraInterface.getInstance().doStopCamera();
-//                    OpenCameraInfo();
-//                } catch (Exception e) {
-//                    LogUtil.e(TAG,"========初始化数据异常===============>"+e.getMessage());
-//                }
-//            }
-//        }, 10000);
 
     }
 
@@ -536,40 +503,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         signalStrengthLayout = (FrameLayout) findViewById(R.id.signalStrengthLayout);
         signalStrengthLayout1 = (FrameLayout) findViewById(R.id.signalStrengthLayout1);
-//        TurretAngleLow = (TextView) findViewById(R.id.TurretAngleLow);
-//        TurretAngleHigh = (TextView) findViewById(R.id.TurretAngleHigh);
         TurretAngle = (TextView) findViewById(R.id.TurretAngle);
-//        EngineSpeedLow = (TextView) findViewById(R.id.EngineSpeedLow);
-//        EngineSpeedHigh = (TextView) findViewById(R.id.EngineSpeedHigh);
         EngineSpeed = (TextView) findViewById(R.id.EngineSpeed);
         HydraulicPress = (TextView) findViewById(R.id.HydraulicPress);
         PumpVentPress = (TextView) findViewById(R.id.PumpVentPress);
         ErrCode = (TextView) findViewById(R.id.ErrCode);
-//        ArmAngle1L = (TextView) findViewById(R.id.ArmAngle1L);
-//        ArmAngle1H = (TextView) findViewById(R.id.ArmAngle1H);
         ArmAngle1 = (TextView) findViewById(R.id.ArmAngle1);
-//        ArmAngle2L = (TextView) findViewById(R.id.ArmAngle2L);
-//        ArmAngle2H = (TextView) findViewById(R.id.ArmAngle2H);
         ArmAngle2 = (TextView) findViewById(R.id.ArmAngle2);
-//        ArmAngle3L = (TextView) findViewById(R.id.ArmAngle3L);
-//        ArmAngle3H = (TextView) findViewById(R.id.ArmAngle3H);
         ArmAngle3 = (TextView) findViewById(R.id.ArmAngle3);
-//        ArmAngle4L = (TextView) findViewById(R.id.ArmAngle4L);
-//        ArmAngle4H = (TextView) findViewById(R.id.ArmAngle4H);
         ArmAngle4 = (TextView) findViewById(R.id.ArmAngle4);
-//        ArmAngle5L = (TextView) findViewById(R.id.ArmAngle5L);
-//        ArmAngle5H = (TextView) findViewById(R.id.ArmAngle5H);
         ArmAngle5 = (TextView) findViewById(R.id.ArmAngle5);
-//        ArmAngle6L = (TextView) findViewById(R.id.ArmAngle6L);
-//        ArmAngle6H = (TextView) findViewById(R.id.ArmAngle6H);
-//        ArmAngle6 = (TextView) findViewById(R.id.ArmAngle6);
-
-//        WaterFlowLow = (TextView) findViewById(R.id.WaterFlowLow);
-//        WaterFlowHigh = (TextView) findViewById(R.id.WaterFlowHigh);
+        
         WaterFlow = (TextView) findViewById(R.id.WaterFlow);
-//        WindSpeedLow = (TextView) findViewById(R.id.WindSpeedLow);
-//        WindSpeedHigh = (TextView) findViewById(R.id.WindSpeedHigh);
-//        WindSpeed = (TextView) findViewById(R.id.WindSpeed);
 
         signalStrength = (TextView) findViewById(R.id.signalStrength);
         RemoteCtrlStatus = (TextView) findViewById(R.id.RemoteCtrlStatus);
@@ -581,10 +526,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         tvLeftXz.setOnClickListener(this);
         tvRightXz.setOnClickListener(this);
-
-//        startLLayout = (LinearLayout) findViewById(R.id.startLLayout);
-//        startLLayout.setOnClickListener(this);
-
 
         turretHitok = (LinearLayout) findViewById(R.id.TurretHitok);
         turretHitfail = (LinearLayout) findViewById(R.id.TurretHitfail);
@@ -604,24 +545,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Battery2 = (TextView) findViewById(R.id.tvBattery2);
         Battery3 = (TextView) findViewById(R.id.tvBattery3);
         Battery4 = (TextView) findViewById(R.id.tvBattery4);
-
-//        formLevel1 = (TextView) findViewById(R.id.tvFormlevel1);
-//        formLevel2 = (TextView) findViewById(R.id.tvFormlevel2);
-//        formLevel3 = (TextView) findViewById(R.id.tvFormlevel3);
-//        formLevel4 = (TextView) findViewById(R.id.tvFormlevel4);
-//        formLevel5 = (TextView) findViewById(R.id.tvFormlevel5);
-//        formLevel6 = (TextView) findViewById(R.id.tvFormlevel6);
-//        formLevel7 = (TextView) findViewById(R.id.tvFormlevel7);
-//        formLevel8 = (TextView) findViewById(R.id.tvFormlevel8);
-
-//        waterLevel1 = (TextView) findViewById(R.id.tvWaterlevel1);
-//        waterLevel2 = (TextView) findViewById(R.id.tvWaterlevel2);
-//        waterLevel3 = (TextView) findViewById(R.id.tvWaterlevel3);
-//        waterLevel4 = (TextView) findViewById(R.id.tvWaterlevel4);
-//        waterLevel5 = (TextView) findViewById(R.id.tvWaterlevel5);
-//        waterLevel6 = (TextView) findViewById(R.id.tvWaterlevel6);
-//        waterLevel7 = (TextView) findViewById(R.id.tvWaterlevel7);
-//        waterLevel8 = (TextView) findViewById(R.id.tvWaterlevel8);
 
     }
 
@@ -1008,20 +931,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if (tmp_0 == 1) {
                 ivMid2211.setImageResource(R.drawable.ic_22_up_red);
                 ivMid2212.setImageResource(R.drawable.ic_22_do_wh);
-                //提附具  放附具
-//                if (tmp_2 == 1) {
-//                    ivMid3311.setImageResource(R.drawable.ic_3_up_red);
-//                    ivMid3312.setImageResource(R.drawable.ic_3_mi_wh);
-//                    ivMid3313.setImageResource(R.drawable.ic_3_do_wh);
-//                } else if (tmp_3 == 1) {
-//                    ivMid3311.setImageResource(R.drawable.ic_3_up_wh);
-//                    ivMid3312.setImageResource(R.drawable.ic_3_mi_red);
-//                    ivMid1313.setImageResource(R.drawable.ic_3_do_wh);
-//                } else {
-//                    ivMid3311.setImageResource(R.drawable.ic_3_up_wh);
-//                    ivMid3312.setImageResource(R.drawable.ic_3_mi_wh);
-//                    ivMid1313.setImageResource(R.drawable.ic_3_do_red);
-//                }
             } else {
                 ivMid2211.setImageResource(R.drawable.ic_22_up_wh);
                 ivMid2212.setImageResource(R.drawable.ic_22_do_red);
@@ -1191,25 +1100,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 ivMid1111.setImageResource(R.drawable.ic_22_up_wh);
                 ivMid1112.setImageResource(R.drawable.ic_22_do_red);
             }
-
-
-            //炮出水开
-//            if (tmp_4 == 1) {
-//                ivMid1111.setImageResource(R.drawable.ic_22_up_red);
-//                ivMid1112.setImageResource(R.drawable.ic_22_do_wh);
-//            } else {
-//                ivMid1111.setImageResource(R.drawable.ic_22_up_wh);
-//                ivMid1112.setImageResource(R.drawable.ic_22_do_red);
-//            }
-
-            //钮子备用
-//            if (tmp_5 == 1) {
-//                ivMid2311.setImageResource(R.drawable.ic_22_up_red);
-//                ivMid2312.setImageResource(R.drawable.ic_22_do_wh);
-//            } else {
-//                ivMid2311.setImageResource(R.drawable.ic_22_up_wh);
-//                ivMid2312.setImageResource(R.drawable.ic_22_do_red);
-//            }
 
         }
 
@@ -1424,51 +1314,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         String water_level = multipleStateInfo.getWater_level();
 
-//        String turret_angle_low = multipleStateInfo.getTurret_angle_low();
-//        String turret_angle_high = multipleStateInfo.getTurret_angle_high();
         float turret_angle = multipleStateInfo.getTurret_angle();
 
-//        String engine_speed_low = multipleStateInfo.getEngine_speed_low();
-//        String engine_speed_high = multipleStateInfo.getEngine_speed_high();
         int engine_speed = multipleStateInfo.getEngine_speed();
 
         String hydraulic_press = multipleStateInfo.getHydraulic_press();
 
-//        String pump_vent_press = multipleStateInfo.getPump_vent_press();
         float pump_vent_press = multipleStateInfo.getPump_vent_press();
 
         String err_code = multipleStateInfo.getErr_code();
 
-//        String arm_angle1_low = multipleStateInfo.getArm_angle1_low();
-//        String arm_angle1_high = multipleStateInfo.getArm_angle1_high();
         int arm_angle1 = multipleStateInfo.getArm_angle1();
 
-//        String arm_angle2_low = multipleStateInfo.getArm_angle2_low();
-//        String arm_angle2_high = multipleStateInfo.getArm_angle2_high();
         int arm_angle2 = multipleStateInfo.getArm_angle2();
 
-//        String arm_angle3_low = multipleStateInfo.getArm_angle3_low();
-//        String arm_angle3_high = multipleStateInfo.getArm_angle3_high();
         int arm_angle3 = multipleStateInfo.getArm_angle3();
 
-//        String arm_angle4_low = multipleStateInfo.getArm_angle4_low();
-//        String arm_angle4_high = multipleStateInfo.getArm_angle4_high();
         int arm_angle4 = multipleStateInfo.getArm_angle4();
 
-//        String arm_angle5_low = multipleStateInfo.getArm_angle5_low();
-//        String arm_angle5_high = multipleStateInfo.getArm_angle5_high();
         int arm_angle5 = multipleStateInfo.getArm_angle5();
 
-//        String arm_angle6_low = multipleStateInfo.getArm_angle6_low();
-//        String arm_angle6_high = multipleStateInfo.getArm_angle6_high();
         int arm_angle6 = multipleStateInfo.getArm_angle6();
 
-//        String water_flow_low = multipleStateInfo.getWater_flow_low();
-//        String water_flow_high = multipleStateInfo.getWater_flow_high();
         int water_flow = multipleStateInfo.getWater_flow();
 //
-//        String wind_speed_low = multipleStateInfo.getWind_speed_low();
-//        String wind_speed_high = multipleStateInfo.getWind_speed_high();
         float wind_speed = multipleStateInfo.getWind_speed();
 
         String battery_electricity = multipleStateInfo.getBattery_electricity();
@@ -1487,69 +1356,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else {
             TurretAngle.setText("" + turret_angle);
         }
-//        TurretAngleLow.setText(turret_angle_low);
-//        TurretAngleHigh.setText(turret_angle_high);
-//        TurretAngle.setText("" + turret_angle);
-
-//        EngineSpeedLow.setText(engine_speed_low);
-//        EngineSpeedHigh.setText(engine_speed_high);
         EngineSpeed.setText("" + engine_speed);
 
         HydraulicPress.setText(hydraulic_press);
         PumpVentPress.setText("" + pump_vent_press);
 
-//        ArmAngle1L.setText(arm_angle1_low);
-//        ArmAngle1H.setText(arm_angle1_high);
         ArmAngle1.setText("" + arm_angle1);
-//        ArmAngle2L.setText(arm_angle2_low);
-//        ArmAngle2H.setText(arm_angle2_high);
         ArmAngle2.setText("" + arm_angle2);
-//        ArmAngle3L.setText(arm_angle3_low);
-//        ArmAngle3H.setText(arm_angle3_high);
         ArmAngle3.setText("" + arm_angle3);
-//        ArmAngle4L.setText(arm_angle4_low);
-//        ArmAngle4H.setText(arm_angle4_high);
         ArmAngle4.setText("" + arm_angle4);
-//        ArmAngle5L.setText(arm_angle5_low);
-//        ArmAngle5H.setText(arm_angle5_high);
         ArmAngle5.setText("" + arm_angle5);
-//        ArmAngle6L.setText(arm_angle6_low);
-//        ArmAngle6H.setText(arm_angle6_high);
-//        ArmAngle6.setText("" + arm_angle6);
-
-//        WaterFlowLow.setText(water_flow_low);
-//        WaterFlowHigh.setText(water_flow_high);
         WaterFlow.setText("" + water_flow);
-//
-//        WindSpeedLow.setText(wind_speed_low);
-//        WindSpeedHigh.setText(wind_speed_high);
-//        WindSpeed.setText("" + wind_speed);
-//        CacheData.setMsg_info("==========displayMultipleState=======2=======收到数据======>" ,0);
-
-//        cameraTime_flag++;
-//
-//        if ((brightness&0x8) == 0x0 && cameraFlag7 == 0 && cameraTime_flag>6){
-//            CacheData.setMsg_info("===========cameraIndex = 7;=============",1);
-//            cameraFlag7 = 1;
-//            cameraFlag5 = 0;
-//            CameraInterface.getInstance().doStopCamera();
-//            cameraView.setVisibility(View.VISIBLE);
-//            cameraIndex = 7;
-//            OpenCameraInfo();
-//        }else if ((brightness&0x8) == 0x8 && cameraFlag5 == 0 && cameraTime_flag>6){
-//            CacheData.setMsg_info("===========cameraIndex = 5;=============",1);
-//            cameraFlag7 = 0;
-//            cameraFlag5 = 1;
-//            CameraInterface.getInstance().doStopCamera();
-//            cameraView.setVisibility(View.VISIBLE);
-//            cameraIndex = 5;
-//            OpenCameraInfo();
-//        }
-//
-//        if(cameraTime_flag > 10000){
-//            cameraTime_flag = 100;
-//        }
-//        CacheData.setMsg_info("==========displayMultipleState=======3=======收到数据======>" ,0);
 
         signalStrength.setText(wireless_link_status + "-" + signal_strength);
 
@@ -1590,16 +1407,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             noSignalTest.setVisibility(LinearLayout.GONE);
             haveSignalTest.setVisibility(LinearLayout.GONE);
         }
-
-
-//        if (IConstant.ARM_SPREAD_1.equals(arm_spread_status) && IConstant.ARM_SHRINK_0.equals(arm_shrink_status)){
-//            ArmSpreadStatus.setText(getString(R.string.arm_spread));
-//        }else if (IConstant.ARM_SPREAD_0.equals(arm_spread_status) && IConstant.ARM_SHRINK_1.equals(arm_shrink_status)){
-//            ArmSpreadStatus.setText(getString(R.string.arm_shrink));
-//        }else {
-//            ArmSpreadStatus.setText(getString(R.string.arm_none));
-//        }
-//        CacheData.setMsg_info("==========displayMultipleState=======4=======收到数据======>" ,0);
+        
         if (IConstant.Turret_Hit_ok.equals(turret_hit_status)) {
             turretHitok.setVisibility(View.VISIBLE);
             turretHitfail.setVisibility(View.GONE);
@@ -1624,181 +1432,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             waterPumpfail.setVisibility(View.VISIBLE);
         }
 
-//        CacheData.setMsg_info("==========displayMultipleState=======5=======收到数据======>" ,0);
-
-//        if (IConstant.FOAM_LEVEL_0000.equals(foam_level)){
-//            formLevel1.setVisibility(View.INVISIBLE);
-//            formLevel2.setVisibility(View.INVISIBLE);
-//            formLevel3.setVisibility(View.INVISIBLE);
-//            formLevel4.setVisibility(View.INVISIBLE);
-//            formLevel5.setVisibility(View.INVISIBLE);
-//            formLevel6.setVisibility(View.INVISIBLE);
-//            formLevel7.setVisibility(View.INVISIBLE);
-//            formLevel8.setVisibility(View.INVISIBLE);
-//        }else if(IConstant.FOAM_LEVEL_0001.equals(foam_level)){
-//            formLevel1.setVisibility(View.INVISIBLE);
-//            formLevel2.setVisibility(View.INVISIBLE);
-//            formLevel3.setVisibility(View.INVISIBLE);
-//            formLevel4.setVisibility(View.INVISIBLE);
-//            formLevel5.setVisibility(View.INVISIBLE);
-//            formLevel6.setVisibility(View.INVISIBLE);
-//            formLevel7.setVisibility(View.INVISIBLE);
-//            formLevel8.setVisibility(View.VISIBLE);
-//        }else if(IConstant.FOAM_LEVEL_0010.equals(foam_level)){
-//            formLevel1.setVisibility(View.INVISIBLE);
-//            formLevel2.setVisibility(View.INVISIBLE);
-//            formLevel3.setVisibility(View.INVISIBLE);
-//            formLevel4.setVisibility(View.INVISIBLE);
-//            formLevel5.setVisibility(View.INVISIBLE);
-//            formLevel6.setVisibility(View.INVISIBLE);
-//            formLevel7.setVisibility(View.VISIBLE);
-//            formLevel8.setVisibility(View.VISIBLE);
-//        }else if(IConstant.FOAM_LEVEL_0011.equals(foam_level)){
-//            formLevel1.setVisibility(View.INVISIBLE);
-//            formLevel2.setVisibility(View.INVISIBLE);
-//            formLevel3.setVisibility(View.INVISIBLE);
-//            formLevel4.setVisibility(View.INVISIBLE);
-//            formLevel5.setVisibility(View.INVISIBLE);
-//            formLevel6.setVisibility(View.VISIBLE);
-//            formLevel7.setVisibility(View.VISIBLE);
-//            formLevel8.setVisibility(View.VISIBLE);
-//        }else if(IConstant.FOAM_LEVEL_0100.equals(foam_level)){
-//            formLevel1.setVisibility(View.INVISIBLE);
-//            formLevel2.setVisibility(View.INVISIBLE);
-//            formLevel3.setVisibility(View.INVISIBLE);
-//            formLevel4.setVisibility(View.INVISIBLE);
-//            formLevel5.setVisibility(View.VISIBLE);
-//            formLevel6.setVisibility(View.VISIBLE);
-//            formLevel7.setVisibility(View.VISIBLE);
-//            formLevel8.setVisibility(View.VISIBLE);
-//        }else if(IConstant.FOAM_LEVEL_0101.equals(foam_level)){
-//            formLevel1.setVisibility(View.INVISIBLE);
-//            formLevel2.setVisibility(View.INVISIBLE);
-//            formLevel3.setVisibility(View.INVISIBLE);
-//            formLevel4.setVisibility(View.VISIBLE);
-//            formLevel5.setVisibility(View.VISIBLE);
-//            formLevel6.setVisibility(View.VISIBLE);
-//            formLevel7.setVisibility(View.VISIBLE);
-//            formLevel8.setVisibility(View.VISIBLE);
-//        }else if(IConstant.FOAM_LEVEL_0110.equals(foam_level)){
-//            formLevel1.setVisibility(View.INVISIBLE);
-//            formLevel2.setVisibility(View.INVISIBLE);
-//            formLevel3.setVisibility(View.VISIBLE);
-//            formLevel4.setVisibility(View.VISIBLE);
-//            formLevel5.setVisibility(View.VISIBLE);
-//            formLevel6.setVisibility(View.VISIBLE);
-//            formLevel7.setVisibility(View.VISIBLE);
-//            formLevel8.setVisibility(View.VISIBLE);
-//        }else if(IConstant.FOAM_LEVEL_0111.equals(foam_level)){
-//            formLevel1.setVisibility(View.INVISIBLE);
-//            formLevel2.setVisibility(View.VISIBLE);
-//            formLevel3.setVisibility(View.VISIBLE);
-//            formLevel4.setVisibility(View.VISIBLE);
-//            formLevel5.setVisibility(View.VISIBLE);
-//            formLevel6.setVisibility(View.VISIBLE);
-//            formLevel7.setVisibility(View.VISIBLE);
-//            formLevel8.setVisibility(View.VISIBLE);
-//        }else if(IConstant.FOAM_LEVEL_1000.equals(foam_level)){
-//            formLevel1.setVisibility(View.VISIBLE);
-//            formLevel2.setVisibility(View.VISIBLE);
-//            formLevel3.setVisibility(View.VISIBLE);
-//            formLevel4.setVisibility(View.VISIBLE);
-//            formLevel5.setVisibility(View.VISIBLE);
-//            formLevel6.setVisibility(View.VISIBLE);
-//            formLevel7.setVisibility(View.VISIBLE);
-//            formLevel8.setVisibility(View.VISIBLE);
-//        }
-
-//        if (IConstant.WATER_LEVEL_0000.equals(water_level)){
-//            waterLevel1.setVisibility(View.INVISIBLE);
-//            waterLevel2.setVisibility(View.INVISIBLE);
-//            waterLevel3.setVisibility(View.INVISIBLE);
-//            waterLevel4.setVisibility(View.INVISIBLE);
-//            waterLevel5.setVisibility(View.INVISIBLE);
-//            waterLevel6.setVisibility(View.INVISIBLE);
-//            waterLevel7.setVisibility(View.INVISIBLE);
-//            waterLevel8.setVisibility(View.INVISIBLE);
-//        }else if(IConstant.WATER_LEVEL_0001.equals(water_level)){
-//            waterLevel1.setVisibility(View.INVISIBLE);
-//            waterLevel2.setVisibility(View.INVISIBLE);
-//            waterLevel3.setVisibility(View.INVISIBLE);
-//            waterLevel4.setVisibility(View.INVISIBLE);
-//            waterLevel5.setVisibility(View.INVISIBLE);
-//            waterLevel6.setVisibility(View.INVISIBLE);
-//            waterLevel7.setVisibility(View.INVISIBLE);
-//            waterLevel8.setVisibility(View.VISIBLE);
-//        }else if(IConstant.WATER_LEVEL_0010.equals(water_level)){
-//            waterLevel1.setVisibility(View.INVISIBLE);
-//            waterLevel2.setVisibility(View.INVISIBLE);
-//            waterLevel3.setVisibility(View.INVISIBLE);
-//            waterLevel4.setVisibility(View.INVISIBLE);
-//            waterLevel5.setVisibility(View.INVISIBLE);
-//            waterLevel6.setVisibility(View.INVISIBLE);
-//            waterLevel7.setVisibility(View.VISIBLE);
-//            waterLevel8.setVisibility(View.VISIBLE);
-//        }else if(IConstant.WATER_LEVEL_0011.equals(water_level)){
-//            waterLevel1.setVisibility(View.INVISIBLE);
-//            waterLevel2.setVisibility(View.INVISIBLE);
-//            waterLevel3.setVisibility(View.INVISIBLE);
-//            waterLevel4.setVisibility(View.INVISIBLE);
-//            waterLevel5.setVisibility(View.INVISIBLE);
-//            waterLevel6.setVisibility(View.VISIBLE);
-//            waterLevel7.setVisibility(View.VISIBLE);
-//            waterLevel8.setVisibility(View.VISIBLE);
-//        }else if(IConstant.WATER_LEVEL_0100.equals(water_level)){
-//            waterLevel1.setVisibility(View.INVISIBLE);
-//            waterLevel2.setVisibility(View.INVISIBLE);
-//            waterLevel3.setVisibility(View.INVISIBLE);
-//            waterLevel4.setVisibility(View.INVISIBLE);
-//            waterLevel5.setVisibility(View.VISIBLE);
-//            waterLevel6.setVisibility(View.VISIBLE);
-//            waterLevel7.setVisibility(View.VISIBLE);
-//            waterLevel8.setVisibility(View.VISIBLE);
-//        }else if(IConstant.WATER_LEVEL_0101.equals(water_level)){
-//            waterLevel1.setVisibility(View.INVISIBLE);
-//            waterLevel2.setVisibility(View.INVISIBLE);
-//            waterLevel3.setVisibility(View.INVISIBLE);
-//            waterLevel4.setVisibility(View.VISIBLE);
-//            waterLevel5.setVisibility(View.VISIBLE);
-//            waterLevel6.setVisibility(View.VISIBLE);
-//            waterLevel7.setVisibility(View.VISIBLE);
-//            waterLevel8.setVisibility(View.VISIBLE);
-//        }else if(IConstant.WATER_LEVEL_0110.equals(water_level)){
-//            waterLevel1.setVisibility(View.INVISIBLE);
-//            waterLevel2.setVisibility(View.INVISIBLE);
-//            waterLevel3.setVisibility(View.VISIBLE);
-//            waterLevel4.setVisibility(View.VISIBLE);
-//            waterLevel5.setVisibility(View.VISIBLE);
-//            waterLevel6.setVisibility(View.VISIBLE);
-//            waterLevel7.setVisibility(View.VISIBLE);
-//            waterLevel8.setVisibility(View.VISIBLE);
-//        }else if(IConstant.WATER_LEVEL_0111.equals(water_level)){
-//            waterLevel1.setVisibility(View.INVISIBLE);
-//            waterLevel2.setVisibility(View.VISIBLE);
-//            waterLevel3.setVisibility(View.VISIBLE);
-//            waterLevel4.setVisibility(View.VISIBLE);
-//            waterLevel5.setVisibility(View.VISIBLE);
-//            waterLevel6.setVisibility(View.VISIBLE);
-//            waterLevel7.setVisibility(View.VISIBLE);
-//            waterLevel8.setVisibility(View.VISIBLE);
-//        }else if(IConstant.WATER_LEVEL_1000.equals(water_level)){
-//            waterLevel1.setVisibility(View.VISIBLE);
-//            waterLevel2.setVisibility(View.VISIBLE);
-//            waterLevel3.setVisibility(View.VISIBLE);
-//            waterLevel4.setVisibility(View.VISIBLE);
-//            waterLevel5.setVisibility(View.VISIBLE);
-//            waterLevel6.setVisibility(View.VISIBLE);
-//            waterLevel7.setVisibility(View.VISIBLE);
-//            waterLevel8.setVisibility(View.VISIBLE);
-//        }
-
-//        if (IConstant.REMOTE_CTRL_STATUS_2.equals(remote_ctrl_status)) {
-//            RemoteCtrlStatus.setText(getString(R.string.scram));
-//        } else if (IConstant.REMOTE_CTRL_STATUS_1.equals(remote_ctrl_status)) {
-//            RemoteCtrlStatus.setText(getString(R.string.started));
-//        } else if (IConstant.REMOTE_CTRL_STATUS_0.equals(remote_ctrl_status)) {
-//            RemoteCtrlStatus.setText(getString(R.string.not_started));
-//        }
         if ((remote_ctrl_status & 0x2) == 0x2) {
             RemoteCtrlStatus.setText(getString(R.string.scram));
             tvStartStaTest.setText(getString(R.string.scram));
@@ -1880,14 +1513,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             tvBatteryTest3.setVisibility(View.VISIBLE);
             tvBatteryTest4.setVisibility(View.VISIBLE);
         }
-
-//        if (IConstant.WATER_PUMP_START.equals(water_pump_status)){
-//            WaterPumpStatus.setText(getString(R.string.started));
-//        } else if (IConstant.WATER_PUMP_STOP.equals(water_pump_status)) {
-//            WaterPumpStatus.setText(getString(R.string.stop));
-//        }
-
-//        CacheData.setMsg_info("==========displayMultipleState=======7=======收到数据======>" ,0);
 
         if (IConstant.ERR_CODE_0.equals(err_code)) {
             ErrCode.setText(getString(R.string.err_code_0));
@@ -2086,43 +1711,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void brightNess(int flag) {
         int val;
-//        if((flag&0x4) == 0x4) {
-////            CacheData.setMsg_info("===========flag============="+flag,1);
-//            SharedPreferences share = getSharedPreferences("Acitivity", Context.MODE_WORLD_READABLE);
-//            val = share.getInt("value", 0);
-//            if (val >= 250) {
-//                val = 2;
-//            } else {
-//                val = val + 50;
-//            }
-//
-//            SharedPreferences.Editor editor = share.edit();//获取编辑器
-//            editor.putInt("value", val);
-//            editor.commit();//提交修改
-//            SystemBrightManager.setBrightness(this, val);
-//        }
-
 
         if ((flag & 0x4) == 0x4) {
-//            if(change_bright_old == 0){
-//                SharedPreferences share = getSharedPreferences("Acitivity", Context.MODE_WORLD_READABLE);
-//                val = share.getInt("value", 100);
-//                if (val >= 250) {
-//                    val = 2;
-//                }else if(val >= 200){
-//                    val = 250;
-//                }else{
-//                    val = val + 50;
-//                }
-//
-//                // CacheData.setMsg_info("=================brightNess==========tvBright=============="+"" + (val*100)/250 + "%",1);
-//               // tvBright.setText("" + (val*100)/250 + "%");
-//                SharedPreferences.Editor editor = share.edit();//获取编辑器
-//                editor.putInt("value", val);
-//                editor.commit();//提交修改
-//                SystemBrightManager.setBrightness(this, val);
-//
-//            }
             change_bright_old = 1;
             ivRight3.setImageResource(R.drawable.ic_round_red);
         } else {
