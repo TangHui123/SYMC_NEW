@@ -1,7 +1,6 @@
 package cn.com.sany.symc.zg.ui;
 
 import android.Manifest;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -41,21 +40,18 @@ import cn.com.sany.symc.zg.ui.fragment.MessageShowFragment;
 import cn.com.sany.symc.zg.ui.fragment.PasswordInputFragment;
 import cn.com.sany.symc.zg.util.CacheData;
 import cn.com.sany.symc.zg.util.LogUtil;
-import cn.com.sany.symc.zg.util.NumberBytes;
 
 /**
- *
  * 首页应用
- *
  */
-public class MainActivity extends AppCompatActivity implements View.OnClickListener,CameraInterface.CamOpenOverCallback  {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, CameraInterface.CamOpenOverCallback {
 
     public static final String TAG = "MainActivity.class";
 
     private byte temp;
-    private byte [] temp_1 = new byte[1];
-    private byte [] temp_3 = new byte[3];
-    private byte [] temp_2 = new byte[2];
+    private byte[] temp_1 = new byte[1];
+    private byte[] temp_3 = new byte[3];
+    private byte[] temp_2 = new byte[2];
 
     private int tmp_0;
     private int tmp_1;
@@ -122,9 +118,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private LinearLayout testB98LLayout;    //测试界面
     private LinearLayout mainLLayout;    //内容显示主界面
 
-    private static int  change_page_old = 0;  //保存之前一次上升沿  0x01从0到1切换
+    private static int change_page_old = 0;  //保存之前一次上升沿  0x01从0到1切换
 
-    private static int  change_bright_old = 0;  //保存之前一次亮度上升沿   0x04从0到1切换
+    private static int change_bright_old = 0;  //保存之前一次亮度上升沿   0x04从0到1切换
 
     private LinearLayout lowBattery;
     private LinearLayout haveBattery;
@@ -156,7 +152,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView waterLevel8;
 
 
-
     private boolean syncFlag = true;  //报第一次经纬度执行一次
     private CameraSurfaceView cameraView; //预览
     //串口帮助类
@@ -168,7 +163,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private MessageShowFragment messageShowFragment = new MessageShowFragment();
 
     int count = 0;
-    private long[] mHints=new long[3];
+    private long[] mHints = new long[3];
     private PasswordInputFragment passwordInputFragment;
 
     //更新定位地图信息
@@ -218,7 +213,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView tvMidFour1133;
     private TextView tvMidFour1144;
 
-    private ImageView  ivStop1111;
+    private ImageView ivStop1111;
     private TextView tvStop1111;
 
     private TextView tvRightTwo1211;
@@ -309,9 +304,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 try {
                     //打开串口
                     LogUtil.d(TAG, "===========initSerial=========start=============");
-                    initSerial();
+//                    initSerial();   //tanghui delete for crash
                 } catch (Exception e) {
-                    LogUtil.e(TAG,"========initSerial===========打开串口数据异常==================>"+e.getMessage());
+                    LogUtil.e(TAG, "========initSerial===========打开串口数据异常==================>" + e.getMessage());
                 }
             }
         }, 1200);  //先连接控制器，获取控制器版本号 4000 to 1000
@@ -334,12 +329,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void run() {
                 try {
-                    CacheData.setMsg_info("==========cameraIndex7=======cameraIndex=======收到数据======>" + cameraIndex ,0);
+                    CacheData.setMsg_info("==========cameraIndex7=======cameraIndex=======收到数据======>" + cameraIndex, 0);
                     cameraIndex = 7;
                     CameraInterface.getInstance().doStopCamera();
                     OpenCameraInfo();
                 } catch (Exception e) {
-                    LogUtil.e(TAG,"========初始化数据异常===============>"+e.getMessage());
+                    LogUtil.e(TAG, "========初始化数据异常===============>" + e.getMessage());
                 }
             }
         }, 1000);
@@ -367,22 +362,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onPostResume();
     }
 
-    public int getCameraIndex()
-    {
+    public int getCameraIndex() {
         return cameraIndex;
     }
 
-    public void setCameraIndex(int index)
-    {
+    public void setCameraIndex(int index) {
         this.cameraIndex = index;
     }
 
     /**
-     *
      * 控件初始化
-     *
      */
-    private void initView(Bundle savedInstanceState){
+    private void initView(Bundle savedInstanceState) {
 
         //初始化控件基本信息
         initBaseInfo();
@@ -392,18 +383,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         // OpenCameraInfo();
 
-        SystemBrightManager.stopAutoBrightness(this);
-        SharedPreferences share = getSharedPreferences("Acitivity", Context.MODE_WORLD_READABLE);
+//        SystemBrightManager.stopAutoBrightness(this);
+        SharedPreferences share = getSharedPreferences("Acitivity", Context.MODE_PRIVATE);
         int val = share.getInt("value", 200);
         SystemBrightManager.setBrightness(this, val);
 
-        SharedPreferences.Editor editor = share.edit();//获取编辑器
+        SharedPreferences.Editor editor = share.edit();  //获取编辑器
         editor.putInt("value", val);
         editor.commit();//提交修改
 
     }
 
-    private String stringSub(String pa_str,String son_str){
+    private String stringSub(String pa_str, String son_str) {
         StringBuffer sb = new StringBuffer(pa_str);
         int index = pa_str.indexOf(son_str);
         sb.delete(index, index + son_str.length());
@@ -412,137 +403,136 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     /**
      * 将byte[]转为各种进制的字符串
+     *
      * @param bytes byte[]
      * @return 转换后的字符串
      */
-    private String byteToString(byte[] bytes) throws Exception{
+    private String byteToString(byte[] bytes) throws Exception {
         String str = new String(bytes, "GBK");
-        return TextUtils.isEmpty(str)?str:str.trim();
+        return TextUtils.isEmpty(str) ? str : str.trim();
     }
 
     /**
-     *
      * 初始化缓存数据
-     *
      */
-    private void initBaseInfo(){
+    private void initBaseInfo() {
 
-        testB98LLayout = (LinearLayout)findViewById(R.id.testB98LLayout);
-        mainLLayout = (LinearLayout)findViewById(R.id.mainLLayout);
+        testB98LLayout = (LinearLayout) findViewById(R.id.testB98LLayout);
+        mainLLayout = (LinearLayout) findViewById(R.id.mainLLayout);
 
-        ivLeft1 = (ImageView)findViewById(R.id.ivLeft1);
-        ivLeft2 = (ImageView)findViewById(R.id.ivLeft2);
-        ivLeft3 = (ImageView)findViewById(R.id.ivLeft3);
-        ivLeft4  = (ImageView)findViewById(R.id.ivLeft4);
+        ivLeft1 = (ImageView) findViewById(R.id.ivLeft1);
+        ivLeft2 = (ImageView) findViewById(R.id.ivLeft2);
+        ivLeft3 = (ImageView) findViewById(R.id.ivLeft3);
+        ivLeft4 = (ImageView) findViewById(R.id.ivLeft4);
 
-        ivRight1 = (ImageView)findViewById(R.id.ivRight1);
-        ivRight2 = (ImageView)findViewById(R.id.ivRight2);
-        ivRight3 = (ImageView)findViewById(R.id.ivRight3);
-        ivRight4 = (ImageView)findViewById(R.id.ivRight4);
+        ivRight1 = (ImageView) findViewById(R.id.ivRight1);
+        ivRight2 = (ImageView) findViewById(R.id.ivRight2);
+        ivRight3 = (ImageView) findViewById(R.id.ivRight3);
+        ivRight4 = (ImageView) findViewById(R.id.ivRight4);
 
-        ivLeftFour1111 = (ImageView)findViewById(R.id.ivLeftFour1111);
-        ivLeftFour1122 = (ImageView)findViewById(R.id.ivLeftFour1122);
-        ivLeftFour1133 = (ImageView)findViewById(R.id.ivLeftFour1133);
-        ivLeftFour1144 = (ImageView)findViewById(R.id.ivLeftFour1144);
+        ivLeftFour1111 = (ImageView) findViewById(R.id.ivLeftFour1111);
+        ivLeftFour1122 = (ImageView) findViewById(R.id.ivLeftFour1122);
+        ivLeftFour1133 = (ImageView) findViewById(R.id.ivLeftFour1133);
+        ivLeftFour1144 = (ImageView) findViewById(R.id.ivLeftFour1144);
 
-        tvLeftFour1111 = (TextView)findViewById(R.id.tvLeftFour1111);
-        tvLeftFour1122 = (TextView)findViewById(R.id.tvLeftFour1122);
+        tvLeftFour1111 = (TextView) findViewById(R.id.tvLeftFour1111);
+        tvLeftFour1122 = (TextView) findViewById(R.id.tvLeftFour1122);
 
-        tvLeftFour1133 = (TextView)findViewById(R.id.tvLeftFour1133);
+        tvLeftFour1133 = (TextView) findViewById(R.id.tvLeftFour1133);
 
-        tvLeftFour1144 = (TextView)findViewById(R.id.tvLeftFour1144);
+        tvLeftFour1144 = (TextView) findViewById(R.id.tvLeftFour1144);
 
-        ivRightFour1111 = (ImageView)findViewById(R.id.ivRightFour1111);
-        ivRightFour1122 = (ImageView)findViewById(R.id.ivRightFour1122);
-        ivRightFour1133 = (ImageView)findViewById(R.id.ivRightFour1133);
-        ivRightFour1144 = (ImageView)findViewById(R.id.ivRightFour1144);
+        ivRightFour1111 = (ImageView) findViewById(R.id.ivRightFour1111);
+        ivRightFour1122 = (ImageView) findViewById(R.id.ivRightFour1122);
+        ivRightFour1133 = (ImageView) findViewById(R.id.ivRightFour1133);
+        ivRightFour1144 = (ImageView) findViewById(R.id.ivRightFour1144);
 
-        tvRightFour1111 = (TextView)findViewById(R.id.tvRightFour1111);
-        tvRightFour1122 = (TextView)findViewById(R.id.tvRightFour1122);
-        tvRightFour1133 = (TextView)findViewById(R.id.tvRightFour1133);
-        tvRightFour1144 = (TextView)findViewById(R.id.tvRightFour1144);
+        tvRightFour1111 = (TextView) findViewById(R.id.tvRightFour1111);
+        tvRightFour1122 = (TextView) findViewById(R.id.tvRightFour1122);
+        tvRightFour1133 = (TextView) findViewById(R.id.tvRightFour1133);
+        tvRightFour1144 = (TextView) findViewById(R.id.tvRightFour1144);
 
-        ivMidFour1111 = (ImageView)findViewById(R.id.ivMidFour1111);
-        ivMidFour1122 = (ImageView)findViewById(R.id.ivMidFour1122);
-        ivMidFour1133 = (ImageView)findViewById(R.id.ivMidFour1133);
-        ivMidFour1144 = (ImageView)findViewById(R.id.ivMidFour1144);
+        ivMidFour1111 = (ImageView) findViewById(R.id.ivMidFour1111);
+        ivMidFour1122 = (ImageView) findViewById(R.id.ivMidFour1122);
+        ivMidFour1133 = (ImageView) findViewById(R.id.ivMidFour1133);
+        ivMidFour1144 = (ImageView) findViewById(R.id.ivMidFour1144);
 
-        tvMidFour1111 = (TextView)findViewById(R.id.tvMidFour1111);
-        tvMidFour1122 = (TextView)findViewById(R.id.tvMidFour1122);
-        tvMidFour1133 = (TextView)findViewById(R.id.tvMidFour1133);
-        tvMidFour1144 = (TextView)findViewById(R.id.tvMidFour1144);
+        tvMidFour1111 = (TextView) findViewById(R.id.tvMidFour1111);
+        tvMidFour1122 = (TextView) findViewById(R.id.tvMidFour1122);
+        tvMidFour1133 = (TextView) findViewById(R.id.tvMidFour1133);
+        tvMidFour1144 = (TextView) findViewById(R.id.tvMidFour1144);
 
-        tvMidFour1133 = (TextView)findViewById(R.id.tvMidFour1133);
-        tvMidFour1144 = (TextView)findViewById(R.id.tvMidFour1144);
+        tvMidFour1133 = (TextView) findViewById(R.id.tvMidFour1133);
+        tvMidFour1144 = (TextView) findViewById(R.id.tvMidFour1144);
 
-        ivStop1111 = (ImageView)findViewById(R.id.ivStop1111);
-        tvStop1111 = (TextView)findViewById(R.id.tvStop1111);
+        ivStop1111 = (ImageView) findViewById(R.id.ivStop1111);
+        tvStop1111 = (TextView) findViewById(R.id.tvStop1111);
 
-        tvRightTwo1211 = (TextView)findViewById(R.id.tvRightTwo1211);
-        tvRightTwo1212 = (TextView)findViewById(R.id.tvRightTwo1212);
+        tvRightTwo1211 = (TextView) findViewById(R.id.tvRightTwo1211);
+        tvRightTwo1212 = (TextView) findViewById(R.id.tvRightTwo1212);
 
-        ivMid1111 = (ImageView)findViewById(R.id.ivMid1111);
-        ivMid1112 = (ImageView)findViewById(R.id.ivMid1112);
+        ivMid1111 = (ImageView) findViewById(R.id.ivMid1111);
+        ivMid1112 = (ImageView) findViewById(R.id.ivMid1112);
 
-        ivMid1211 = (ImageView)findViewById(R.id.ivMid1211);
-        ivMid1212 = (ImageView)findViewById(R.id.ivMid1212);
-        ivMid1213 = (ImageView)findViewById(R.id.ivMid1213);
+        ivMid1211 = (ImageView) findViewById(R.id.ivMid1211);
+        ivMid1212 = (ImageView) findViewById(R.id.ivMid1212);
+        ivMid1213 = (ImageView) findViewById(R.id.ivMid1213);
 
-        ivMid1311 = (ImageView)findViewById(R.id.ivMid1311);
-        ivMid1312 = (ImageView)findViewById(R.id.ivMid1312);
-        ivMid1313 = (ImageView)findViewById(R.id.ivMid1313);
+        ivMid1311 = (ImageView) findViewById(R.id.ivMid1311);
+        ivMid1312 = (ImageView) findViewById(R.id.ivMid1312);
+        ivMid1313 = (ImageView) findViewById(R.id.ivMid1313);
 
-        ivMid1411 = (ImageView)findViewById(R.id.ivMid1411);
-        ivMid1412 = (ImageView)findViewById(R.id.ivMid1412);
-        ivMid1413 = (ImageView)findViewById(R.id.ivMid1413);
+        ivMid1411 = (ImageView) findViewById(R.id.ivMid1411);
+        ivMid1412 = (ImageView) findViewById(R.id.ivMid1412);
+        ivMid1413 = (ImageView) findViewById(R.id.ivMid1413);
 
-        ivMid1511 = (ImageView)findViewById(R.id.ivMid1511);
-        ivMid1512 = (ImageView)findViewById(R.id.ivMid1512);
-        ivMid1513 = (ImageView)findViewById(R.id.ivMid1513);
+        ivMid1511 = (ImageView) findViewById(R.id.ivMid1511);
+        ivMid1512 = (ImageView) findViewById(R.id.ivMid1512);
+        ivMid1513 = (ImageView) findViewById(R.id.ivMid1513);
 
-        ivMid1611 = (ImageView)findViewById(R.id.ivMid1611);
-        ivMid1612 = (ImageView)findViewById(R.id.ivMid1612);
+        ivMid1611 = (ImageView) findViewById(R.id.ivMid1611);
+        ivMid1612 = (ImageView) findViewById(R.id.ivMid1612);
 
-        ivMid2111 = (ImageView)findViewById(R.id.ivMid2111);
-        ivMid2112 = (ImageView)findViewById(R.id.ivMid2112);
+        ivMid2111 = (ImageView) findViewById(R.id.ivMid2111);
+        ivMid2112 = (ImageView) findViewById(R.id.ivMid2112);
 
-        ivMid2211 = (ImageView)findViewById(R.id.ivMid2211);
-        ivMid2212 = (ImageView)findViewById(R.id.ivMid2212);
+        ivMid2211 = (ImageView) findViewById(R.id.ivMid2211);
+        ivMid2212 = (ImageView) findViewById(R.id.ivMid2212);
 
-        ivMid3211 = (ImageView)findViewById(R.id.ivMid3211);
-        ivMid3212 = (ImageView)findViewById(R.id.ivMid3212);
+        ivMid3211 = (ImageView) findViewById(R.id.ivMid3211);
+        ivMid3212 = (ImageView) findViewById(R.id.ivMid3212);
 
-        ivMid2311 = (ImageView)findViewById(R.id.ivMid2311);
-        ivMid2312 = (ImageView)findViewById(R.id.ivMid2312);
-        ivMid2313 = (ImageView)findViewById(R.id.ivMid2313);
+        ivMid2311 = (ImageView) findViewById(R.id.ivMid2311);
+        ivMid2312 = (ImageView) findViewById(R.id.ivMid2312);
+        ivMid2313 = (ImageView) findViewById(R.id.ivMid2313);
 
-        ivMid3311 = (ImageView)findViewById(R.id.ivMid3311);
-        ivMid3312 = (ImageView)findViewById(R.id.ivMid3312);
-        ivMid3313 = (ImageView)findViewById(R.id.ivMid3313);
+        ivMid3311 = (ImageView) findViewById(R.id.ivMid3311);
+        ivMid3312 = (ImageView) findViewById(R.id.ivMid3312);
+        ivMid3313 = (ImageView) findViewById(R.id.ivMid3313);
 
         //臂架旋转
-        tvLeftXz = (TextView)findViewById(R.id.tvLeftXz);
+        tvLeftXz = (TextView) findViewById(R.id.tvLeftXz);
         //属具旋转
-        tvMidXz = (TextView)findViewById(R.id.tvMidXz);
+        tvMidXz = (TextView) findViewById(R.id.tvMidXz);
         //备用旋转
-        tvRightXz = (TextView)findViewById(R.id.tvRightXz);
+        tvRightXz = (TextView) findViewById(R.id.tvRightXz);
 
-        noSignalTest = (LinearLayout)findViewById(R.id.noSignalTest);
-        haveSignalTest = (LinearLayout)findViewById(R.id.haveSignalTest);
+        noSignalTest = (LinearLayout) findViewById(R.id.noSignalTest);
+        haveSignalTest = (LinearLayout) findViewById(R.id.haveSignalTest);
 
-        lowBatteryTest = (LinearLayout)findViewById(R.id.lowBatteryLayoutTest);
-        haveBatteryTest = (LinearLayout)findViewById(R.id.haveBatteryLayoutTest);
+        lowBatteryTest = (LinearLayout) findViewById(R.id.lowBatteryLayoutTest);
+        haveBatteryTest = (LinearLayout) findViewById(R.id.haveBatteryLayoutTest);
 
-        tvBatteryTest1 = (TextView)findViewById(R.id.tvBatteryTest1);
-        tvBatteryTest2 = (TextView)findViewById(R.id.tvBatteryTest2);
-        tvBatteryTest3 = (TextView)findViewById(R.id.tvBatteryTest3);
-        tvBatteryTest4 = (TextView)findViewById(R.id.tvBatteryTest4);
+        tvBatteryTest1 = (TextView) findViewById(R.id.tvBatteryTest1);
+        tvBatteryTest2 = (TextView) findViewById(R.id.tvBatteryTest2);
+        tvBatteryTest3 = (TextView) findViewById(R.id.tvBatteryTest3);
+        tvBatteryTest4 = (TextView) findViewById(R.id.tvBatteryTest4);
 
-        tvStartStaTest = (TextView)findViewById(R.id.tvStartStaTest);
-        signalStrengthTest = (TextView)findViewById(R.id.signalStrengthTest);
+        tvStartStaTest = (TextView) findViewById(R.id.tvStartStaTest);
+        signalStrengthTest = (TextView) findViewById(R.id.signalStrengthTest);
 
-        signalStrengthLayoutTest = (FrameLayout)findViewById(R.id.signalStrengthLayoutTest);
-        signalStrengthLayout1Test = (FrameLayout)findViewById(R.id.signalStrengthLayout1Test);
+        signalStrengthLayoutTest = (FrameLayout) findViewById(R.id.signalStrengthLayoutTest);
+        signalStrengthLayout1Test = (FrameLayout) findViewById(R.id.signalStrengthLayout1Test);
 
         signalStrengthLayout = (FrameLayout) findViewById(R.id.signalStrengthLayout);
         signalStrengthLayout1 = (FrameLayout) findViewById(R.id.signalStrengthLayout1);
@@ -637,44 +627,46 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     /**
      * 初始化地图信息
+     *
      * @param
      */
-    private void initCameraInfo(){
+    private void initCameraInfo() {
         //摄像头控件
-        cameraView = (CameraSurfaceView)findViewById(R.id.cameraView);
+        cameraView = (CameraSurfaceView) findViewById(R.id.cameraView);
         cameraView.setVisibility(View.VISIBLE);
 
     }
 
     /**
      * 初始化串口
+     *
      * @param
      */
-    private void initSerial(){
+    private void initSerial() {
 
         try {
             serialhelp = new SerialHelper(mHandler, getApplicationContext());
             serialhelp.open();
         } catch (Exception e) {
-            LogUtil.d("initSerial","============打开串口异常==============：" + e.getMessage());
+            LogUtil.d("initSerial", "============打开串口异常==============：" + e.getMessage());
 
         }
 
     }
 
 
-    private void changePage(int flag){
+    private void changePage(int flag) {
         int val;
         // CacheData.setMsg_info("=======changePage====flag====flag========="+flag,1);
-        if((flag&0x1) == 0x1) {
-            if(change_page_old == 0){
+        if ((flag & 0x1) == 0x1) {
+            if (change_page_old == 0) {
 //                SharedPreferences share = getSharedPreferences("Acitivity", Context.MODE_WORLD_READABLE);
 //                int page = share.getInt("page", 0);
-                if (mainLLayout.getVisibility() == View.VISIBLE){  //0表示内容显示界面， 1：表示测试诊断界面
+                if (mainLLayout.getVisibility() == View.VISIBLE) {  //0表示内容显示界面， 1：表示测试诊断界面
                     // page = 1;
                     mainLLayout.setVisibility(View.GONE);
                     testB98LLayout.setVisibility(View.VISIBLE);
-                }else {
+                } else {
                     // page = 0;
                     mainLLayout.setVisibility(View.VISIBLE);
                     testB98LLayout.setVisibility(View.GONE);
@@ -686,7 +678,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                editor.commit();
             }
             change_page_old = 1;
-        }else{
+        } else {
             change_page_old = 0;
         }
 
@@ -695,6 +687,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     /**
      * 布局中所有点击事件处理
+     *
      * @param view
      */
     @Override
@@ -706,11 +699,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //左边圆圈
                 case R.id.tvLeftXz: {
                     //弹出调试信息显示框
-                    if(messageShowFragment == null){
+                    if (messageShowFragment == null) {
                         messageShowFragment = new MessageShowFragment();
                     }
 
-                    if(!messageShowFragment.isAdded() && !messageShowFragment.isVisible()&& !messageShowFragment.isRemoving()){
+                    if (!messageShowFragment.isAdded() && !messageShowFragment.isVisible() && !messageShowFragment.isRemoving()) {
                         messageShowFragment.show(getSupportFragmentManager(), "messageLogId");
                     }
                     break;
@@ -723,16 +716,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
 
 
-
                 case R.id.signalStrengthLayout:
-                case R.id.signalStrengthLayout1:{
+                case R.id.signalStrengthLayout1: {
 
                     //弹出调试信息显示框
-                    if(messageShowFragment == null){
+                    if (messageShowFragment == null) {
                         messageShowFragment = new MessageShowFragment();
                     }
 
-                    if(!messageShowFragment.isAdded() && !messageShowFragment.isVisible()&& !messageShowFragment.isRemoving()){
+                    if (!messageShowFragment.isAdded() && !messageShowFragment.isVisible() && !messageShowFragment.isRemoving()) {
                         messageShowFragment.show(getSupportFragmentManager(), "messageLogId");
                     }
                     //进入文件系统目录
@@ -742,32 +734,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 }
 
-                case R.id.waterLLayout:{
+                case R.id.waterLLayout: {
                     //进入文件系统目录
                     dealPasswordValidate(IConstant.SOURCE_SETTING);
                     break;
                 }
 
 
-
             }
 
-        }catch (Exception e) {
+        } catch (Exception e) {
 
         }
     }
 
     /**
-     *
      * 跳转到密码输入框，验证通过后，做相应的处理
-     *
      */
-    private void dealPasswordValidate(final int source){
-        System.arraycopy(mHints,1,mHints,0,mHints.length-1);
-        mHints[mHints.length-1] = SystemClock.uptimeMillis();
-        if(SystemClock.uptimeMillis()-mHints[0]<=500){
+    private void dealPasswordValidate(final int source) {
+        System.arraycopy(mHints, 1, mHints, 0, mHints.length - 1);
+        mHints[mHints.length - 1] = SystemClock.uptimeMillis();
+        if (SystemClock.uptimeMillis() - mHints[0] <= 500) {
 
-            if(passwordInputFragment == null){
+            if (passwordInputFragment == null) {
                 passwordInputFragment = new PasswordInputFragment();
             }
 
@@ -775,34 +764,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             passwordInputFragment.setFunCallback(new IFunCallback() {
                 @Override
                 public void onSuccess(Object obj) {
-                    final int source = (int)obj;
+                    final int source = (int) obj;
                     String content = "";
-                    if(source==IConstant.SOURCE_SETTING){
-                        content = "当前安装包的版本号：" + CacheData.versioCode_current + "当前安装包的version_code：" + CacheData.versionName_current +"，您确定要进设置吗？";
-                    }else if(source==IConstant.SOURCE_ES_FILEMANAGER){
-                        content = "当前安装包的版本号：" + CacheData.versioCode_current + "当前安装包的version_code：" + CacheData.versionName_current +"，您确定要进ES文件管理器吗？";
-                    }else if(source==IConstant.SOURCE_QUERY_LOG){
-                        if(messageShowFragment == null){
+                    if (source == IConstant.SOURCE_SETTING) {
+                        content = "当前安装包的版本号：" + CacheData.versioCode_current + "当前安装包的version_code：" + CacheData.versionName_current + "，您确定要进设置吗？";
+                    } else if (source == IConstant.SOURCE_ES_FILEMANAGER) {
+                        content = "当前安装包的版本号：" + CacheData.versioCode_current + "当前安装包的version_code：" + CacheData.versionName_current + "，您确定要进ES文件管理器吗？";
+                    } else if (source == IConstant.SOURCE_QUERY_LOG) {
+                        if (messageShowFragment == null) {
                             messageShowFragment = new MessageShowFragment();
                         }
 
-                        if(!messageShowFragment.isAdded() && !messageShowFragment.isVisible()&& !messageShowFragment.isRemoving()){
+                        if (!messageShowFragment.isAdded() && !messageShowFragment.isVisible() && !messageShowFragment.isRemoving()) {
                             messageShowFragment.show(getSupportFragmentManager(), "messageLogId");
                         }
                         return;
-                    }else if(source==IConstant.SOURCE_U_UPGRADE){
+                    } else if (source == IConstant.SOURCE_U_UPGRADE) {
                         // if(FileUtil.getAllExternalSdcardPath()){
                         //发送安装广播
                         Intent intent = new Intent();
                         intent.setAction("com.unisound.unicar.install.action");
-                        intent.putExtra("apk","/storage/usb0/app-debug.apk");    //  /storage/usb0/app-debug.apk
+                        intent.putExtra("apk", "/storage/usb0/app-debug.apk");    //  /storage/usb0/app-debug.apk
                         sendBroadcast(intent);
 //                        }else{
 //                            Toast.makeText(getApplicationContext(), "没有检测到连接的U盘，连接U盘到检测到大概需要15秒！", Toast.LENGTH_SHORT).show();
 //                        }
 
 
-                    }else if(source==IConstant.SOURCE_CLEAR_RECORD_DEVICE_DATA){
+                    } else if (source == IConstant.SOURCE_CLEAR_RECORD_DEVICE_DATA) {
 
                         //根据上传的状态显示对应的信息
 //                        serialhelp.deleteRecordDate();
@@ -811,29 +800,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         return;
                     }
 
-                    final AlertDialog.Builder dialog=new AlertDialog.Builder(MainActivity.this);
+                    final AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
                     dialog.setTitle("提示");
                     dialog.setMessage(content);
-                    dialog.setPositiveButton("确认",new DialogInterface.OnClickListener(){
-                        public  void onClick(DialogInterface dialog,int which)
-                        {
+                    dialog.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
 
                             //MainActivity.this.finish();
                             //System.exit(0);
 
-                            try{
+                            try {
                                 Intent intent = new Intent();
-                                if(source==IConstant.SOURCE_SETTING){
+                                if (source == IConstant.SOURCE_SETTING) {
                                     intent.setClassName("com.android.settings", "com.android.settings.Settings");
                                     startActivity(intent);
 //                                     MainActivity.this.finish();
 //                                     System.exit(0);
-                                }else if(source==IConstant.SOURCE_ES_FILEMANAGER){
+                                } else if (source == IConstant.SOURCE_ES_FILEMANAGER) {
                                     intent.setClassName("com.estrongs.android.pop",
                                             "com.estrongs.android.pop.view.FileExplorerActivity");
                                     startActivity(intent);
 
-                                }else if(source==IConstant.SOURCE_U_UPGRADE){
+                                } else if (source == IConstant.SOURCE_U_UPGRADE) {
                                     //  String path = FileUtil.getExtSDCard();
 //                                    String path = "/storage/usb";   //  /mnt/sdcard  /mnt/usb0
 //                                    if(TextUtils.isEmpty(path)){
@@ -853,16 +841,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                     startActivity(intent);
                                 }
 
-                            }catch (Exception e){
-                                LogUtil.e(TAG,"=================dealPasswordValidate=====================>"+e.getMessage());
+                            } catch (Exception e) {
+                                LogUtil.e(TAG, "=================dealPasswordValidate=====================>" + e.getMessage());
 
                             }
 
                         }
                     });
-                    dialog.setNegativeButton("取消",new DialogInterface.OnClickListener(){
-                        public  void onClick(DialogInterface dialog,int which)
-                        {
+                    dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
 
                         }
                     });
@@ -870,14 +857,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
             });
 
-            if(!passwordInputFragment.isAdded() && !passwordInputFragment.isVisible()
-                    && !passwordInputFragment.isRemoving()){
+            if (!passwordInputFragment.isAdded() && !passwordInputFragment.isVisible()
+                    && !passwordInputFragment.isRemoving()) {
                 passwordInputFragment.show(getSupportFragmentManager(), "");
             }
 
         }
     }
-
 
 
     class MyHandler extends Handler {
@@ -894,14 +880,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 return;
             }
 
-            try{
+            try {
 
                 switch (msg.what) {
 
                     //综合信息上传
                     case IConstant.COMMAND_MULTIPLE_POSTION_INFO: {
                         MultipleStateInfo multipleStateInfo = (MultipleStateInfo) msg.obj;
-                        byte [] content = msg.getData().getByteArray("content");
+                        byte[] content = msg.getData().getByteArray("content");
                         //根据上传的状态显示对应的信息
                         displayMultipleState(multipleStateInfo);
                         dealOtherData(content);    //处理诊断测试数据
@@ -916,8 +902,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     break;
 
                 }
-            }catch (Exception e){
-               // LogUtil.e(TAG,"===================handleMessage===========================>"+e.getMessage());
+            } catch (Exception e) {
+                // LogUtil.e(TAG,"===================handleMessage===========================>"+e.getMessage());
                 e.printStackTrace();
             }
 
@@ -927,14 +913,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     /**
-     *
      * 处理其它数据
-     * @param content
      *
+     * @param content
      */
-    private void dealOtherData(byte [] content) {
+    private void dealOtherData(byte[] content) {
 
-       // CacheData.setMsg_info("============ReadSerialDataThread=========content===================>" + NumberBytes.byteArrayToHexStr(content), IConstant.MESSAGE_INFO_ALL);
+        // CacheData.setMsg_info("============ReadSerialDataThread=========content===================>" + NumberBytes.byteArrayToHexStr(content), IConstant.MESSAGE_INFO_ALL);
         //B40对应181_b0 遥控启动
         //181数据解析
         if (content.length > 40) {
@@ -956,7 +941,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
 
             //遥控直流  遥控喷雾
-            if (IConstant.STATE_10.equals("" + tmp_1 + tmp_2)){   //
+            if (IConstant.STATE_10.equals("" + tmp_1 + tmp_2)) {   //
                 ivMid1311.setImageResource(R.drawable.ic_3_up_red);
                 ivMid1312.setImageResource(R.drawable.ic_3_mi_wh);
                 ivMid1313.setImageResource(R.drawable.ic_3_do_wh);
@@ -964,7 +949,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 ivMid1311.setImageResource(R.drawable.ic_3_up_wh);
                 ivMid1312.setImageResource(R.drawable.ic_3_mi_red);
                 ivMid1313.setImageResource(R.drawable.ic_3_do_wh);
-            } else if (IConstant.STATE_01.equals("" + tmp_1 + tmp_2)){
+            } else if (IConstant.STATE_01.equals("" + tmp_1 + tmp_2)) {
                 ivMid1311.setImageResource(R.drawable.ic_3_up_wh);
                 ivMid1312.setImageResource(R.drawable.ic_3_mi_wh);
                 ivMid1313.setImageResource(R.drawable.ic_3_do_red);
@@ -979,7 +964,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 ivMid1511.setImageResource(R.drawable.ic_3_up_wh);
                 ivMid1512.setImageResource(R.drawable.ic_3_mi_red);
                 ivMid1513.setImageResource(R.drawable.ic_3_do_wh);
-            } else if (IConstant.STATE_01.equals("" + tmp_3 + tmp_4)){
+            } else if (IConstant.STATE_01.equals("" + tmp_3 + tmp_4)) {
                 ivMid1511.setImageResource(R.drawable.ic_3_up_wh);
                 ivMid1512.setImageResource(R.drawable.ic_3_mi_wh);
                 ivMid1513.setImageResource(R.drawable.ic_3_do_red);
@@ -1052,7 +1037,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
 
             //急停
-            if(tmp_3 == 1) {
+            if (tmp_3 == 1) {
                 // ivRight3.setImageResource(R.drawable.ic_round_red);
             } else {
                 // ivRight3.setImageResource(R.drawable.ic_round_white);
@@ -1067,7 +1052,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 ivMid1211.setImageResource(R.drawable.ic_3_up_wh);
                 ivMid1212.setImageResource(R.drawable.ic_3_mi_red);
                 ivMid1213.setImageResource(R.drawable.ic_3_do_wh);
-            } else  if (IConstant.STATE_01.equals("" + tmp_4 + tmp_5)) {
+            } else if (IConstant.STATE_01.equals("" + tmp_4 + tmp_5)) {
                 ivMid1211.setImageResource(R.drawable.ic_3_up_wh);
                 ivMid1212.setImageResource(R.drawable.ic_3_mi_wh);
                 ivMid1213.setImageResource(R.drawable.ic_3_do_red);
@@ -1111,7 +1096,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 ivMid2311.setImageResource(R.drawable.ic_3_up_wh);
                 ivMid2312.setImageResource(R.drawable.ic_3_mi_red);
                 ivMid2313.setImageResource(R.drawable.ic_3_do_wh);
-            } else  if (IConstant.STATE_001.equals("" + tmp_0 + tmp_1 + tmp_2)) {  //选择铲
+            } else if (IConstant.STATE_001.equals("" + tmp_0 + tmp_1 + tmp_2)) {  //选择铲
                 ivMid2311.setImageResource(R.drawable.ic_3_up_wh);
                 ivMid2312.setImageResource(R.drawable.ic_3_mi_wh);
                 ivMid2313.setImageResource(R.drawable.ic_3_do_red);
@@ -1176,7 +1161,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             //任意手柄动作
             if (tmp_1 == 1) {
                 //ivMid3311.setImageResource(R.drawable.ic_22_up_red);
-               // ivMid3312.setImageResource(R.drawable.ic_22_do_wh);
+                // ivMid3312.setImageResource(R.drawable.ic_22_do_wh);
             } else {
                 //ivMid3311.setImageResource(R.drawable.ic_22_up_wh);
                 //ivMid3312.setImageResource(R.drawable.ic_22_do_red);
@@ -1208,7 +1193,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
 
 
-
             //炮出水开
 //            if (tmp_4 == 1) {
 //                ivMid1111.setImageResource(R.drawable.ic_22_up_red);
@@ -1231,197 +1215,194 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
         // 回转手柄信号  ==  臂架旋转
-        System.arraycopy(content,45,temp_1,0,1);
+        System.arraycopy(content, 45, temp_1, 0, 1);
         int hzsbxh = bytes2int(temp_1);
-        if(hzsbxh  <= 127){
+        if (hzsbxh <= 127) {
             tvLeftXz.setText("" + hzsbxh);
-        }else if(hzsbxh > 127){
-            tvLeftXz.setText("-" + (256-hzsbxh));
+        } else if (hzsbxh > 127) {
+            tvLeftXz.setText("-" + (256 - hzsbxh));
         }
-        if(hzsbxh==0){
+        if (hzsbxh == 0) {
             tvLeftXz.setText("");
         }
 
 
         //一臂手柄信号
-        System.arraycopy(content,46,temp_1,0,1);
+        System.arraycopy(content, 46, temp_1, 0, 1);
         int ybsb = bytes2int(temp_1);
-        if(ybsb  <= 127){   //  1为上，0为下  图片的设置
+        if (ybsb <= 127) {   //  1为上，0为下  图片的设置
             ivMidFour1111.setImageResource(R.drawable.ic_up_default);
             tvMidFour1111.setText("");
             ivMidFour1122.setImageResource(R.drawable.ic_down_select);
             tvMidFour1122.setText("" + ybsb);
 
-        }else if(ybsb > 127){
+        } else if (ybsb > 127) {
             ivMidFour1111.setImageResource(R.drawable.ic_up_select);
-            tvMidFour1111.setText("-" + (256-ybsb));
+            tvMidFour1111.setText("-" + (256 - ybsb));
             ivMidFour1122.setImageResource(R.drawable.ic_down_default);
             tvMidFour1122.setText("");
         }
-        if(ybsb==0){
+        if (ybsb == 0) {
             ivMidFour1122.setImageResource(R.drawable.ic_down_default);
             tvMidFour1122.setText("");
         }
 
         //二臂手柄信号
-        System.arraycopy(content,47,temp_1,0,1);
-        int ebsb =bytes2int(temp_1);
-        if(ebsb  <= 127){   //  1为上，0为下  图片的设置
+        System.arraycopy(content, 47, temp_1, 0, 1);
+        int ebsb = bytes2int(temp_1);
+        if (ebsb <= 127) {   //  1为上，0为下  图片的设置
             ivLeftFour1111.setImageResource(R.drawable.ic_up_default);
             tvLeftFour1111.setText("");
             ivLeftFour1122.setImageResource(R.drawable.ic_down_select);
             tvLeftFour1122.setText("" + ebsb);
 
-        }else if(ebsb > 127){
+        } else if (ebsb > 127) {
             ivLeftFour1111.setImageResource(R.drawable.ic_up_select);
             ivLeftFour1122.setImageResource(R.drawable.ic_down_default);
-            tvLeftFour1111.setText("-" + (256-ebsb));
+            tvLeftFour1111.setText("-" + (256 - ebsb));
             tvLeftFour1122.setText("");
         }
 
-        if(ebsb==0){
+        if (ebsb == 0) {
             ivLeftFour1122.setImageResource(R.drawable.ic_down_default);
             tvLeftFour1122.setText("");
         }
 
 
         //三臂手柄信号
-        System.arraycopy(content,48,temp_1,0,1);
+        System.arraycopy(content, 48, temp_1, 0, 1);
         int sanbsb = bytes2int(temp_1);
-       // CacheData.setMsg_info("==========sanbsb=======temp_1=======收到数据======>" + temp_1 ,0);
-       // CacheData.setMsg_info("==========sanbsb=======sanbsb=======收到数据======>" + sanbsb ,0);
-        if(sanbsb <= 127){     // 1为上，0为下
+        // CacheData.setMsg_info("==========sanbsb=======temp_1=======收到数据======>" + temp_1 ,0);
+        // CacheData.setMsg_info("==========sanbsb=======sanbsb=======收到数据======>" + sanbsb ,0);
+        if (sanbsb <= 127) {     // 1为上，0为下
             ivLeftFour1133.setImageResource(R.drawable.ic_left_default);
             tvLeftFour1133.setText("");
             ivLeftFour1144.setImageResource(R.drawable.ic_right_select);
             tvLeftFour1144.setText("" + sanbsb);
 
-        }else if(sanbsb > 127){
+        } else if (sanbsb > 127) {
             ivLeftFour1133.setImageResource(R.drawable.ic_left_select);
-            tvLeftFour1133.setText("-" + (256-sanbsb));
+            tvLeftFour1133.setText("-" + (256 - sanbsb));
             ivLeftFour1144.setImageResource(R.drawable.ic_right_default);
             tvLeftFour1144.setText("");
         }
 
-        if(sanbsb==0){
+        if (sanbsb == 0) {
             ivLeftFour1144.setImageResource(R.drawable.ic_right_default);
             tvLeftFour1144.setText("");
         }
 
         //附具俯仰信号
-        System.arraycopy(content,49,temp_1,0,1);
+        System.arraycopy(content, 49, temp_1, 0, 1);
         int fjfysb = bytes2int(temp_1);
 
-        if(fjfysb  <= 127){   //  1为上，0为下
+        if (fjfysb <= 127) {   //  1为上，0为下
             ivRightFour1133.setImageResource(R.drawable.ic_left_default);
             tvRightFour1133.setText("");
-            if(fjfysb==0){
+            if (fjfysb == 0) {
                 ivRightFour1144.setImageResource(R.drawable.ic_right_default);
-                tvRightFour1144.setText("" );
-            }else{
+                tvRightFour1144.setText("");
+            } else {
                 ivRightFour1144.setImageResource(R.drawable.ic_right_select);
                 tvRightFour1144.setText("" + fjfysb);
             }
-        }else if(fjfysb > 127){
+        } else if (fjfysb > 127) {
             ivRightFour1133.setImageResource(R.drawable.ic_left_select);
             ivRightFour1144.setImageResource(R.drawable.ic_right_default);
-            tvRightFour1133.setText("-" + (256-fjfysb));
+            tvRightFour1133.setText("-" + (256 - fjfysb));
             tvRightFour1144.setText("");
         }
 
         //剪顺逆旋信号
-        System.arraycopy(content,50,temp_1,0,1);
+        System.arraycopy(content, 50, temp_1, 0, 1);
         int jxxzxh = bytes2int(temp_1);
-        if(jxxzxh  <= 127){
+        if (jxxzxh <= 127) {
             tvMidXz.setText("" + jxxzxh);
-        }else if(jxxzxh > 127){
-            tvMidXz.setText("-" + (256-jxxzxh));
+        } else if (jxxzxh > 127) {
+            tvMidXz.setText("-" + (256 - jxxzxh));
         }
-        if(jxxzxh==0){
+        if (jxxzxh == 0) {
             tvMidXz.setText("");
         }
 
         //水泵调速信号
-        System.arraycopy(content,51,temp_1,0,1);
+        System.arraycopy(content, 51, temp_1, 0, 1);
         int sdtjxh = bytes2int(temp_1);
         tvRightTwo1211.setText("" + sdtjxh);
 
 
-
         //四臂调速信号
-        System.arraycopy(content,52,temp_1,0,1);
+        System.arraycopy(content, 52, temp_1, 0, 1);
         int sibsb = bytes2int(temp_1);
-        if(sibsb <= 127){     //  1 为上，0为下
+        if (sibsb <= 127) {     //  1 为上，0为下
             ivRightFour1111.setImageResource(R.drawable.ic_up_default);
             tvRightFour1111.setText("");
-            if(sibsb==0){
+            if (sibsb == 0) {
                 ivRightFour1122.setImageResource(R.drawable.ic_down_default);
-                tvRightFour1122.setText("" );
-            }else{
+                tvRightFour1122.setText("");
+            } else {
                 ivRightFour1122.setImageResource(R.drawable.ic_down_select);
                 tvRightFour1122.setText("" + sibsb);
             }
 
-        }else if(sibsb > 127){
+        } else if (sibsb > 127) {
             ivRightFour1111.setImageResource(R.drawable.ic_up_select);
             ivRightFour1122.setImageResource(R.drawable.ic_down_default);
-            tvRightFour1111.setText("-" + (256-sibsb));
+            tvRightFour1111.setText("-" + (256 - sibsb));
             tvRightFour1122.setText("");
         }
 
         //剪开合信号信号
-        System.arraycopy(content,53,temp_1,0,1);
+        System.arraycopy(content, 53, temp_1, 0, 1);
         int jkhxh = bytes2int(temp_1);
-        if(jkhxh  <= 127){   //  1为上，0为下  图片的设置
+        if (jkhxh <= 127) {   //  1为上，0为下  图片的设置
             ivMidFour1133.setImageResource(R.drawable.ic_left_default);
             tvMidFour1133.setText("");
             ivMidFour1144.setImageResource(R.drawable.ic_right_select);
             tvMidFour1144.setText("" + jkhxh);
 
-        }else if(jkhxh > 127){
+        } else if (jkhxh > 127) {
             ivMidFour1133.setImageResource(R.drawable.ic_left_select);
-            tvMidFour1133.setText("-" + (256-jkhxh));
+            tvMidFour1133.setText("-" + (256 - jkhxh));
             ivMidFour1144.setImageResource(R.drawable.ic_right_default);
             tvMidFour1144.setText("");
         }
-        if(jkhxh==0){
+        if (jkhxh == 0) {
             ivMidFour1144.setImageResource(R.drawable.ic_right_default);
             tvMidFour1144.setText("");
         }
 
 
         //备用信号
-        System.arraycopy(content,54,temp_1,0,1);
+        System.arraycopy(content, 54, temp_1, 0, 1);
         int byxh = bytes2int(temp_1);
-        if(byxh  <= 127){
+        if (byxh <= 127) {
             tvRightXz.setText("" + byxh);
-        }else if(byxh > 127){
-            tvRightXz.setText("-" + (256-byxh));
+        } else if (byxh > 127) {
+            tvRightXz.setText("-" + (256 - byxh));
         }
-        if(byxh==0){
+        if (byxh == 0) {
             tvRightXz.setText("");
         }
 
-   }
+    }
 
 
     /**
      * 将byte[]转为int形
+     *
      * @param bytes byte[]
      * @return 转换后的字符串
-     *
      */
-    private int bytes2int(byte[] bytes){
+    private int bytes2int(byte[] bytes) {
         return new BigInteger(1, bytes).intValue();// 这里的1代表正数
     }
 
 
-
     /**
-     *
      * 显示上报的综合信息
-     * @param multipleStateInfo
      *
+     * @param multipleStateInfo
      */
     private void displayMultipleState(MultipleStateInfo multipleStateInfo) throws Exception {
 
@@ -1501,10 +1482,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         int brightness = multipleStateInfo.getBrightness();
 //        CacheData.setMsg_info("==========displayMultipleState=======1=======收到数据======>" ,0);
 
-        if(IConstant.TURRET_ANGEL_NEGTIVE.equals(turrent_angel_negtive) )
-        {
+        if (IConstant.TURRET_ANGEL_NEGTIVE.equals(turrent_angel_negtive)) {
             TurretAngle.setText("-" + turret_angle);
-        }else{
+        } else {
             TurretAngle.setText("" + turret_angle);
         }
 //        TurretAngleLow.setText(turret_angle_low);
@@ -1573,7 +1553,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         signalStrength.setText(wireless_link_status + "-" + signal_strength);
 
-        if (IConstant.WIRELESS_LINK_0.equals(wireless_link_status)){
+        if (IConstant.WIRELESS_LINK_0.equals(wireless_link_status)) {
             signalStrengthLayout.setVisibility(FrameLayout.VISIBLE);
             signalStrengthLayout1.setVisibility(FrameLayout.GONE);
             noSignal.setVisibility(LinearLayout.VISIBLE);
@@ -1586,7 +1566,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             haveSignalTest.setVisibility(LinearLayout.GONE);
             signalStrengthTest.setVisibility(View.GONE);
 
-        }else if (IConstant.WIRELESS_LINK_1.equals(wireless_link_status)){
+        } else if (IConstant.WIRELESS_LINK_1.equals(wireless_link_status)) {
             signalStrengthLayout.setVisibility(FrameLayout.VISIBLE);
             signalStrengthLayout1.setVisibility(FrameLayout.GONE);
             noSignal.setVisibility(LinearLayout.GONE);
@@ -1598,7 +1578,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             noSignalTest.setVisibility(LinearLayout.GONE);
             haveSignalTest.setVisibility(LinearLayout.VISIBLE);
             signalStrengthTest.setVisibility(View.VISIBLE);
-        } else if (IConstant.WIRELESS_LINK_2.equals(wireless_link_status)){
+        } else if (IConstant.WIRELESS_LINK_2.equals(wireless_link_status)) {
             signalStrengthLayout.setVisibility(FrameLayout.GONE);
             signalStrengthLayout1.setVisibility(FrameLayout.VISIBLE);
             noSignal.setVisibility(LinearLayout.GONE);
@@ -1612,7 +1592,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
 
-
 //        if (IConstant.ARM_SPREAD_1.equals(arm_spread_status) && IConstant.ARM_SHRINK_0.equals(arm_shrink_status)){
 //            ArmSpreadStatus.setText(getString(R.string.arm_spread));
 //        }else if (IConstant.ARM_SPREAD_0.equals(arm_spread_status) && IConstant.ARM_SHRINK_1.equals(arm_shrink_status)){
@@ -1621,26 +1600,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //            ArmSpreadStatus.setText(getString(R.string.arm_none));
 //        }
 //        CacheData.setMsg_info("==========displayMultipleState=======4=======收到数据======>" ,0);
-        if (IConstant.Turret_Hit_ok.equals(turret_hit_status)){
+        if (IConstant.Turret_Hit_ok.equals(turret_hit_status)) {
             turretHitok.setVisibility(View.VISIBLE);
             turretHitfail.setVisibility(View.GONE);
-        }else if (IConstant.Turret_Hit_fail.equals(turret_hit_status)){
+        } else if (IConstant.Turret_Hit_fail.equals(turret_hit_status)) {
             turretHitok.setVisibility(View.GONE);
             turretHitfail.setVisibility(View.VISIBLE);
         }
 
-        if (IConstant.Urgent_Stop_ok.equals(urgent_stop)){
+        if (IConstant.Urgent_Stop_ok.equals(urgent_stop)) {
             urgentStopok.setVisibility(View.VISIBLE);
             urgentStopfail.setVisibility(View.GONE);
-        }else if (IConstant.Urgent_Stop_fail.equals(urgent_stop)){
+        } else if (IConstant.Urgent_Stop_fail.equals(urgent_stop)) {
             urgentStopok.setVisibility(View.GONE);
             urgentStopfail.setVisibility(View.VISIBLE);
         }
 
-        if (IConstant.Water_Pump_ok.equals(water_pump_status)){
+        if (IConstant.Water_Pump_ok.equals(water_pump_status)) {
             waterPumpok.setVisibility(View.VISIBLE);
             waterPumpfail.setVisibility(View.GONE);
-        }else if (IConstant.Water_Pump_fail.equals(water_pump_status)){
+        } else if (IConstant.Water_Pump_fail.equals(water_pump_status)) {
             waterPumpok.setVisibility(View.GONE);
             waterPumpfail.setVisibility(View.VISIBLE);
         }
@@ -1825,7 +1804,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             tvStartStaTest.setText(getString(R.string.scram));
             tvStop1111.setText(getString(R.string.scram));
             ivStop1111.setImageResource(R.drawable.ic_jt_use);
-        } else if((remote_ctrl_status & 0x1) == 0x1) {
+        } else if ((remote_ctrl_status & 0x1) == 0x1) {
             RemoteCtrlStatus.setText(getString(R.string.started));
             tvStartStaTest.setText(getString(R.string.started));
             tvStop1111.setText(getString(R.string.shut_stop));
@@ -1910,7 +1889,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 //        CacheData.setMsg_info("==========displayMultipleState=======7=======收到数据======>" ,0);
 
-        if (IConstant.ERR_CODE_0.equals(err_code)){
+        if (IConstant.ERR_CODE_0.equals(err_code)) {
             ErrCode.setText(getString(R.string.err_code_0));
         } else if (IConstant.ERR_CODE_1.equals(err_code)) {
             ErrCode.setText(getString(R.string.err_code_1));
@@ -1990,16 +1969,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             ErrCode.setText(getString(R.string.err_code_38));
         } else if (IConstant.ERR_CODE_39.equals(err_code)) {
             ErrCode.setText(getString(R.string.err_code_39));
-        }else{
+        } else {
             ErrCode.setText("");
         }
 
-        if(signal_strength > 127){
+        if (signal_strength > 127) {
             signal_strength = 256 - signal_strength;
 //            CacheData.setMsg_info("==========signal_strength=====+++====== > 127======>"+signal_strength ,0);
             signalStrength.setText(("-" + signal_strength));
             signalStrengthTest.setText(("-" + signal_strength));
-        }else{
+        } else {
 //            CacheData.setMsg_info("==========signal_strength=====+++====== <= 127======>"+signal_strength ,0);
             signalStrength.setText("" + signal_strength);
             signalStrengthTest.setText(("" + signal_strength));
@@ -2019,16 +1998,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-
     /**
-     *
      * 打开摄像头进行视频监控或回看视频
-     * @param
      *
+     * @param
      */
     //   private void OpenCameraInfo(){
-    public void OpenCameraInfo(){
-        try{
+    public void OpenCameraInfo() {
+        try {
             if (!CameraInterface.getInstance().CameraState()) {
                 // check Android 6 permission
                 if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
@@ -2037,7 +2014,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         @Override
                         public void run() {
                             //CameraInterface.getInstance().doStopCamera();
-                            CameraInterface.getInstance().doOpenCamera(MainActivity.this,cameraIndex);
+//                            CameraInterface.getInstance().doOpenCamera(MainActivity.this, cameraIndex);
                         }
                     };
                     openThread.start();
@@ -2048,9 +2025,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             }
 
-        }catch (Exception e){
-            LogUtil.d("cameraHasOpened","没有连接摄像头。");
-            LogUtil.e(TAG,"===================OpenCameraInfo===========================>"+e.getMessage());
+        } catch (Exception e) {
+            LogUtil.d("cameraHasOpened", "没有连接摄像头。");
+            LogUtil.e(TAG, "===================OpenCameraInfo===========================>" + e.getMessage());
             e.printStackTrace();
         }
 
@@ -2059,7 +2036,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        try{
+        try {
             if (requestCode == IConstant.TAKE_PHOTO_REQUEST_CODE) {
                 for (int index = 0; index < permissions.length; index++) {
                     switch (permissions[index]) {
@@ -2069,7 +2046,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                     @Override
                                     public void run() {
                                         CameraInterface.getInstance().doStopCamera();
-                                        CameraInterface.getInstance().doOpenCamera(MainActivity.this,cameraIndex);
+                                        CameraInterface.getInstance().doOpenCamera(MainActivity.this, cameraIndex);
                                     }
                                 };
                                 openThread.start();
@@ -2078,8 +2055,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
                 }
             }
-        }catch (Exception e){
-            LogUtil.e(TAG,"===================onRequestPermissionsResult===========================>"+e.getMessage());
+        } catch (Exception e) {
+            LogUtil.e(TAG, "===================onRequestPermissionsResult===========================>" + e.getMessage());
             e.printStackTrace();
         }
 
@@ -2089,25 +2066,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void cameraHasOpened() {
-        try{
+        try {
 
-            float previewRate =0.1f;
+            float previewRate = 0.1f;
             try {
                 Thread.sleep(200);
-            }catch (InterruptedException e){
+            } catch (InterruptedException e) {
 
             }
 
             SurfaceHolder holder = cameraView.getSurfaceHolder();
             CameraInterface.getInstance().doStartPreview(holder, previewRate);
-        }catch (Exception e){
-            LogUtil.e(TAG,"===================cameraHasOpened===========================>"+e.getMessage());
+        } catch (Exception e) {
+            LogUtil.e(TAG, "===================cameraHasOpened===========================>" + e.getMessage());
             e.printStackTrace();
         }
 
     }
 
-    private void  brightNess(int flag){
+    private void brightNess(int flag) {
         int val;
 //        if((flag&0x4) == 0x4) {
 ////            CacheData.setMsg_info("===========flag============="+flag,1);
@@ -2126,7 +2103,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //        }
 
 
-        if((flag&0x4) == 0x4) {
+        if ((flag & 0x4) == 0x4) {
 //            if(change_bright_old == 0){
 //                SharedPreferences share = getSharedPreferences("Acitivity", Context.MODE_WORLD_READABLE);
 //                val = share.getInt("value", 100);
@@ -2148,7 +2125,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //            }
             change_bright_old = 1;
             ivRight3.setImageResource(R.drawable.ic_round_red);
-        }else{
+        } else {
             ivRight3.setImageResource(R.drawable.ic_round_white);
             change_bright_old = 0;
         }
@@ -2156,22 +2133,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    private TimerTask getTimerTask_loc(){
+    private TimerTask getTimerTask_loc() {
 
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
-                try{
-                    if(CacheData.getThread_flag()==12){
+                try {
+                    if (CacheData.getThread_flag() == 12) {
                         serialhelp.close();
                         initSerial();
-                        CacheData.setMsg_info("============================getTimerTask_loc=====================initSerial==",0);
-                    }else{
+                        CacheData.setMsg_info("============================getTimerTask_loc=====================initSerial==", 0);
+                    } else {
                         CacheData.setThread_flag(CacheData.getThread_flag() + 1);
                     }
 
-                }catch (Exception e){
-                    LogUtil.e(TAG,"===================TimerTask===========================>"+e.getMessage());
+                } catch (Exception e) {
+                    LogUtil.e(TAG, "===================TimerTask===========================>" + e.getMessage());
                     e.printStackTrace();
                 }
 

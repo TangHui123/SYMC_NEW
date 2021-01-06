@@ -12,11 +12,11 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Random;
+
 import cn.com.sany.symc.zg.R;
 import cn.com.sany.symc.zg.help.IConstant;
 import cn.com.sany.symc.zg.util.LogUtil;
-
-import java.util.Random;
 
 
 /**

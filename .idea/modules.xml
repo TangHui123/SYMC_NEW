@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/SYMC_B98H.iml" filepath="$PROJECT_DIR$/SYMC_B98H.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/SYMC_B98H.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/SYMC_B98H.app.iml" />
     </modules>
   </component>
 </project>

@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.serialport.SerialPort;
 import android.text.TextUtils;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,14 +24,14 @@ import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
+
 import cn.com.sany.symc.zg.entity.DownDataEntity;
 import cn.com.sany.symc.zg.entity.MultipleStateInfo;
 import cn.com.sany.symc.zg.help.IConstant;
-import cn.com.sany.symc.zg.ui.CameraInterface;
+import cn.com.sany.symc.zg.ui.MainActivity;
 import cn.com.sany.symc.zg.util.CacheData;
 import cn.com.sany.symc.zg.util.LogUtil;
 import cn.com.sany.symc.zg.util.NumberBytes;
-import cn.com.sany.symc.zg.ui.MainActivity;
 
 
 

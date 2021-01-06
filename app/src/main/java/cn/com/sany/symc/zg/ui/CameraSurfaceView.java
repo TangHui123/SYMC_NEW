@@ -10,16 +10,15 @@ import android.view.SurfaceView;
 
 
 /**
- *
  * 视频监控
  * Created by andy on 2017/3/23.
- *
  */
 public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Callback {
     private static final String TAG = "yanzi";
     CameraInterface mCameraInterface;
     Context mContext;
     SurfaceHolder mSurfaceHolder;
+
     public CameraSurfaceView(Context context, AttributeSet attrs) {
         super(context, attrs);
         // TODO Auto-generated constructor stub
@@ -49,7 +48,8 @@ public class CameraSurfaceView extends SurfaceView implements SurfaceHolder.Call
         Log.i(TAG, "surfaceDestroyed...");
         CameraInterface.getInstance().doStopCamera();
     }
-    public SurfaceHolder getSurfaceHolder(){
+
+    public SurfaceHolder getSurfaceHolder() {
         return mSurfaceHolder;
     }
 
