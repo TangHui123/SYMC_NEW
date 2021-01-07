@@ -17,6 +17,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.SurfaceHolder;
 import android.view.View;
@@ -404,15 +405,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
     
     private void initMainView() {
+        DashBoardView dashBoardEngine = (DashBoardView) findViewById(R.id.dash_board_engine);
+        String[] pointerMain = new String[] {"1", "1.5","2","2.5","5", "6","7","8","9", "10","11"};
+        dashBoardEngine.setCompleteDegree(40f);
+        dashBoardEngine.setPointerMain(pointerMain);
+        DashBoardView dashBoardOil = (DashBoardView) findViewById(R.id.dash_board_oil);
+        dashBoardOil.setCompleteDegree(66f);
+        
         mTextView_1_1 = (TextView) findViewById(R.id.oil_danwei_1_1);
         mTextView_1_2 = (TextView) findViewById(R.id.oil_youwei_1_2);
         mTextView_1_3 = (TextView) findViewById(R.id.water_temper_1_3);
         mTextView_1_4 = (TextView) findViewById(R.id.presure_youwen_1_4);
 
-        mTextView_2_1 = (TextView) findViewById(R.id.oil_temper_2_1);
-        mTextView_2_2 = (TextView) findViewById(R.id.power_mode_2_2);
-        mTextView_2_3 = (TextView) findViewById(R.id.work_mode_2_3);
-        mTextView_2_4 = (TextView) findViewById(R.id.engine_mode_2_4);
+//        mTextView_2_1 = (TextView) findViewById(R.id.oil_temper_2_1);
+//        mTextView_2_2 = (TextView) findViewById(R.id.power_mode_2_2);
+//        mTextView_2_3 = (TextView) findViewById(R.id.work_mode_2_3);
+//        mTextView_2_4 = (TextView) findViewById(R.id.engine_mode_2_4);
 
         mTextView_3_1 = (TextView) findViewById(R.id.pump_pressure_3_1);
         mTextView_3_2 = (TextView) findViewById(R.id.pump_pressure_3_2);
@@ -590,6 +598,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         
         signalStrength = (TextView) findViewById(R.id.signalStrength);
         RemoteCtrlStatus = (TextView) findViewById(R.id.RemoteCtrlStatus);
+        RemoteCtrlStatus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mainLLayout.setVisibility(View.GONE);
+                testB98LLayout.setVisibility(View.VISIBLE);
+            }
+        });
 
         signalStrengthLayout.setOnClickListener(this);
         signalStrengthLayout1.setOnClickListener(this);
@@ -639,6 +654,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void changePage(int flag) {
         int val;
+        Log.i(TAG,"click changePage flag=" + flag);
         // CacheData.setMsg_info("=======changePage====flag====flag========="+flag,1);
         if ((flag & 0x1) == 0x1) {
             if (change_page_old == 0) {
@@ -693,6 +709,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //右边圆圈
                 case R.id.tvRightXz: {
                     //往linux发送视频摄像头打开指令
+                    Log.i(TAG,"click changePage");
                     changePage(1);
                     break;
                 }
