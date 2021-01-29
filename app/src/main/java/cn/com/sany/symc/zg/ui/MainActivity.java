@@ -511,24 +511,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tvRightFour1133 = (TextView) findViewById(R.id.tvRightFour1133);
         tvRightFour1144 = (TextView) findViewById(R.id.tvRightFour1144);
 
-        ivMidFour1111 = (ImageView) findViewById(R.id.ivMidFour1111);
-        ivMidFour1122 = (ImageView) findViewById(R.id.ivMidFour1122);
-        ivMidFour1133 = (ImageView) findViewById(R.id.ivMidFour1133);
-        ivMidFour1144 = (ImageView) findViewById(R.id.ivMidFour1144);
+//        ivMidFour1111 = (ImageView) findViewById(R.id.ivMidFour1111);
+//        ivMidFour1122 = (ImageView) findViewById(R.id.ivMidFour1122);
+//        ivMidFour1133 = (ImageView) findViewById(R.id.ivMidFour1133);
+//        ivMidFour1144 = (ImageView) findViewById(R.id.ivMidFour1144);
+//
+//        tvMidFour1111 = (TextView) findViewById(R.id.tvMidFour1111);
+//        tvMidFour1122 = (TextView) findViewById(R.id.tvMidFour1122);
+//        tvMidFour1133 = (TextView) findViewById(R.id.tvMidFour1133);
+//        tvMidFour1144 = (TextView) findViewById(R.id.tvMidFour1144);
+//
+//        tvMidFour1133 = (TextView) findViewById(R.id.tvMidFour1133);
+//        tvMidFour1144 = (TextView) findViewById(R.id.tvMidFour1144);
+//
+//        ivStop1111 = (ImageView) findViewById(R.id.ivStop1111);
+//        tvStop1111 = (TextView) findViewById(R.id.tvStop1111);
 
-        tvMidFour1111 = (TextView) findViewById(R.id.tvMidFour1111);
-        tvMidFour1122 = (TextView) findViewById(R.id.tvMidFour1122);
-        tvMidFour1133 = (TextView) findViewById(R.id.tvMidFour1133);
-        tvMidFour1144 = (TextView) findViewById(R.id.tvMidFour1144);
-
-        tvMidFour1133 = (TextView) findViewById(R.id.tvMidFour1133);
-        tvMidFour1144 = (TextView) findViewById(R.id.tvMidFour1144);
-
-        ivStop1111 = (ImageView) findViewById(R.id.ivStop1111);
-        tvStop1111 = (TextView) findViewById(R.id.tvStop1111);
-
-        tvRightTwo1211 = (TextView) findViewById(R.id.tvRightTwo1211);
-        tvRightTwo1212 = (TextView) findViewById(R.id.tvRightTwo1212);
+//        tvRightTwo1211 = (TextView) findViewById(R.id.tvRightTwo1211);
+//        tvRightTwo1212 = (TextView) findViewById(R.id.tvRightTwo1212);
 
         ivMid1111 = (ImageView) findViewById(R.id.ivMid1111);
         ivMid1112 = (ImageView) findViewById(R.id.ivMid1112);
@@ -552,27 +552,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ivMid1611 = (ImageView) findViewById(R.id.ivMid1611);
         ivMid1612 = (ImageView) findViewById(R.id.ivMid1612);
 
-        ivMid2111 = (ImageView) findViewById(R.id.ivMid2111);
-        ivMid2112 = (ImageView) findViewById(R.id.ivMid2112);
-
-        ivMid2211 = (ImageView) findViewById(R.id.ivMid2211);
-        ivMid2212 = (ImageView) findViewById(R.id.ivMid2212);
-
-        ivMid3211 = (ImageView) findViewById(R.id.ivMid3211);
-        ivMid3212 = (ImageView) findViewById(R.id.ivMid3212);
-
-        ivMid2311 = (ImageView) findViewById(R.id.ivMid2311);
-        ivMid2312 = (ImageView) findViewById(R.id.ivMid2312);
-        ivMid2313 = (ImageView) findViewById(R.id.ivMid2313);
-
-        ivMid3311 = (ImageView) findViewById(R.id.ivMid3311);
-        ivMid3312 = (ImageView) findViewById(R.id.ivMid3312);
-        ivMid3313 = (ImageView) findViewById(R.id.ivMid3313);
+//        ivMid2111 = (ImageView) findViewById(R.id.ivMid2111);
+//        ivMid2112 = (ImageView) findViewById(R.id.ivMid2112);
+//
+//        ivMid2211 = (ImageView) findViewById(R.id.ivMid2211);
+//        ivMid2212 = (ImageView) findViewById(R.id.ivMid2212);
+//
+//        ivMid3211 = (ImageView) findViewById(R.id.ivMid3211);
+//        ivMid3212 = (ImageView) findViewById(R.id.ivMid3212);
+//
+//        ivMid2311 = (ImageView) findViewById(R.id.ivMid2311);
+//        ivMid2312 = (ImageView) findViewById(R.id.ivMid2312);
+//        ivMid2313 = (ImageView) findViewById(R.id.ivMid2313);
+//
+//        ivMid3311 = (ImageView) findViewById(R.id.ivMid3311);
+//        ivMid3312 = (ImageView) findViewById(R.id.ivMid3312);
+//        ivMid3313 = (ImageView) findViewById(R.id.ivMid3313);
 
         //臂架旋转
         tvLeftXz = (TextView) findViewById(R.id.tvLeftXz);
         //属具旋转
-        tvMidXz = (TextView) findViewById(R.id.tvMidXz);
+//        tvMidXz = (TextView) findViewById(R.id.tvMidXz);
         //备用旋转
         tvRightXz = (TextView) findViewById(R.id.tvRightXz);
 

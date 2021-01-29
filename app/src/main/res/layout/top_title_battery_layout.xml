@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="250dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="right|center">
+
+        <LinearLayout
+            android:id="@+id/statusLayout66"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:visibility="visible"
+            android:orientation="horizontal"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:gravity="center"
+            android:baselineAligned="false">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:visibility="visible"
+                android:layout_weight="5"
+                android:orientation="horizontal">
+
+                <!--<TextView-->
+                <!--android:id="@+id/SignalStrength"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:textColor="@color/white"-->
+                <!--android:text="信号"/>-->
+
+                <FrameLayout
+                    android:id="@+id/signalStrengthLayoutTest"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:visibility="visible"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/haveSignalTest"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="left"
+                        android:background="@drawable/ic_signal1"
+                        android:visibility="gone"
+                        android:orientation="horizontal">
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/noSignalTest"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="left"
+                        android:background="@drawable/ic_signal2"
+                        android:visibility="gone"
+                        android:orientation="horizontal">
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/signalStrengthTest"
+                        android:layout_width="140dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="2dp"
+                        android:layout_marginBottom="0dp"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:text="未连接"
+                        android:textColor="@color/white"
+                        android:textSize="18sp"
+                        android:visibility="visible">
+
+                    </TextView>
+
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/signalStrengthLayout1Test"
+                    android:layout_width="110dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/signalStrength1Dbg"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="有线"
+                        android:textSize="18sp"
+                        android:textColor="@color/white"
+                        android:orientation="horizontal">
+
+                    </TextView>
+
+                </FrameLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:visibility="visible"
+                android:paddingLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="3"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/haveBatteryLayoutTest"
+                    android:layout_width="42dp"
+                    android:layout_height="20dp"
+                    android:gravity="center"
+                    android:visibility="visible"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="3dp"
+                        android:layout_height="8dp"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:background="@drawable/shape_text_close1"
+                        android:visibility="visible"
+                        android:orientation="horizontal">
+
+                    </TextView>
+
+                    <LinearLayout
+                        android:layout_width="39dp"
+                        android:layout_height="18dp"
+                        android:background="@drawable/shape_llayout_battery_bg"
+                        android:visibility="visible"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/tvBatteryTest4"
+                            android:layout_width="4dp"
+                            android:layout_height="8dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:background="@color/green"
+                            android:visibility="visible"
+                            android:orientation="horizontal"
+                            />
+                        <TextView
+                            android:id="@+id/tvBatteryTest3"
+                            android:layout_width="4dp"
+                            android:layout_height="8dp"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="4dp"
+                            android:gravity="center"
+                            android:background="@color/green"
+                            android:visibility="visible"
+                            android:orientation="horizontal"
+                            />
+                        <TextView
+                            android:id="@+id/tvBatteryTest2"
+                            android:layout_width="4dp"
+                            android:layout_height="8dp"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="4dp"
+                            android:gravity="center"
+                            android:background="@color/green"
+                            android:visibility="visible"
+                            android:orientation="horizontal"
+                            />
+                        <TextView
+                            android:id="@+id/tvBatteryTest1"
+                            android:layout_width="4dp"
+                            android:layout_height="8dp"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="4dp"
+                            android:gravity="center"
+                            android:background="@color/green"
+                            android:visibility="visible"
+                            android:orientation="horizontal"
+                            />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/lowBatteryLayoutTest"
+                    android:layout_width="42dp"
+                    android:layout_height="20dp"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="3dp"
+                        android:layout_height="8dp"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:background="@drawable/shape_text_close"
+                        android:orientation="horizontal">
+
+                    </TextView>
+
+                    <LinearLayout
+                        android:layout_width="39dp"
+                        android:layout_height="18dp"
+                        android:layout_marginLeft="1dp"
+                        android:background="@drawable/shape_llayout_battery_empty"
+                        android:orientation="horizontal">
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/startLLayoutT"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:visibility="visible"
+                android:layout_weight="5"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvStartStaTest"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:text="未启动"
+                    android:textSize="18sp"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</FrameLayout>
