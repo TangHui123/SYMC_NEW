@@ -28,6 +28,7 @@
                 android:background="@drawable/shape_main_bg"
                 android:layout_margin="10dp"
                 android:paddingLeft="15dp"
+                android:paddingTop="30dp"
                 android:orientation="vertical">
                 <LinearLayout
 
@@ -114,14 +115,11 @@
             </LinearLayout>
 
             <LinearLayout
-
-
-
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:layout_margin="10dp"
-                android:padding="5dp"
+                android:paddingTop="25dp"
                 android:background="@drawable/shape_main_bg"
                 android:layout_gravity="center"
                 android:gravity="center"
@@ -134,7 +132,6 @@
                     app:stroke_width_dial="5dp"
                     app:text_title_dial="发动机转速" />
 
-
             </LinearLayout>
 
             <LinearLayout
@@ -142,7 +139,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:layout_margin="10dp"
-                android:padding="5dp"
+                android:paddingTop="25dp"
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:background="@drawable/shape_main_bg"
@@ -154,8 +151,6 @@
                     app:stroke_width_dial="5dp"
                     app:text_title_dial="燃油油位"
                     />
-
-
             </LinearLayout>
             
             <LinearLayout
@@ -164,6 +159,7 @@
                 android:layout_weight="1"
                 android:layout_margin="10dp"
                 android:paddingLeft="15dp"
+                android:paddingTop="30dp"
                 android:background="@drawable/shape_main_bg"
                 android:orientation="vertical">
                 <LinearLayout
