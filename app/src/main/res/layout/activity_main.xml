@@ -131,7 +131,8 @@
                     android:id="@+id/b4142_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:text_title_dial="发动机" />
+                    app:stroke_width_dial="5dp"
+                    app:text_title_dial="发动机转速" />
 
 
             </LinearLayout>
@@ -150,6 +151,7 @@
                     android:id="@+id/b33_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:stroke_width_dial="5dp"
                     app:text_title_dial="油门档位"
                     />
 

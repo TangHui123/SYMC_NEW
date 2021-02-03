@@ -171,12 +171,13 @@ public class DashBoardView extends View{
             }
 
             if (i % 10 == 0){     //长表针
-                pointerPaint.setStrokeWidth(6);
-                canvas.drawLine(radiusDial, 0, radiusDial - strokeWidthDial - dp2px(15), 0, pointerPaint);
+                pointerPaint.setStrokeWidth(5);
+                canvas.drawLine(radiusDial, 0, radiusDial - strokeWidthDial - dp2px(12), 0,
+                        pointerPaint);
 
                 drawPointerText(canvas, i);
             }else {    //短表针
-                pointerPaint.setStrokeWidth(3);
+                pointerPaint.setStrokeWidth(2);
                 canvas.drawLine(radiusDial, 0, radiusDial - strokeWidthDial - dp2px(5), 0, pointerPaint);
             }
             canvas.rotate(2.7f);
@@ -199,6 +200,10 @@ public class DashBoardView extends View{
         titlePaint.setTextSize(titleDialSize);
         canvas.rotate( -47.7f);       //恢复坐标系为起始中心位置
         canvas.drawText(titleDial, 0, -radiusDial / 3, titlePaint);
+        if(titleDial != null && titleDial.contains("发动机")) {
+            titlePaint.setTextSize(titleDialSize*2/3);
+            canvas.drawText("r/min * 1000", 0, -radiusDial / 3 + titleDialSize, titlePaint);
+        }
 
         if (currentValue <= 20){
             titlePaint.setColor(colorDialLower);
