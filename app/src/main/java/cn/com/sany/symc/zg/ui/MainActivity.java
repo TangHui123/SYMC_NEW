@@ -207,8 +207,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //tanghui add for SYMC new
     private ImageView b32_iv;
     private ImageView b32_page_iv;
-    private DashBoardView b33_tv;
-    private TextView b34_tv;
+    private TextView b33_tv;
+    private DashBoardView b34_tv;
     private TextView b35_tv;
     private TextView b36_tv;
     
@@ -338,15 +338,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         b4142_tv.setCompleteDegree(0f);
         b4142_tv.setPointerMain(pointer_4142);
 
-        String[] pointer_33 = new String[] {"1","2","3","4", "5","6","7","8", "9","10","11"};
-        b33_tv = (DashBoardView) findViewById(R.id.b33_tv);
-        b33_tv.setCompleteDegree(0f);
-        b33_tv.setPointerMain(pointer_33);
+        String[] pointer_33 = new String[] {"0","1","2","3", "4","5","6","7", "8","9","10"};
+        b34_tv = (DashBoardView) findViewById(R.id.b34_tv);
+
+        b34_tv.setCompleteDegree(0f);
+        b34_tv.setPointerMain(pointer_33);
 
         b32_iv =  (ImageView) findViewById(R.id.b32_iv);
         b32_page_iv =  (ImageView) findViewById(R.id.b32_page_iv);
 
-        b34_tv = (TextView) findViewById(R.id.b34_tv);
+        b33_tv = (TextView) findViewById(R.id.b33_tv);
         b35_tv = (TextView) findViewById(R.id.b35_tv);
         b36_tv = (TextView) findViewById(R.id.b36_tv);
 
@@ -667,7 +668,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void  brightNess(int flag){
         int val;
         CacheData.setMsg_info("=================brightNess==========tvBright=======flag======="+"" + flag,1);
-        if(flag==1) {
+        CacheData.setMsg_info("=================brightNess==========true=======flag======="+"" + ((flag & 0x4) == 0x1),1);
+        if(flag == 1) {
+            CacheData.setMsg_info("=================brightNess==========change_bright_old == 0==========="+"" + (change_bright_old == 0),1);
             if(change_bright_old == 0){
                 SharedPreferences share = getSharedPreferences("Acitivity", Context.MODE_WORLD_READABLE);
                 val = share.getInt("value", 200);
@@ -1448,7 +1451,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 System.arraycopy(content, 24, temp_1, 0, 1);
                 try {
                     int brightness = Integer.valueOf(binary(temp_1, 10)).intValue();
-                    temp = content[24];
+                    temp = content[17];
                     tmp_2 = (temp >> 2) & 0x1;
                     brightNess(tmp_2);
                     changePage(brightness);
@@ -1463,17 +1466,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 // 油门挡位
                 System.arraycopy(content, 25, temp_1, 0, 1);
                 int b33 = bytes2int(temp_1);
-                b33= b33 - 1;
-                b33_tv.setCompleteDegree((b33/10f)*100);  //8888
+                b33_tv.setText("" + (b33>11?11:b33));
 
                 // 燃油油位
                 System.arraycopy(content, 26, temp_1, 0, 1);
                 int b34 = bytes2int(temp_1);
-                b34_tv.setText(b34 + "%");
+                b34_tv.setCompleteDegree(b34>100?100:b34);  //8888
 
                 //水温
                 System.arraycopy(content, 27, temp_1, 0, 1);
                 int b35 = bytes2int(temp_1);
+                b35 = b35 -40;
                 b35_tv.setText("" + b35 + "\u00B0");
 
                 //液压油温
@@ -1551,31 +1554,38 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //动臂操作
                 System.arraycopy(content, 44, temp_1, 0, 1);
                 int b52 = bytes2int(temp_1);
+                b52 = b52 -20;
                 b52_tv.setText("" + b52 + "\u00B0");
 
                 // 斗杆操作
                 System.arraycopy(content, 45, temp_1, 0, 1);
                 int b53 = bytes2int(temp_1);
+                b53 = b53 -20;
                 b53_tv.setText("" + b53 + "\u00B0");
 
                 // 铲斗操作
                 System.arraycopy(content, 46, temp_1, 0, 1);
                 int b54 = bytes2int(temp_1);
+                b54 = b54 -20;
                 b54_tv.setText("" + b54 + "\u00B0");
 
                 // 回转操作
                 System.arraycopy(content, 47, temp_1, 0, 1);
                 int b55 = bytes2int(temp_1);
+                b55 = b55 -20;
                 b55_tv.setText("" + b55 + "\u00B0");
 
                 // 左行走
                 System.arraycopy(content, 48, temp_1, 0, 1);
                 int b56 = bytes2int(temp_1);
+                b56 = b56 -20;
+                b56= b56 -20;
                 b56_tv.setText("" + b56 + "\u00B0");
 
                 // 右行走
                 System.arraycopy(content, 49, temp_1, 0, 1);
                 int b57 = bytes2int(temp_1);
+                b57 = b57 -20;
                 b57_tv.setText("" + b57 + "\u00B0");
 
                 // 动臂角度
@@ -1586,7 +1596,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 // 斗杆角度
                 System.arraycopy(content, 52, temp_2, 0, 2);
                 int b6061 = bytes2int(temp_2);
-                CacheData.setMsg_info("=================b6061==========b6061=============="+"" + b6061,1);
+               // CacheData.setMsg_info("=================b6061==========b6061=============="+"" + b6061,1);
                 b6061_tv.setText("" + b6061 + "\u00B0");
 
                 // 铲斗角度

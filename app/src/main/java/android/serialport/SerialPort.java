@@ -58,7 +58,7 @@ public class SerialPort {
 			}
 		}*/
        try{
-//		   mFd = open(device.getAbsolutePath(), baudrate, flags);
+		   mFd = open(device.getAbsolutePath(), baudrate, flags);
 	   }catch (Exception e){
 		   e.printStackTrace();
 	   }
@@ -86,7 +86,7 @@ public class SerialPort {
 	public native void close();
 	static {
 		try {
-//			System.loadLibrary("serial_port");  //SerialPort  serial_port
+			System.loadLibrary("serial_port");  //SerialPort  serial_port
 		}catch (Exception e){
 			e.printStackTrace();
 		}

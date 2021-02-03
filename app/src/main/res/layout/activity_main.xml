@@ -24,7 +24,7 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="1.1"
                 android:background="@drawable/shape_main_bg"
                 android:layout_margin="10dp"
                 android:paddingLeft="15dp"
@@ -145,7 +145,7 @@
                 android:background="@drawable/shape_main_bg"
                 android:orientation="vertical">
                 <cn.com.sany.symc.zg.ui.DashBoardView
-                    android:id="@+id/b33_tv"
+                    android:id="@+id/b34_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:stroke_width_dial="5dp"
@@ -156,7 +156,7 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="1.1"
                 android:layout_margin="10dp"
                 android:paddingLeft="15dp"
                 android:paddingTop="30dp"
@@ -249,7 +249,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="2.8"
+            android:layout_weight="3"
             android:orientation="horizontal">
             <LinearLayout
                 android:layout_width="0dp"
@@ -494,9 +494,9 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/main_text_color"
                         android:textSize="@dimen/main_text_size"
-                        android:text="燃油油位:"/>
+                        android:text="油门挡位:"/>
                     <TextView
-                        android:id="@+id/b34_tv"
+                        android:id="@+id/b33_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/main_text_color"
@@ -798,12 +798,12 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.2"
+            android:layout_weight="0.8"
             android:visibility="visible"
             android:layout_gravity="center_vertical"
-            android:background="@color/deep_blue"
+            android:background="@color/black"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/b700_tv"
@@ -814,7 +814,7 @@
                 android:singleLine="true"
                 android:ellipsize="marquee"
                 android:marqueeRepeatLimit="marquee_forever"
-                android:text=""
+                android:text="故障信息：无"
                 android:textColor="@color/red"
                 android:textSize="18sp"/>
         </LinearLayout>
