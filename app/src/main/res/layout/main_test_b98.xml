@@ -3,13 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/black"
+    android:background="@color/deep_blue"
     android:baselineAligned="false">
     
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@color/black"
+        android:background="@color/deep_blue"
         android:visibility="visible"
         android:orientation="vertical">
        <LinearLayout
@@ -41,7 +41,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="10dp"
-        android:background="@color/black"
+        android:background="@color/deep_blue"
         android:visibility="visible"
         android:orientation="horizontal">
 
@@ -51,28 +51,28 @@
             android:orientation="vertical"
             android:gravity="center_vertical">
             <ImageView
-                android:id="@+id/ivLeft1"
+                android:id="@+id/b107_iv"
                 android:padding="5dp"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:scaleType="fitXY"
                 android:src="@drawable/ic_round_white"/>
             <ImageView
-                android:id="@+id/ivLeft2"
+                android:id="@+id/b103_iv"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:padding="5dp"
                 android:scaleType="fitXY"
                 android:src="@drawable/ic_round_white"/>
             <ImageView
-                android:id="@+id/ivLeft3"
+                android:id="@+id/b32_iv"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:padding="5dp"
                 android:scaleType="fitXY"
                 android:src="@drawable/ic_round_white"/>
             <ImageView
-                android:id="@+id/ivLeft4"
+                android:id="@+id/b32_page_iv"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:padding="5dp"
@@ -86,42 +86,27 @@
             android:layout_height="match_parent"
             android:orientation="horizontal">
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="110dp"
+                android:layout_marginLeft="0dp"
+                android:layout_marginRight="0dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal"
                 android:gravity="center_horizontal"
-                android:layout_weight="1"
-                android:orientation="vertical">
-                <ImageView
-                    android:id="@+id/ivMid1100"
-                    android:layout_width="37dp"
-                    android:layout_height="34dp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/ic_22_up_red" />
 
-                <ImageView
-                    android:id="@+id/ivMid1101"
-                    android:layout_width="37dp"
-                    android:layout_height="34dp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/ic_22_do_wh" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="天线"
-                    android:textColor="@color/white"/>
+                android:orientation="vertical">
+
                 
                 <ImageView
-                    android:id="@+id/ivDown11Up"
+                    android:id="@+id/b1920_down_iv"
                     android:layout_width="57dp"
                     android:layout_height="62dp"
                     android:visibility="visible"
                     android:scaleType="fitCenter"
                     android:layout_marginTop="50dp"
-                    android:src="@drawable/ic_2_up_red"/>
+                    android:src="@drawable/ic_2_up_wh"/>
 
                 <ImageView
-                    android:id="@+id/ivDown11Down"
+                    android:id="@+id/b1920_up_iv"
                     android:layout_width="57dp"
                     android:layout_height="62dp"
                     android:visibility="visible"
@@ -129,29 +114,29 @@
                     android:src="@drawable/ic_2_do_wh"/>
 
                 <TextView
-                    android:id="@+id/tvDown11"
+                    android:id="@+id/b1920_tv"
                     android:layout_width="57dp"
                     android:layout_height="40dp"
-                    android:text="0"
-                    android:textColor="@color/yellow"
-                    android:textSize="18sp"/>
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text=""
+                    android:textColor="@color/white"
+                    android:textSize="14sp"/>
+
+
                 <ImageView
-                    android:id="@+id/image_switch"
-                    android:padding="5dp"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:id="@+id/b967_1001_iv"
+                    android:layout_width="110dp"
+                    android:layout_height="99dp"
+                    android:layout_marginTop="80dp"
                     android:scaleType="fitXY"
-                    android:src="@drawable/ic_round_white"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="熄火上电启动"
-                    android:textColor="@color/white"/>
+                    android:src="@drawable/ic_967_xh"/>
+
             </LinearLayout>
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="6"
+                android:layout_weight="8"
                 android:gravity="bottom"
                 android:orientation="vertical">
                 <LinearLayout
@@ -166,14 +151,14 @@
                         android:gravity="center_horizontal"
                         android:orientation="vertical">
                         <ImageView
-                            android:id="@+id/ivMid1111"
+                            android:id="@+id/b90_1_iv"
                             android:layout_width="37dp"
                             android:layout_height="34dp"
                             android:scaleType="fitXY"
                             android:src="@drawable/ic_22_up_red" />
 
                         <ImageView
-                            android:id="@+id/ivMid1112"
+                            android:id="@+id/b90_0_iv"
                             android:layout_width="37dp"
                             android:layout_height="34dp"
                             android:scaleType="fitXY"
@@ -188,25 +173,18 @@
                         android:orientation="vertical">
 
                         <ImageView
-                            android:id="@+id/ivMid1211"
-                            android:layout_width="38dp"
-                            android:layout_height="30dp"
+                            android:id="@+id/b85_1_iv"
+                            android:layout_width="37dp"
+                            android:layout_height="34dp"
                             android:scaleType="fitXY"
-                            android:src="@drawable/ic_3_up_wh" />
+                            android:src="@drawable/ic_22_up_red" />
 
                         <ImageView
-                            android:id="@+id/ivMid1212"
-                            android:layout_width="38dp"
-                            android:layout_height="20dp"
+                            android:id="@+id/b85_0_iv"
+                            android:layout_width="37dp"
+                            android:layout_height="34dp"
                             android:scaleType="fitXY"
-                            android:src="@drawable/ic_3_mi_red" />
-
-                        <ImageView
-                            android:id="@+id/ivMid1213"
-                            android:layout_width="38dp"
-                            android:layout_height="30dp"
-                            android:scaleType="fitXY"
-                            android:src="@drawable/ic_3_do_wh" />
+                            android:src="@drawable/ic_22_do_wh" />
 
                     </LinearLayout>
 
@@ -218,25 +196,18 @@
                         android:orientation="vertical">
 
                         <ImageView
-                            android:id="@+id/ivMid1311"
-                            android:layout_width="38dp"
-                            android:layout_height="30dp"
+                            android:id="@+id/b84_1_iv"
+                            android:layout_width="37dp"
+                            android:layout_height="34dp"
                             android:scaleType="fitXY"
-                            android:src="@drawable/ic_3_up_wh" />
+                            android:src="@drawable/ic_22_up_red" />
 
                         <ImageView
-                            android:id="@+id/ivMid1312"
-                            android:layout_width="38dp"
-                            android:layout_height="20dp"
+                            android:id="@+id/b84_0_iv"
+                            android:layout_width="37dp"
+                            android:layout_height="34dp"
                             android:scaleType="fitXY"
-                            android:src="@drawable/ic_3_mi_red" />
-
-                        <ImageView
-                            android:id="@+id/ivMid1313"
-                            android:layout_width="38dp"
-                            android:layout_height="30dp"
-                            android:scaleType="fitXY"
-                            android:src="@drawable/ic_3_do_wh" />
+                            android:src="@drawable/ic_22_do_wh" />
 
                     </LinearLayout>
 
@@ -248,25 +219,18 @@
                         android:orientation="vertical">
 
                         <ImageView
-                            android:id="@+id/ivMid1411"
-                            android:layout_width="38dp"
-                            android:layout_height="30dp"
+                            android:id="@+id/b25_01_iv"
+                            android:layout_width="37dp"
+                            android:layout_height="34dp"
                             android:scaleType="fitXY"
-                            android:src="@drawable/ic_3_up_wh" />
+                            android:src="@drawable/ic_22_up_red" />
 
                         <ImageView
-                            android:id="@+id/ivMid1412"
-                            android:layout_width="38dp"
-                            android:layout_height="20dp"
+                            android:id="@+id/b25_00_iv"
+                            android:layout_width="37dp"
+                            android:layout_height="34dp"
                             android:scaleType="fitXY"
-                            android:src="@drawable/ic_3_mi_red" />
-
-                        <ImageView
-                            android:id="@+id/ivMid1413"
-                            android:layout_width="38dp"
-                            android:layout_height="30dp"
-                            android:scaleType="fitXY"
-                            android:src="@drawable/ic_3_do_wh" />
+                            android:src="@drawable/ic_22_do_wh" />
 
                     </LinearLayout>
 
@@ -278,27 +242,21 @@
                         android:orientation="vertical">
 
                         <ImageView
-                            android:id="@+id/ivMid1511"
-                            android:layout_width="38dp"
-                            android:layout_height="30dp"
+                            android:id="@+id/b25_11_iv"
+                            android:layout_width="37dp"
+                            android:layout_height="34dp"
                             android:scaleType="fitXY"
-                            android:src="@drawable/ic_3_up_wh" />
+                            android:src="@drawable/ic_22_up_red" />
 
                         <ImageView
-                            android:id="@+id/ivMid1512"
-                            android:layout_width="38dp"
-                            android:layout_height="20dp"
+                            android:id="@+id/b25_10_iv"
+                            android:layout_width="37dp"
+                            android:layout_height="34dp"
                             android:scaleType="fitXY"
-                            android:src="@drawable/ic_3_mi_red" />
-
-                        <ImageView
-                            android:id="@+id/ivMid1513"
-                            android:layout_width="38dp"
-                            android:layout_height="30dp"
-                            android:scaleType="fitXY"
-                            android:src="@drawable/ic_3_do_wh" />
+                            android:src="@drawable/ic_22_do_wh" />
 
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -307,25 +265,18 @@
                         android:orientation="vertical">
 
                         <ImageView
-                            android:id="@+id/ivMid1611"
-                            android:layout_width="38dp"
-                            android:layout_height="30dp"
+                            android:id="@+id/b102_1_iv"
+                            android:layout_width="37dp"
+                            android:layout_height="34dp"
                             android:scaleType="fitXY"
-                            android:src="@drawable/ic_3_up_wh" />
+                            android:src="@drawable/ic_22_up_red" />
 
                         <ImageView
-                            android:id="@+id/ivMid1612"
-                            android:layout_width="38dp"
-                            android:layout_height="20dp"
+                            android:id="@+id/b102_0_iv"
+                            android:layout_width="37dp"
+                            android:layout_height="34dp"
                             android:scaleType="fitXY"
-                            android:src="@drawable/ic_3_mi_red" />
-
-                        <ImageView
-                            android:id="@+id/ivMid1613"
-                            android:layout_width="38dp"
-                            android:layout_height="30dp"
-                            android:scaleType="fitXY"
-                            android:src="@drawable/ic_3_do_wh" />
+                            android:src="@drawable/ic_22_do_wh" />
 
                     </LinearLayout>
 
@@ -337,14 +288,14 @@
                         android:orientation="vertical">
 
                         <ImageView
-                            android:id="@+id/ivMid1711"
+                            android:id="@+id/b83_1_iv"
                             android:layout_width="37dp"
                             android:layout_height="34dp"
                             android:scaleType="fitXY"
                             android:src="@drawable/ic_22_up_red" />
 
                         <ImageView
-                            android:id="@+id/ivMid1712"
+                            android:id="@+id/b83_0_iv"
                             android:layout_width="37dp"
                             android:layout_height="34dp"
                             android:scaleType="fitXY"
@@ -357,9 +308,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
-                    
-                    <include layout="@layout/direction_switch_button"/>
-                    
+
+                    <include layout="@layout/direction_switch_button" />
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="230dp"
@@ -370,16 +321,16 @@
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
                             <ImageView
-                                android:id="@+id/ivDown31Up"
+                                android:id="@+id/b2324_down_iv"
                                 android:layout_width="57dp"
                                 android:layout_height="62dp"
                                 android:visibility="visible"
                                 android:scaleType="fitCenter"
                                 android:layout_marginTop="30dp"
-                                android:src="@drawable/ic_2_left_red"/>
+                                android:src="@drawable/ic_2_left_wh"/>
 
                             <ImageView
-                                android:id="@+id/ivDown31Down"
+                                android:id="@+id/b2324_up_iv"
                                 android:layout_width="57dp"
                                 android:layout_height="62dp"
                                 android:layout_marginTop="30dp"
@@ -389,27 +340,29 @@
                         </LinearLayout>
 
                         <TextView
-                            android:id="@+id/tvDown31"
+                            android:id="@+id/b2324_tv"
                             android:layout_width="wrap_content"
                             android:layout_height="40dp"
-                            android:text="液压/破碎"
-                            android:textColor="@color/yellow"
-                            android:textSize="14sp"/>
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:text=""
+                            android:textColor="@color/white"
+                            android:textSize="14sp" />
                     </LinearLayout>
                     <LinearLayout
-                        android:layout_width="230dp"
-                        android:layout_height="230dp"
+                        android:layout_width="270dp"
+                        android:layout_height="270dp"
                         android:orientation="vertical">
 
                         <FrameLayout
-                            android:layout_width="230dp"
-                            android:layout_height="230dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:layout_gravity="center">
 
                             <ImageView
                                 android:id="@+id/ivRightFour1111"
                                 android:layout_width="30dp"
-                                android:layout_height="24dp"
+                                android:layout_height="18dp"
                                 android:layout_gravity="center_horizontal|top"
                                 android:layout_marginTop="40dp"
                                 android:scaleType="fitXY"
@@ -452,7 +405,7 @@
                                 android:scaleType="fitXY"
                                 android:text=""
                                 android:textColor="@color/white"
-                                android:textSize="18dp" />
+                                android:textSize="14dp" />
 
                             <TextView
                                 android:id="@+id/tvRightFour1122"
@@ -464,7 +417,7 @@
                                 android:scaleType="fitXY"
                                 android:text=""
                                 android:textColor="@color/white"
-                                android:textSize="18dp" />
+                                android:textSize="14dp" />
 
                             <TextView
                                 android:id="@+id/tvRightFour1133"
@@ -476,7 +429,7 @@
                                 android:scaleType="fitXY"
                                 android:text=""
                                 android:textColor="@color/white"
-                                android:textSize="18dp" />
+                                android:textSize="14dp" />
 
                             <TextView
                                 android:id="@+id/tvRightFour1144"
@@ -488,42 +441,91 @@
                                 android:scaleType="fitXY"
                                 android:text=""
                                 android:textColor="@color/white"
-                                android:textSize="18dp" />
+                                android:textSize="14dp" />
 
-                            <TextView
-                                android:id="@+id/tvRightXz"
-                                android:layout_width="70dp"
-                                android:layout_height="70dp"
+
+                            <FrameLayout
+                                android:layout_width="110dp"
+                                android:layout_height="110dp"
                                 android:layout_gravity="center"
                                 android:background="@drawable/shape_ring_bg"
-                                android:gravity="center"
-                                android:text=""
-                                android:textColor="@color/app_title_middle_txt"
-                                android:textSize="18dp" />
+                                >
+
+                                <TextView
+                                    android:id="@+id/tvRightXz"
+                                    android:layout_width="70dp"
+                                    android:layout_height="70dp"
+                                    android:layout_gravity="center"
+                                    android:gravity="center"
+                                    android:text=""
+                                    android:textSize="18dp"
+                                    android:textColor="@color/app_title_middle_txt"
+                                    android:background="@drawable/shape_ring_bg"/>
+
+                                <ImageView
+                                    android:id="@+id/ivLeftFourB1111"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:scaleType="fitXY"
+                                    android:src="@drawable/ic_round_white"
+                                    android:layout_gravity="center_horizontal|top"
+                                    android:layout_marginTop="3dp"
+                                    />
+
+                                <ImageView
+                                    android:id="@+id/ivLeftFourB1122"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_gravity="center_horizontal|bottom"
+                                    android:layout_marginBottom="3dp"
+                                    android:scaleType="fitXY"
+                                    android:src="@drawable/ic_round_white"/>
+
+                                <ImageView
+                                    android:id="@+id/b86_iv"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_gravity="center_vertical|left"
+                                    android:layout_marginLeft="3dp"
+                                    android:scaleType="fitXY"
+                                    android:src="@drawable/ic_round_white" />
+
+                                <ImageView
+                                    android:id="@+id/b87_iv"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_gravity="center_vertical|right"
+                                    android:layout_marginRight="3dp"
+                                    android:scaleType="fitXY"
+                                    android:src="@drawable/ic_round_white"/>
+
+                            </FrameLayout>
+
                         </FrameLayout>
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="110dp"
+                android:layout_marginRight="0dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal"
                 android:gravity="center_horizontal"
-                android:layout_weight="1"
+
                 android:orientation="vertical">
 
                 <ImageView
-                    android:id="@+id/ivDown21Up"
+                    android:id="@+id/b2122_down_iv"
                     android:layout_width="57dp"
                     android:layout_height="62dp"
                     android:visibility="visible"
                     android:layout_marginTop="20dp"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/ic_2_up_red"/>
+                    android:src="@drawable/ic_2_up_wh"/>
 
                 <ImageView
-                    android:id="@+id/ivDown21Down"
+                    android:id="@+id/b2122_up_iv"
                     android:layout_width="57dp"
                     android:layout_height="62dp"
                     android:visibility="visible"
@@ -531,12 +533,14 @@
                     android:src="@drawable/ic_2_do_wh"/>
 
                 <TextView
-                    android:id="@+id/tvDown21"
+                    android:id="@+id/b2122_tv"
                     android:layout_width="57dp"
                     android:layout_height="40dp"
-                    android:text="0"
-                    android:textColor="@color/yellow"
-                    android:textSize="18sp"/>
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text=""
+                    android:textColor="@color/white"
+                    android:textSize="14sp"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -545,14 +549,14 @@
                     android:orientation="vertical">
 
                     <ImageView
-                        android:id="@+id/ivMid1811"
+                        android:id="@+id/b80_1_iv"
                         android:layout_width="37dp"
                         android:layout_height="34dp"
                         android:scaleType="fitXY"
                         android:src="@drawable/ic_22_up_red" />
 
                     <ImageView
-                        android:id="@+id/ivMid1812"
+                        android:id="@+id/b80_0_iv"
                         android:layout_width="37dp"
                         android:layout_height="34dp"
                         android:scaleType="fitXY"
@@ -561,18 +565,14 @@
                 </LinearLayout>
 
                 <ImageView
-                    android:id="@+id/image_dang_wei"
+                    android:id="@+id/b925_iv"
                     android:padding="5dp"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="30dp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/ic_round_white"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="档位旋钮"
-                    android:textColor="@color/white"/>
+                    android:layout_width="110dp"
+                    android:layout_height="110dp"
+                    android:layout_marginTop="50dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_925_1"/>
+
             </LinearLayout>
         </LinearLayout>
 
@@ -583,7 +583,7 @@
             android:gravity="center_vertical">
 
             <ImageView
-                android:id="@+id/ivRight1"
+                android:id="@+id/b104_iv"
                 android:padding="5dp"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -591,7 +591,7 @@
                 android:src="@drawable/ic_round_white"/>
 
             <ImageView
-                android:id="@+id/ivRight2"
+                android:id="@+id/b91_iv"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:padding="5dp"
@@ -599,7 +599,7 @@
                 android:src="@drawable/ic_round_white"/>
 
             <ImageView
-                android:id="@+id/ivRight3"
+                android:id="@+id/b105_iv"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:padding="5dp"
@@ -607,7 +607,7 @@
                 android:src="@drawable/ic_round_white"/>
 
             <ImageView
-                android:id="@+id/ivRight4"
+                android:id="@+id/b106_iv"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:padding="5dp"

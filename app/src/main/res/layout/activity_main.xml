@@ -11,8 +11,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        
-        <include layout="@layout/main_top_title_battery_layout"/>
+
+        <include
+            layout="@layout/main_top_title_battery_layout"
+           />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -28,6 +30,7 @@
                 android:padding="5dp"
                 android:orientation="vertical">
                 <LinearLayout
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/main_text_margin_top"
@@ -39,15 +42,16 @@
                         android:textSize="@dimen/main_text_size"
                         android:text="泵1压力:"/>
                     <TextView
-                        android:id="@+id/pump_pressure_3_1"
+                        android:id="@+id/b4344_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/main_text_color"
                         android:textSize="@dimen/main_text_size"
                         android:layout_marginLeft="5dp"
-                        android:text="500bar"/>
+                        android:text=""/>
                 </LinearLayout>
                 <LinearLayout
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/main_text_margin_top"
@@ -59,13 +63,13 @@
                         android:textSize="@dimen/main_text_size"
                         android:text="泵2压力:"/>
                     <TextView
-                        android:id="@+id/pump_pressure_3_2"
+                        android:id="@+id/b4546_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/main_text_color"
                         android:textSize="@dimen/main_text_size"
                         android:layout_marginLeft="5dp"
-                        android:text="500bar"/>
+                        android:text=""/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -79,13 +83,13 @@
                         android:textSize="@dimen/main_text_size"
                         android:text="泵1电流:"/>
                     <TextView
-                        android:id="@+id/pump_ele_3_3"
+                        android:id="@+id/b4748_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/main_text_color"
                         android:textSize="@dimen/main_text_size"
                         android:layout_marginLeft="5dp"
-                        android:text="1000mA"/>
+                        android:text=""/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -99,211 +103,57 @@
                         android:textSize="@dimen/main_text_size"
                         android:text="泵2电流:"/>
                     <TextView
-                        android:id="@+id/pump_ele_3_4"
+                        android:id="@+id/b4950_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/main_text_color"
                         android:textSize="@dimen/main_text_size"
                         android:layout_marginLeft="5dp"
-                        android:text="1000mA"/>
+                        android:text=""/>
                 </LinearLayout>
             </LinearLayout>
-            
+
             <LinearLayout
+
+
+
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:layout_margin="10dp"
                 android:padding="5dp"
                 android:background="@drawable/shape_main_bg"
+                android:layout_gravity="center"
+                android:gravity="center"
                 android:orientation="vertical">
+
                 <cn.com.sany.symc.zg.ui.DashBoardView
-                    android:id="@+id/dash_board_engine"
+                    android:id="@+id/b4142_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:text_title_dial="发动机"/>
-<!--                <LinearLayout-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginTop="@dimen/main_text_margin_top"-->
-<!--                    android:orientation="horizontal">-->
-<!--                    <TextView-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:textColor="@color/main_text_color"-->
-<!--                        android:textSize="@dimen/main_text_size"-->
-<!--                        android:text="机油压力:"/>-->
-<!--                    <TextView-->
-<!--                        android:id="@+id/oil_temper_2_1"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:textColor="@color/main_text_color"-->
-<!--                        android:textSize="@dimen/main_text_size"-->
-<!--                        android:layout_marginLeft="5dp"-->
-<!--                        android:text="1000kpa"/>-->
-<!--                </LinearLayout>-->
-<!--                <LinearLayout-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginTop="@dimen/main_text_margin_top"-->
-<!--                    android:orientation="horizontal">-->
-<!--                    <TextView-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:textColor="@color/main_text_color"-->
-<!--                        android:textSize="@dimen/main_text_size"-->
-<!--                        android:text="功率模式:"/>-->
-<!--                    <TextView-->
-<!--                        android:id="@+id/power_mode_2_2"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:textColor="@color/main_text_color"-->
-<!--                        android:textSize="@dimen/main_text_size"-->
-<!--                        android:layout_marginLeft="5dp"-->
-<!--                        android:text="NG"/>-->
-<!--                </LinearLayout>-->
-<!--                <LinearLayout-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginTop="@dimen/main_text_margin_top"-->
-<!--                    android:orientation="horizontal">-->
-<!--                    <TextView-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:textColor="@color/main_text_color"-->
-<!--                        android:textSize="@dimen/main_text_size"-->
-<!--                        android:text="作业模式:"/>-->
-<!--                    <TextView-->
-<!--                        android:id="@+id/work_mode_2_3"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:textColor="@color/main_text_color"-->
-<!--                        android:textSize="@dimen/main_text_size"-->
-<!--                        android:layout_marginLeft="5dp"-->
-<!--                        android:text="动臂先"/>-->
-<!--                </LinearLayout>-->
-<!--                <LinearLayout-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginTop="@dimen/main_text_margin_top"-->
-<!--                    android:orientation="horizontal">-->
-<!--                    <TextView-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:textColor="@color/main_text_color"-->
-<!--                        android:textSize="@dimen/main_text_size"-->
-<!--                        android:text="发动机:"/>-->
-<!--                    <TextView-->
-<!--                        android:id="@+id/engine_mode_2_4"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:textColor="@color/main_text_color"-->
-<!--                        android:textSize="@dimen/main_text_size"-->
-<!--                        android:layout_marginLeft="5dp"-->
-<!--                        android:text="2500rpm"/>-->
-<!--                </LinearLayout>-->
+                    app:text_title_dial="发动机" />
+
+
             </LinearLayout>
-            
+
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:layout_margin="10dp"
                 android:padding="5dp"
+                android:layout_gravity="center"
+                android:gravity="center"
                 android:background="@drawable/shape_main_bg"
                 android:orientation="vertical">
                 <cn.com.sany.symc.zg.ui.DashBoardView
-                    android:id="@+id/dash_board_oil"
+                    android:id="@+id/b33_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:text_title_dial="油门档位"
                     />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/main_text_margin_top"
-                    android:visibility="gone"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/main_text_color"
-                        android:textSize="@dimen/main_text_size"
-                        android:text="油门档位:"/>
-                    <TextView
-                        android:id="@+id/oil_danwei_1_1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/main_text_color"
-                        android:textSize="@dimen/main_text_size"
-                        android:layout_marginLeft="5dp"
-                        android:padding="5dp"
-                        android:text="11"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:layout_marginTop="@dimen/main_text_margin_top"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/main_text_color"
-                        android:textSize="@dimen/main_text_size"
-                        android:text="燃油油位:"/>
-                    <TextView
-                        android:id="@+id/oil_youwei_1_2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/main_text_color"
-                        android:textSize="@dimen/main_text_size"
-                        android:layout_marginLeft="5dp"
-                        android:text="100"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:layout_marginTop="@dimen/main_text_margin_top"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/main_text_color"
-                        android:textSize="@dimen/main_text_size"
-                        android:text="水温:"/>
-                    <TextView
-                        android:id="@+id/water_temper_1_3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/main_text_color"
-                        android:textSize="@dimen/main_text_size"
-                        android:layout_marginLeft="5dp"
-                        android:text="105\u2103"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:layout_marginTop="@dimen/main_text_margin_top"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/main_text_color"
-                        android:textSize="@dimen/main_text_size"
-                        android:text="液压油温:"/>
-                    <TextView
-                        android:id="@+id/presure_youwen_1_4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/main_text_color"
-                        android:textSize="@dimen/main_text_size"
-                        android:layout_marginLeft="5dp"
-                        android:text="100\u2103"/>
-                </LinearLayout>
+
             </LinearLayout>
             
             <LinearLayout
@@ -326,13 +176,13 @@
                         android:textSize="@dimen/main_text_size"
                         android:text="先导压力:"/>
                     <TextView
-                        android:id="@+id/fisrt_pressure_4_1"
+                        android:id="@+id/b51_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/main_text_color"
                         android:textSize="@dimen/main_text_size"
                         android:layout_marginLeft="5dp"
-                        android:text="50bar"/>
+                        android:text=""/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -346,13 +196,13 @@
                         android:textSize="@dimen/main_text_size"
                         android:text="动臂位移:"/>
                     <TextView
-                        android:id="@+id/work_displacement_4_2"
+                        android:id="@+id/b52_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/main_text_color"
                         android:textSize="@dimen/main_text_size"
                         android:layout_marginLeft="5dp"
-                        android:text="-20\u00B0"/>
+                        android:text=""/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -366,13 +216,13 @@
                         android:textSize="@dimen/main_text_size"
                         android:text="斗杆位移:"/>
                     <TextView
-                        android:id="@+id/stick_displacement_4_3"
+                        android:id="@+id/b53_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/main_text_color"
                         android:textSize="@dimen/main_text_size"
                         android:layout_marginLeft="5dp"
-                        android:text="-20\u00B0"/>
+                        android:text=""/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -386,13 +236,13 @@
                         android:textSize="@dimen/main_text_size"
                         android:text="铲斗位移:"/>
                     <TextView
-                        android:id="@+id/shovel_displacement_4_4"
+                        android:id="@+id/b54_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/main_text_color"
                         android:textSize="@dimen/main_text_size"
                         android:layout_marginLeft="5dp"
-                        android:text="-20\u00B0"/>
+                        android:text=""/>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
@@ -401,7 +251,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="3"
+            android:layout_weight="2.8"
             android:orientation="horizontal">
             <LinearLayout
                 android:layout_width="0dp"
@@ -412,6 +262,7 @@
                 android:background="@drawable/shape_main_bg"
                 android:orientation="vertical">
                 <LinearLayout
+                    android:id="@+id/fileManagerLL"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/main_text_margin_top"
@@ -423,13 +274,13 @@
                         android:textSize="@dimen/main_text_size"
                         android:text="回转位移:"/>
                     <TextView
-                        android:id="@+id/reve_displackement_5_1"
+                        android:id="@+id/b55_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/main_text_color"
                         android:textSize="@dimen/main_text_size"
                         android:layout_marginLeft="5dp"
-                        android:text="-20\u00B0"/>
+                        android:text=""/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -443,33 +294,33 @@
                         android:textSize="@dimen/main_text_size"
                         android:text="左行走位移:"/>
                     <TextView
-                        android:id="@+id/left_displackement_5_2"
+                        android:id="@+id/b56_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/main_text_color"
                         android:textSize="@dimen/main_text_size"
                         android:layout_marginLeft="5dp"
-                        android:text="-20\u00B0"/>
+                        android:text=""/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/main_text_margin_top"
                     android:orientation="horizontal">
-                    <TextView
+                <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/main_text_color"
                         android:textSize="@dimen/main_text_size"
                         android:text="右行走位移:"/>
                     <TextView
-                        android:id="@+id/right_displackement_5_3"
+                        android:id="@+id/b57_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/main_text_color"
                         android:textSize="@dimen/main_text_size"
                         android:layout_marginLeft="5dp"
-                        android:text="-20\u00B0"/>
+                        android:text=""/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -483,13 +334,13 @@
                         android:textSize="@dimen/main_text_size"
                         android:text="动臂角度:"/>
                     <TextView
-                        android:id="@+id/work_angle_5_4"
+                        android:id="@+id/b5859_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/main_text_color"
                         android:textSize="@dimen/main_text_size"
                         android:layout_marginLeft="5dp"
-                        android:text="360\u00B0"/>
+                        android:text=""/>
                 </LinearLayout>
             </LinearLayout>
             
@@ -513,13 +364,13 @@
                         android:textSize="@dimen/main_text_size"
                         android:text="斗杆角度:"/>
                     <TextView
-                        android:id="@+id/stick_angle_6_1"
+                        android:id="@+id/b6061_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/main_text_color"
                         android:textSize="@dimen/main_text_size"
                         android:layout_marginLeft="5dp"
-                        android:text="360\u00B0"/>
+                        android:text=""/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -533,13 +384,13 @@
                         android:textSize="@dimen/main_text_size"
                         android:text="铲斗角度:"/>
                     <TextView
-                        android:id="@+id/shovel_angle_6_2"
+                        android:id="@+id/b6263_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/main_text_color"
                         android:textSize="@dimen/main_text_size"
                         android:layout_marginLeft="5dp"
-                        android:text="360\u00B0"/>
+                        android:text=""/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -553,13 +404,13 @@
                         android:textSize="@dimen/main_text_size"
                         android:text="回转角度:"/>
                     <TextView
-                        android:id="@+id/reve_angle_6_3"
+                        android:id="@+id/b6465_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/main_text_color"
                         android:textSize="@dimen/main_text_size"
                         android:layout_marginLeft="5dp"
-                        android:text="360\u00B0"/>
+                        android:text=""/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -573,13 +424,13 @@
                         android:textSize="@dimen/main_text_size"
                         android:text="前后倾角:"/>
                     <TextView
-                        android:id="@+id/front_back_angle_6_4"
+                        android:id="@+id/b6667_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/main_text_color"
                         android:textSize="@dimen/main_text_size"
                         android:layout_marginLeft="5dp"
-                        android:text="360\u00B0"/>
+                        android:text=""/>
                 </LinearLayout>
             </LinearLayout>
             
@@ -603,18 +454,105 @@
                         android:textSize="@dimen/main_text_size"
                         android:text="左右倾角:"/>
                     <TextView
-                        android:id="@+id/left_riht_angle_7_1"
+                        android:id="@+id/b6869_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/main_text_color"
                         android:textSize="@dimen/main_text_size"
                         android:layout_marginLeft="5dp"
-                        android:text="360"/>
+                        android:text=""/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/main_text_margin_top"
+                    android:visibility="gone"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/main_text_color"
+                        android:textSize="@dimen/main_text_size"
+                        android:text="油门档位:"/>
+                    <TextView
+                        android:id="@+id/oil_danwei_1_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/main_text_color"
+                        android:textSize="@dimen/main_text_size"
+                        android:layout_marginLeft="5dp"
+                        android:padding="5dp"
+                        android:text=""/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:layout_marginTop="@dimen/main_text_margin_top"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/main_text_color"
+                        android:textSize="@dimen/main_text_size"
+                        android:text="燃油油位:"/>
+                    <TextView
+                        android:id="@+id/b34_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/main_text_color"
+                        android:textSize="@dimen/main_text_size"
+                        android:layout_marginLeft="5dp"
+                        android:text=""/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:layout_marginTop="@dimen/main_text_margin_top"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/main_text_color"
+                        android:textSize="@dimen/main_text_size"
+                        android:text="水温:"/>
+                    <TextView
+                        android:id="@+id/b35_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/main_text_color"
+                        android:textSize="@dimen/main_text_size"
+                        android:layout_marginLeft="5dp"
+                        android:text=""/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:layout_marginTop="@dimen/main_text_margin_top"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/main_text_color"
+                        android:textSize="@dimen/main_text_size"
+                        android:text="液压油温:"/>
+                    <TextView
+                        android:id="@+id/b36_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/main_text_color"
+                        android:textSize="@dimen/main_text_size"
+                        android:layout_marginLeft="5dp"
+                        android:text=""/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/main_text_margin_top"
+                    android:visibility="gone"
                     android:orientation="horizontal">
                     <TextView
                         android:layout_width="wrap_content"
@@ -623,7 +561,7 @@
                         android:textSize="@dimen/main_text_size"
                         android:text="故障报警:"/>
                     <TextView
-                        android:id="@+id/fault_warn_7_2"
+
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/main_text_color"
@@ -634,6 +572,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     android:layout_marginTop="@dimen/main_text_margin_top"
                     android:orientation="horizontal">
                     <TextView
@@ -641,7 +580,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/main_text_color"
                         android:textSize="@dimen/main_text_size"
-                        android:text="蓄电池供电:"/>
+                        android:text=":"/>
                     <TextView
                         android:id="@+id/battery_7_3"
                         android:layout_width="wrap_content"
@@ -654,6 +593,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     android:layout_marginTop="@dimen/main_text_margin_top"
                     android:orientation="horizontal">
                     <TextView
@@ -661,7 +601,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/main_text_color"
                         android:textSize="@dimen/main_text_size"
-                        android:text="机油压力低:"/>
+                        android:text=":"/>
                     <TextView
                         android:id="@+id/oil_pressure_7_4"
                         android:layout_width="wrap_content"
@@ -681,9 +621,35 @@
                 android:padding="5dp"
                 android:background="@drawable/shape_main_bg"
                 android:orientation="vertical">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/main_text_margin_top"
+                    android:orientation="horizontal"
+                    android:visibility="visible">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="机油压力:"
+                        android:textColor="@color/main_text_color"
+                        android:textSize="@dimen/main_text_size" />
+
+                    <TextView
+                        android:id="@+id/b3738_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:text=""
+                        android:textColor="@color/main_text_color"
+                        android:textSize="@dimen/main_text_size" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible"
                     android:layout_marginTop="@dimen/main_text_margin_top"
                     android:orientation="horizontal">
                     <TextView
@@ -691,7 +657,70 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/main_text_color"
                         android:textSize="@dimen/main_text_size"
-                        android:text="水温高:"/>
+                        android:text="功率模式:"/>
+                    <TextView
+                        android:id="@+id/b39_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/main_text_color"
+                        android:textSize="@dimen/main_text_size"
+                        android:layout_marginLeft="5dp"
+                        android:text=""/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible"
+                    android:layout_marginTop="@dimen/main_text_margin_top"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/main_text_color"
+                        android:textSize="@dimen/main_text_size"
+                        android:text="作业模式:"/>
+                    <TextView
+                        android:id="@+id/b40_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/main_text_color"
+                        android:textSize="@dimen/main_text_size"
+                        android:layout_marginLeft="5dp"
+                        android:text=""/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/main_text_margin_top"
+                    android:visibility="gone"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/main_text_color"
+                        android:textSize="@dimen/main_text_size"
+                        android:text=":"/>
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/main_text_color"
+                        android:textSize="@dimen/main_text_size"
+                        android:layout_marginLeft="5dp"
+                        android:text=""/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/main_text_margin_top"
+                    android:visibility="gone"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/main_text_color"
+                        android:textSize="@dimen/main_text_size"
+                        android:text=":"/>
                     <TextView
                         android:id="@+id/water_temper_high_8_1"
                         android:layout_width="wrap_content"
@@ -705,13 +734,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/main_text_margin_top"
+                    android:visibility="gone"
                     android:orientation="horizontal">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/main_text_color"
                         android:textSize="@dimen/main_text_size"
-                        android:text="空滤阻塞:"/>
+                        android:text=":"/>
                     <TextView
                         android:id="@+id/air_block_8_2"
                         android:layout_width="wrap_content"
@@ -724,6 +754,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     android:layout_marginTop="@dimen/main_text_margin_top"
                     android:orientation="horizontal">
                     <TextView
@@ -731,7 +762,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/main_text_color"
                         android:textSize="@dimen/main_text_size"
-                        android:text="油水分离器水位高:"/>
+                        android:text=":"/>
                     <TextView
                         android:id="@+id/oil_water_high_8_3"
                         android:layout_width="wrap_content"
@@ -765,6 +796,35 @@
             </LinearLayout>
 
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.2"
+            android:visibility="visible"
+            android:layout_gravity="center_vertical"
+            android:background="@color/deep_blue"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/b700_tv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:singleLine="true"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="marquee_forever"
+                android:text=""
+                android:textColor="@color/red"
+                android:textSize="18sp"/>
+        </LinearLayout>
+
+
+
+
+
     </LinearLayout>
 
     <include
