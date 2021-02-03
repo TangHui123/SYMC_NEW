@@ -338,7 +338,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         b4142_tv.setCompleteDegree(0f);
         b4142_tv.setPointerMain(pointer_4142);
 
-        String[] pointer_33 = new String[] {"0", "1","2","3","4", "5","6","7","8", "9","10","11"};
+        String[] pointer_33 = new String[] {"1","2","3","4", "5","6","7","8", "9","10","11"};
         b33_tv = (DashBoardView) findViewById(R.id.b33_tv);
         b33_tv.setCompleteDegree(0f);
         b33_tv.setPointerMain(pointer_33);
@@ -667,7 +667,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void  brightNess(int flag){
         int val;
         CacheData.setMsg_info("=================brightNess==========tvBright=======flag======="+"" + flag,1);
-        if((flag&0x4) == 0x4) {
+        if(flag==1) {
             if(change_bright_old == 0){
                 SharedPreferences share = getSharedPreferences("Acitivity", Context.MODE_WORLD_READABLE);
                 val = share.getInt("value", 200);
@@ -1001,6 +1001,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             CacheData.setMsg_info("============dealOtherData========content[2]==================>" + content[2], IConstant.MESSAGE_INFO_ALL);
 
             tmp_2 = (int) (((temp >> 5) & 0x1) * 8) + (int) (((temp >> 4) & 0x1) * 4) + (int) (((temp >> 3) & 0x1) * 2) + (int) ((temp >> 2) & 0x1);
+            tmp_2 = tmp_2 + 1;
             CacheData.setMsg_info("============dealOtherData========content[2]=====tmp_2=============>" + tmp_2, IConstant.MESSAGE_INFO_ALL);
             switch (tmp_2) {
                 case 1: {
@@ -1447,7 +1448,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 System.arraycopy(content, 24, temp_1, 0, 1);
                 try {
                     int brightness = Integer.valueOf(binary(temp_1, 10)).intValue();
-                    brightNess(brightness);
+                    temp = content[24];
+                    tmp_2 = (temp >> 2) & 0x1;
+                    brightNess(tmp_2);
                     changePage(brightness);
                 }catch (Exception e) {
                     e.printStackTrace();
@@ -1460,8 +1463,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 // 油门挡位
                 System.arraycopy(content, 25, temp_1, 0, 1);
                 int b33 = bytes2int(temp_1);
-                b33_tv.setCompleteDegree(66f);
-                b33_tv.setCompleteDegree((b33/11)*100f);
+                b33= b33 - 1;
+                b33_tv.setCompleteDegree((b33/10f)*100);  //8888
 
                 // 燃油油位
                 System.arraycopy(content, 26, temp_1, 0, 1);
@@ -1515,9 +1518,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 // 发动机转速
                 System.arraycopy(content, 33, temp_2, 0, 2);
                 int b4142 = bytes2int(temp_2);
-                b4142_tv.setCompleteDegree((b4142/2500)*100f);
 
-                //b4142_tv.setText("" + b4142 + "rpm");
+                b4142_tv.setCompleteDegree((b4142/2500f)*100); //
+
+
 
                 // 泵1压力
                 System.arraycopy(content, 35, temp_2, 0, 2);
@@ -1560,8 +1564,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 b54_tv.setText("" + b54 + "\u00B0");
 
                 // 回转操作
-                System.arraycopy(content, 47, temp_2, 0, 1);
-                int b55 = bytes2int(temp_2);
+                System.arraycopy(content, 47, temp_1, 0, 1);
+                int b55 = bytes2int(temp_1);
                 b55_tv.setText("" + b55 + "\u00B0");
 
                 // 左行走
@@ -1580,8 +1584,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 b5859_tv.setText("" + b5859 + "\u00B0");
 
                 // 斗杆角度
-                System.arraycopy(content, 52, temp_1, 0, 2);
-                int b6061 = bytes2int(temp_1);
+                System.arraycopy(content, 52, temp_2, 0, 2);
+                int b6061 = bytes2int(temp_2);
+                CacheData.setMsg_info("=================b6061==========b6061=============="+"" + b6061,1);
                 b6061_tv.setText("" + b6061 + "\u00B0");
 
                 // 铲斗角度
