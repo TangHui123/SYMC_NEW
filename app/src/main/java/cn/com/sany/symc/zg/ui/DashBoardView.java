@@ -174,7 +174,6 @@ public class DashBoardView extends View{
                 pointerPaint.setStrokeWidth(5);
                 canvas.drawLine(radiusDial, 0, radiusDial - strokeWidthDial - dp2px(12), 0,
                         pointerPaint);
-
                 drawPointerText(canvas, i);
             }else {    //短表针
                 pointerPaint.setStrokeWidth(2);
@@ -185,8 +184,9 @@ public class DashBoardView extends View{
     }
 
     private void drawPointerText(Canvas canvas, int i){
+        pointerPaint.setTextSize(sp2px(14));
         canvas.save();
-        int currentCenterX = (int) (radiusDial - strokeWidthDial - dp2px(21) - pointerPaint.measureText(String.valueOf(i)) / 2);
+        int currentCenterX = (int) (radiusDial - strokeWidthDial - dp2px(18) - pointerPaint.measureText(String.valueOf(i)) / 2);
         canvas.translate(currentCenterX, 0);
         canvas.rotate(360 - 135 - 2.7f * i);        //坐标系总旋转角度为360度
 
@@ -213,7 +213,11 @@ public class DashBoardView extends View{
             titlePaint.setColor(colorDialHigh);
         }
         titlePaint.setTextSize(valueTextSize);
-        canvas.drawText(currentValue + "%", 0, radiusDial * 2/3, titlePaint);
+        if(titleDial != null && titleDial.contains("油门")) {
+//            canvas.drawText((int)currentValue + "%", 0, radiusDial * 2/3, titlePaint);
+        } else {
+//            canvas.drawText((int)currentValue + "%", 0, radiusDial * 2/3, titlePaint);
+        }
     }
 
     private void drawPointer(Canvas canvas){
