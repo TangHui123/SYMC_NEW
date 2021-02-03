@@ -152,7 +152,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:stroke_width_dial="5dp"
-                    app:text_title_dial="油门档位"
+                    app:text_title_dial="燃油油位"
                     />
 
 

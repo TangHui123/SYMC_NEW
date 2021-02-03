@@ -213,7 +213,7 @@ public class DashBoardView extends View{
             titlePaint.setColor(colorDialHigh);
         }
         titlePaint.setTextSize(valueTextSize);
-        if(titleDial != null && titleDial.contains("油门")) {
+        if(titleDial != null && titleDial.contains("燃油")) {
 //            canvas.drawText((int)currentValue + "%", 0, radiusDial * 2/3, titlePaint);
         } else {
 //            canvas.drawText((int)currentValue + "%", 0, radiusDial * 2/3, titlePaint);
