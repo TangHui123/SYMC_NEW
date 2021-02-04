@@ -667,13 +667,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void  brightNess(int flag){
         int val;
-        CacheData.setMsg_info("=================brightNess==========tvBright=======flag======="+"" + flag,1);
-        CacheData.setMsg_info("=================brightNess==========true=======flag======="+"" + ((flag & 0x4) == 0x1),1);
+       // CacheData.setMsg_info("=================brightNess==========tvBright=======flag======="+"" + flag,1);
+       // CacheData.setMsg_info("=================brightNess==========true=======flag======="+"" + ((flag & 0x4) == 0x1),1);
         if(flag == 1) {
-            CacheData.setMsg_info("=================brightNess==========change_bright_old == 0==========="+"" + (change_bright_old == 0),1);
+          //  CacheData.setMsg_info("=================brightNess==========change_bright_old == 0==========="+"" + (change_bright_old == 0),1);
             if(change_bright_old == 0){
-                SharedPreferences share = getSharedPreferences("Acitivity", Context.MODE_WORLD_READABLE);
+               // CacheData.setMsg_info("=================brightNess========1111====="+"" + change_bright_old,1);
+                SharedPreferences share = getSharedPreferences("aaa", Context.MODE_PRIVATE);
                 val = share.getInt("value", 200);
+               // CacheData.setMsg_info("=================brightNess========2222====="+"" + (change_bright_old == 0),1);
                 if (val >= 250) {
                     val = 2;
                 }else if(val >= 200){
@@ -681,7 +683,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }else{
                     val = val + 50;
                 }
-                CacheData.setMsg_info("=================brightNess==========tvBright=============="+"" + (val*100)/250 + "%",1);
+               // CacheData.setMsg_info("=================brightNess==========3333=============="+"" + val + "%",1);
 
                 SharedPreferences.Editor editor = share.edit();//获取编辑器
                 editor.putInt("value", val);
@@ -896,7 +898,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      */
     private void dealOtherData(byte[] content) {
 
-         CacheData.setMsg_info("============dealOtherData=========content===================>" + NumberBytes.byteArrayToHexStr(content), IConstant.MESSAGE_INFO_ALL);
+        // CacheData.setMsg_info("============dealOtherData=========content===================>" + NumberBytes.byteArrayToHexStr(content), IConstant.MESSAGE_INFO_ALL);
         //B40对应181_b0 遥控启动
         //181数据解析
         if (content.length > 0) {
@@ -922,15 +924,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
 
             if (tmp_1 == 1) {
-                b81_iv.setImageResource(R.drawable.ic_round_red);
+                b81_iv.setImageResource(R.drawable.shape_ring_bg_press);
             } else {
-                b81_iv.setImageResource(R.drawable.ic_round_white);
+                b81_iv.setImageResource(R.drawable.shape_ring_bg_normal);
             }
 
             if (tmp_2 == 1) {
-                b82_iv.setImageResource(R.drawable.ic_round_red);
+                b82_iv.setImageResource(R.drawable.shape_ring_bg_press);
             } else {
-                b82_iv.setImageResource(R.drawable.ic_round_white);
+                b82_iv.setImageResource(R.drawable.shape_ring_bg_normal);
             }
 
             if (tmp_3 == 1) {
@@ -961,15 +963,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
 
             if (tmp_6 == 1) {
-                b86_iv.setImageResource(R.drawable.ic_round_red);
+                b86_iv.setImageResource(R.drawable.shape_ring_bg_press);
             } else {
-                b86_iv.setImageResource(R.drawable.ic_round_white);
+                b86_iv.setImageResource(R.drawable.shape_ring_bg_normal);
             }
 
             if (tmp_7 == 1) {
-                b87_iv.setImageResource(R.drawable.ic_round_red);
+                b87_iv.setImageResource(R.drawable.shape_ring_bg_press);
             } else {
-                b87_iv.setImageResource(R.drawable.ic_round_white);
+                b87_iv.setImageResource(R.drawable.shape_ring_bg_normal);
             }
 
         }
@@ -1001,11 +1003,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 b91_iv.setImageResource(R.drawable.ic_round_white);
             }
 
-            CacheData.setMsg_info("============dealOtherData========content[2]==================>" + content[2], IConstant.MESSAGE_INFO_ALL);
-
+          //  CacheData.setMsg_info("============dealOtherData========content[2]==================>" + content[2], IConstant.MESSAGE_INFO_ALL);
             tmp_2 = (int) (((temp >> 5) & 0x1) * 8) + (int) (((temp >> 4) & 0x1) * 4) + (int) (((temp >> 3) & 0x1) * 2) + (int) ((temp >> 2) & 0x1);
             tmp_2 = tmp_2 + 1;
-            CacheData.setMsg_info("============dealOtherData========content[2]=====tmp_2=============>" + tmp_2, IConstant.MESSAGE_INFO_ALL);
+          //  CacheData.setMsg_info("============dealOtherData========content[2]=====tmp_2=============>" + tmp_2, IConstant.MESSAGE_INFO_ALL);
             switch (tmp_2) {
                 case 1: {
                     b925_iv.setImageResource(R.drawable.ic_925_1);
@@ -1068,13 +1069,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             }
 
-            CacheData.setMsg_info("============dealOtherData========content[2]=====tmp_6=============>" + tmp_6, IConstant.MESSAGE_INFO_ALL);
+         //   CacheData.setMsg_info("============dealOtherData========content[2]=====tmp_6=============>" + tmp_6, IConstant.MESSAGE_INFO_ALL);
             // 熄火
             if (tmp_6 == 1) {
                 b967_1001_iv.setImageResource(R.drawable.ic_967_xh);
             }
 
-            CacheData.setMsg_info("============dealOtherData========content[2]=====tmp_7=============>" + tmp_7, IConstant.MESSAGE_INFO_ALL);
+          //  CacheData.setMsg_info("============dealOtherData========content[2]=====tmp_7=============>" + tmp_7, IConstant.MESSAGE_INFO_ALL);
             // 上电
             if (tmp_7 == 1) {
                 b967_1001_iv.setImageResource(R.drawable.ic_967_sd);
@@ -1090,9 +1091,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
 
             // 急停
-            if (tmp_1 == 1) {
-                b967_1001_iv.setImageResource(R.drawable.ic_967_fdj);
-            }
+//            if (tmp_1 == 1) {
+//                b967_1001_iv.setImageResource(R.drawable.ic_967_fdj);
+//            }
 
             if(tmp_0 == 0 && tmp_1 == 0 && tmp_6 == 0 && tmp_7 == 0){
                 b967_1001_iv.setImageResource(R.drawable.ic_967_xh);
@@ -1451,8 +1452,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 System.arraycopy(content, 24, temp_1, 0, 1);
                 try {
                     int brightness = Integer.valueOf(binary(temp_1, 10)).intValue();
-                    temp = content[17];
+                    temp = content[24];
+                    tmp_0 = (temp >> 0) & 0x1;
+                    tmp_1 = (temp >> 1) & 0x1;
                     tmp_2 = (temp >> 2) & 0x1;
+                    tmp_3 = (temp >> 3) & 0x1;
+                    tmp_4 = (temp >> 4) & 0x1;
+                    tmp_5 = (temp >> 5) & 0x1;
+                    tmp_6 = (temp >> 6) & 0x1;
+                    tmp_7 = (temp >> 7) & 0x1;
+
                     brightNess(tmp_2);
                     changePage(brightness);
                 }catch (Exception e) {
@@ -1462,7 +1471,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             }
 
-            if (content.length > 70) {
+            if (content.length > 62) {
                 // 油门挡位
                 System.arraycopy(content, 25, temp_1, 0, 1);
                 int b33 = bytes2int(temp_1);
@@ -1476,18 +1485,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //水温
                 System.arraycopy(content, 27, temp_1, 0, 1);
                 int b35 = bytes2int(temp_1);
-                b35 = b35 -40;
-                b35_tv.setText("" + b35 + "\u00B0");
+                if(b35 >40 && b35 <215){
+                    b35 = 40;
+                }else if(b35>215 && b35 < 256){
+                    b35 = b35 - 256;
+                }else{
+                    b35 = 0;
+                }
+                b35_tv.setText("" +  b35 + "\u00B0");
 
                 //液压油温
                 System.arraycopy(content, 28, temp_1, 0, 1);
                 int b36 = bytes2int(temp_1);
-                b36_tv.setText("" + b36 + "\u00B0");
+                b36_tv.setText("" + (b36>150?150:b36) + "\u00B0");
 
                 // 机油压力
                 System.arraycopy(content, 29, temp_2, 0, 2);
                 int b3738 = bytes2int(temp_2);
-                b3738_tv.setText("" + b3738 + "KPa");
+                b3738_tv.setText("" + (b3738>1000?1000:b3738) + "KPa");
 
                 // 功率模式
                 System.arraycopy(content, 31, temp_1, 0, 1);
@@ -1521,103 +1536,100 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 // 发动机转速
                 System.arraycopy(content, 33, temp_2, 0, 2);
                 int b4142 = bytes2int(temp_2);
-
+                b4142 = b4142>2500?2500:b4142;
                 b4142_tv.setCompleteDegree((b4142/2500f)*100); //
-
-
 
                 // 泵1压力
                 System.arraycopy(content, 35, temp_2, 0, 2);
                 int b4344 = bytes2int(temp_2);
-                b4344_tv.setText("" + b4344 + "bar");
+                b4344_tv.setText("" + (b4344>500?500:b4344) + "bar");
 
                 // 泵2压力
                 System.arraycopy(content, 37, temp_2, 0, 2);
                 int b4546 = bytes2int(temp_2);
-                b4546_tv.setText("" + b4546 + "bar");
+                b4546_tv.setText("" + (b4546>500?500:b4546) + "bar");
 
                 // 泵1电流
                 System.arraycopy(content, 39, temp_2, 0, 2);
                 int b4748 = bytes2int(temp_2);
-                b4748_tv.setText("" + b4748 + "mA");
+                b4748_tv.setText("" + (b4748>1000?1000:b4748) + "mA");
 
                 // 泵2电流
                 System.arraycopy(content, 41, temp_2, 0, 2);
                 int b4950 = bytes2int(temp_2);
-                b4950_tv.setText("" + b4950 + "mA");
+                b4950_tv.setText("" + (b4950>1000?1000:b4950)  + "mA");
 
                 // 先导压力
                 System.arraycopy(content, 43, temp_1, 0, 1);
                 int b51 = bytes2int(temp_1);
-                b51_tv.setText("" + b51 + "bar");
+                b51_tv.setText("" + (b51>50?50:b51) + "bar");
 
                 //动臂操作
                 System.arraycopy(content, 44, temp_1, 0, 1);
                 int b52 = bytes2int(temp_1);
-                b52 = b52 -20;
+                b52 = dataTranInfo(b52);
                 b52_tv.setText("" + b52 + "\u00B0");
 
                 // 斗杆操作
                 System.arraycopy(content, 45, temp_1, 0, 1);
                 int b53 = bytes2int(temp_1);
-                b53 = b53 -20;
+                b53 = dataTranInfo(b53);
                 b53_tv.setText("" + b53 + "\u00B0");
 
                 // 铲斗操作
                 System.arraycopy(content, 46, temp_1, 0, 1);
                 int b54 = bytes2int(temp_1);
-                b54 = b54 -20;
+                b54 = dataTranInfo(b54);
                 b54_tv.setText("" + b54 + "\u00B0");
 
                 // 回转操作
                 System.arraycopy(content, 47, temp_1, 0, 1);
                 int b55 = bytes2int(temp_1);
-                b55 = b55 -20;
+                b55 = dataTranInfo(b55);
                 b55_tv.setText("" + b55 + "\u00B0");
 
                 // 左行走
                 System.arraycopy(content, 48, temp_1, 0, 1);
                 int b56 = bytes2int(temp_1);
-                b56 = b56 -20;
-                b56= b56 -20;
+                b56 = dataTranInfo(b56);
                 b56_tv.setText("" + b56 + "\u00B0");
 
                 // 右行走
                 System.arraycopy(content, 49, temp_1, 0, 1);
                 int b57 = bytes2int(temp_1);
-                b57 = b57 -20;
+                b57 = dataTranInfo(b57);
                 b57_tv.setText("" + b57 + "\u00B0");
 
                 // 动臂角度
                 System.arraycopy(content, 50, temp_2, 0, 2);
                 int b5859 = bytes2int(temp_2);
-                b5859_tv.setText("" + b5859 + "\u00B0");
+                b5859_tv.setText("" + (b5859>360?360:b5859) + "\u00B0");
 
                 // 斗杆角度
                 System.arraycopy(content, 52, temp_2, 0, 2);
                 int b6061 = bytes2int(temp_2);
                // CacheData.setMsg_info("=================b6061==========b6061=============="+"" + b6061,1);
-                b6061_tv.setText("" + b6061 + "\u00B0");
+                b6061_tv.setText("" + (b6061>360?360:b6061) + "\u00B0");
 
                 // 铲斗角度
                 System.arraycopy(content, 54, temp_2, 0, 2);
                 int b6263 = bytes2int(temp_2);
-                b6263_tv.setText("" + b6263 + "\u00B0");
+                b6263_tv.setText("" + (b6263>360?360:b6263) + "\u00B0");
 
                 // 回转角度
                 System.arraycopy(content, 56, temp_2, 0, 2);
                 int b6465 = bytes2int(temp_2);
-                b6465_tv.setText("" + b6465 + "\u00B0");
+                b6465_tv.setText("" + (b6465>360?360:b6465) + "\u00B0");
 
                 // 前后倾角
                 System.arraycopy(content, 58, temp_2, 0, 2);
                 int b6667 = bytes2int(temp_2);
-                b6667_tv.setText("" + b6667 + "\u00B0");
+                b6667_tv.setText("" + (b6667>360?360:b6667) + "\u00B0");
 
                 // 左右倾角
                 System.arraycopy(content, 60, temp_2, 0, 2);
                 int b6869 = bytes2int(temp_2);
-                b6869_tv.setText("" + b6869 + "\u00B0");
+                b6869_tv.setText("" + (b6869>360?360:b6869) + "\u00B0");
 
                 temp = content[62];
                 tmp_0 = (temp >> 0) & 0x1;
@@ -1643,7 +1655,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if(!question_old.equals(question)){
                     b700_tv.setText(question);
                     b700_tv.setSelected(true);
+                }else if(question.equals("故障信息：")){
+                    question = question + "无";
                 }
+
                 question_old = question;
 
 
@@ -1658,6 +1673,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         }
 
+    }
+
+
+    private int dataTranInfo(int num){
+        if(num >= 20 && num <235){
+            num = 20;
+        }else if(num>235 && num < 256){
+            num = num - 256;
+        }else{
+            num = 0;
+        }
+        return num;
     }
 
 
@@ -1685,7 +1712,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     if (CacheData.getThread_flag() == 12) {
                         serialhelp.close();
                         initSerial();
-                        CacheData.setMsg_info("============================getTimerTask_loc=====================initSerial==", 0);
+                       // CacheData.setMsg_info("============================getTimerTask_loc=====================initSerial==", 0);
                     } else {
                         CacheData.setThread_flag(CacheData.getThread_flag() + 1);
                     }

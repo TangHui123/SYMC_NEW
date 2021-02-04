@@ -800,7 +800,7 @@
             android:layout_height="0dp"
             android:layout_weight="0.8"
             android:visibility="visible"
-            android:layout_gravity="center_vertical"
+            android:layout_gravity="center"
             android:background="@color/black"
             android:gravity="center"
             android:orientation="vertical">
@@ -809,14 +809,16 @@
                 android:id="@+id/b700_tv"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:ellipsize="marquee"
+                android:marqueeRepeatLimit="marquee_forever"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
                 android:singleLine="true"
-                android:ellipsize="marquee"
-                android:marqueeRepeatLimit="marquee_forever"
+                android:gravity="center"
+                android:layout_gravity="center"
                 android:text="故障信息：无"
                 android:textColor="@color/red"
-                android:textSize="18sp"/>
+                android:textSize="18sp" />
         </LinearLayout>
 
 

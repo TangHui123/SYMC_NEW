@@ -449,16 +449,17 @@ public class SerialHelper {
 											System.arraycopy(buffer,i,packageData,0,content_length + 9);//9
 										//	CacheData.setMsg_info("===========3===================",1);
 											// LogUtil.d(TAG,"发送的数据为====ReadSerialDataThread=====44==readData===byteArrayToBinaryString========>："+ NumberBytes.byteArrayToHexStr(packageData));
-											//CacheData.setMsg_info("=====ReadSerialDataThread=====runnable===dealCommandDetail====11====开始接收的数据========readData=：==>",IConstant.MESSAGE_INFO_ALL);
+											//CacheData.setMsg_info("=====ReadSerialDataThread=====runnable===calcCrc8========calcCrc8=：==>"+ NumberBytes.calcCrc8(packageData,0,packageData.length-1),IConstant.MESSAGE_INFO_ALL);
 
+											//CacheData.setMsg_info("=====ReadSerialDataThread=====runnable===calcCrc8========packageData[packageData.length -1]=：==>"+ packageData[packageData.length -1],IConstant.MESSAGE_INFO_ALL);
 
 											//进行异或和验证、验证通过执行
 //											boolean flag = true;
 //											if(flag){
-											//if(NumberBytes.calcCrc8(packageData,0,packageData.length-1) == packageData[packageData.length -1]){
-											//   CacheData.setMsg_info("================xor success===============",1);
-										   boolean aa = true;
-										   if(aa){
+											if(NumberBytes.calcCrc8(packageData,0,packageData.length-1) == packageData[packageData.length -1]){
+											  // CacheData.setMsg_info("================xor success===============",1);
+//										   boolean aa = true;
+//										   if(aa){
 //												CacheData.setMsg_info("================xor success===============",1);
 												//  LogUtil.d(TAG,"发送的数据为====ReadSerialDataThread====getXor===readData===dealCommandDetail========>：  ==/n");
 												//  CacheData.setMsg_info("=====ReadSerialDataThread=====getXor===dealCommandDetail====11====开始接收的数据========readData=：==>",IConstant.MESSAGE_INFO_ALL);

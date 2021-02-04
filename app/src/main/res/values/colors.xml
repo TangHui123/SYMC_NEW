@@ -57,7 +57,7 @@
     <color name="green90">#009000</color>
     <color name="greena0">#DDFFDD</color>
     <color name="greenf0">#b0ffb0</color>
-    <color name="purple">#800080</color>
+    X
     <color name="pink">#FFC0CB</color>
     <color name="orange">#FFA500</color>
     <color name="lemonyellow">#FFFACD</color>
@@ -96,7 +96,11 @@
     <color name="market_title_limit">#800080</color>
     <color name="market_title_xie">#339999</color>
     <color name="market_title_stop">#0000FF</color>
+
+    <color name="shape_bg_red">#C181B3</color>
     
     <color name="main_text_color">#ffffffff</color>
+
+
 
 </resources>
