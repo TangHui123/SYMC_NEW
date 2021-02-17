@@ -1166,7 +1166,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 tvRightFour1122.setText("" + temp_1112);
             } else {
                 ivRightFour1111.setImageResource(R.drawable.ic_up_default);
-                tvRightFour1111.setText("" + temp_1112);
+                tvRightFour1111.setText("" );
                 ivRightFour1122.setImageResource(R.drawable.ic_down_default);
                 tvRightFour1122.setText("");
             }
@@ -1187,7 +1187,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 tvLeftFour1122.setText("" + temp_1314);
             } else {
                 ivLeftFour1111.setImageResource(R.drawable.ic_up_default);
-                tvLeftFour1111.setText("" + temp_1314);
+                tvLeftFour1111.setText("" );
                 ivLeftFour1122.setImageResource(R.drawable.ic_down_default);
                 tvLeftFour1122.setText("");
             }
@@ -1209,7 +1209,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 tvRightFour1144.setText("" + temp_1516);
             } else {
                 ivRightFour1133.setImageResource(R.drawable.ic_left_default);
-                tvRightFour1133.setText("" + temp_1516);
+                tvRightFour1133.setText("" );
                 ivRightFour1144.setImageResource(R.drawable.ic_right_default);
                 tvRightFour1144.setText("");
             }
@@ -1230,7 +1230,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 tvLeftFour1144.setText("" + temp_1718);
             } else {
                 ivLeftFour1133.setImageResource(R.drawable.ic_left_default);
-                tvLeftFour1111.setText("" + temp_1718);
+                tvLeftFour1111.setText("");
                 ivLeftFour1144.setImageResource(R.drawable.ic_right_default);
                 tvLeftFour1144.setText("");
             }
@@ -1250,7 +1250,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 b1920_down_iv.setImageResource(R.drawable.ic_2_up_wh);
                 b1920_up_iv.setImageResource(R.drawable.ic_2_do_wh);
             }
-            b1920_tv.setText(temp_1920 == 0 ? "" : "" + temp_1920);
+            b1920_tv.setText((temp_1920 == 0 || temp_1920 == 8190 )? "" : "" + temp_1920);
 
             //右行前进、后退
             System.arraycopy(content, 13, temp_2, 0, 2);
@@ -1265,7 +1265,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 b2122_down_iv.setImageResource(R.drawable.ic_2_up_wh);
                 b2122_up_iv.setImageResource(R.drawable.ic_2_do_wh);
             }
-            b2122_tv.setText(temp_2122 == 0 ? "" : "" + temp_2122);
+            b2122_tv.setText((temp_2122 == 0 || temp_2122 == 8190  ) ? "" : "" + temp_2122);
 
             //液压剪/破碎锤开合
             System.arraycopy(content, 15, temp_2, 0, 2);
@@ -1280,7 +1280,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 b2324_down_iv.setImageResource(R.drawable.ic_2_left_wh);
                 b2324_up_iv.setImageResource(R.drawable.ic_2_right_wh);
             }
-            b2324_tv.setText(temp_2324 == 0 ? "" : "" + temp_2324);
+            b2324_tv.setText((temp_2324 == 0 || temp_2324 == 8190) ? "" : "" + temp_2324);
 
 
             if (content.length > 24) {
