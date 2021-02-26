@@ -707,90 +707,6 @@
                         android:layout_marginLeft="5dp"
                         android:text=""/>
                 </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/main_text_margin_top"
-                    android:visibility="gone"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/main_text_color"
-                        android:textSize="@dimen/main_text_size"
-                        android:text=":"/>
-                    <TextView
-                        android:id="@+id/water_temper_high_8_1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/main_text_color"
-                        android:textSize="@dimen/main_text_size"
-                        android:layout_marginLeft="5dp"
-                        android:text=" "/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/main_text_margin_top"
-                    android:visibility="gone"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/main_text_color"
-                        android:textSize="@dimen/main_text_size"
-                        android:text=":"/>
-                    <TextView
-                        android:id="@+id/air_block_8_2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/main_text_color"
-                        android:textSize="@dimen/main_text_size"
-                        android:layout_marginLeft="5dp"
-                        android:text=" "/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:layout_marginTop="@dimen/main_text_margin_top"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/main_text_color"
-                        android:textSize="@dimen/main_text_size"
-                        android:text=":"/>
-                    <TextView
-                        android:id="@+id/oil_water_high_8_3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/main_text_color"
-                        android:textSize="@dimen/main_text_size"
-                        android:layout_marginLeft="5dp"
-                        android:text=" "/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/main_text_margin_top"
-                    android:visibility="gone"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/main_text_color"
-                        android:textSize="@dimen/main_text_size"
-                        android:text=" :"/>
-                    <TextView
-                        android:id="@+id/null_8_4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/main_text_color"
-                        android:textSize="@dimen/main_text_size"
-                        android:layout_marginLeft="5dp"
-                        android:text=" "/>
-                </LinearLayout>
             </LinearLayout>
 
         </LinearLayout>
@@ -815,6 +731,7 @@
                 android:paddingRight="20dp"
                 android:singleLine="true"
                 android:gravity="center"
+                android:visibility="invisible"
                 android:layout_gravity="center"
                 android:text="故障信息：无"
                 android:textColor="@color/red"

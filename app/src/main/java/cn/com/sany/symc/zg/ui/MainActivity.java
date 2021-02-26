@@ -1,25 +1,20 @@
 package cn.com.sany.symc.zg.ui;
 
-import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.StrictMode;
 import android.os.SystemClock;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
-import android.view.SurfaceHolder;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -41,7 +36,6 @@ import cn.com.sany.symc.zg.ui.fragment.MessageShowFragment;
 import cn.com.sany.symc.zg.ui.fragment.PasswordInputFragment;
 import cn.com.sany.symc.zg.util.CacheData;
 import cn.com.sany.symc.zg.util.LogUtil;
-import cn.com.sany.symc.zg.util.NumberBytes;
 
 /**
  * 首页应用
@@ -1521,14 +1515,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 System.arraycopy(content, 32, temp_1, 0, 1);
                 int b40 = bytes2int(temp_1);
                 if(b40==0) {
-                    b40_tv.setText("动臂模式");
-                }else if(b39==1) {
+                    b40_tv.setText("动臂优先");
+                }else if(b40==1) {
                     b40_tv.setText("回转优先");
-                }else if(b39==2) {
+                }else if(b40==2) {
                     b40_tv.setText("微操作模式");
-                }else if(b39==3) {
+                }else if(b40==3) {
                     b40_tv.setText("平地模式");
-                }else if(b39==4) {
+                }else if(b40==4) {
                     b40_tv.setText("修坡模式");
                 }
 
@@ -1641,26 +1635,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 tmp_6 = (temp >> 6) & 0x1;
                 tmp_7 = (temp >> 7) & 0x1;
 
-                String question = "故障信息：";
-                question = question + (tmp_0 == 1? "\u3000\u3000蓄电池供电":"");
-                question = question + (tmp_1 == 1? "\u3000\u3000机油压力低":"");
-                question = question + (tmp_2 == 1? "\u3000\u3000水温高":"");
-                question = question + (tmp_3 == 1? "\u3000\u3000空滤阻塞":"");
-                question = question + (tmp_4 == 1? "\u3000\u3000油水分离器水位高":"");
+                String question = "故障信息:";
+                question = question + (tmp_0 == 1? "\u3000蓄电池供电":"");
+                question = question + (tmp_1 == 1? "\u3000机油压力低":"");
+                question = question + (tmp_2 == 1? "\u3000水温高":"");
+                question = question + (tmp_3 == 1? "\u3000空滤阻塞":"");
+                question = question + (tmp_4 == 1? "\u3000油水分离器水位高":"");
 //                question = question + (tmp_5 == 1? "\u3000\u3000":"");
 //                question = question + (tmp_6 == 1? "\u3000\u3000":"");
 //                question = question + (tmp_7 == 1? "\u3000\u3000":"");
 
-                question_old = (question_old == null) ? "":question_old;
-                if(!question_old.equals(question)){
+                if("故障信息:".equals(question.trim())) {
+                    b700_tv.setVisibility(View.INVISIBLE);
+                } else {
                     b700_tv.setText(question);
-                    b700_tv.setSelected(true);
-                }else if(question.equals("故障信息：")){
-                    question = question + "无";
+                    b700_tv.setVisibility(View.VISIBLE);
                 }
-
-                question_old = question;
-
 
                 // 启动
 //                if (tmp_0 == 1) {
