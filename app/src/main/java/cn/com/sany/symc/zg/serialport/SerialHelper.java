@@ -455,8 +455,7 @@ public class SerialHelper {
 
 											//进行异或和验证、验证通过执行
 //											boolean flag = true;
-//											if(flag){
-											if(NumberBytes.calcCrc8(packageData,0,packageData.length-1) == packageData[packageData.length -1]){
+									     if(NumberBytes.getXor(packageData) == packageData[packageData.length -1]){
 											  // CacheData.setMsg_info("================xor success===============",1);
 //										   boolean aa = true;
 //										   if(aa){

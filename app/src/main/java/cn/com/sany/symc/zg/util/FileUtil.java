@@ -14,8 +14,16 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.zip.CRC32;
+import java.util.zip.CheckedInputStream;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
+import java.util.zip.ZipInputStream;
 
 /**
  *
@@ -465,11 +473,73 @@ public class FileUtil {
     }
 
 
+    /**  解压缩（压缩文件中包含多个文件）可代替上面的方法使用。
+     * ZipInputStream类
+     * 当我们需要解压缩多个文件的时候，ZipEntry就无法使用了，
+     * 如果想操作更加复杂的压缩文件，我们就必须使用ZipInputStream类
+     * */
+    public static void ZipContraMultiFile(String zippath ,String outzippath){
+        try {
+            File file = new File(zippath);
+            File outFile = null;
+            ZipFile zipFile = new ZipFile(file);
+            ZipInputStream zipInput = new ZipInputStream(new FileInputStream(file));
+            ZipEntry entry = null;
+            InputStream input = null;
+            OutputStream output = null;
+            while((entry = zipInput.getNextEntry()) != null){
+                System.out.println("解压缩" + entry.getName() + "文件");
+                outFile = new File(outzippath + File.separator + entry.getName());
+                if(!outFile.getParentFile().exists()){
+                    outFile.getParentFile().mkdir();
+                }
+                if(!outFile.exists()){
+                    outFile.createNewFile();
+                }
+                input = zipFile.getInputStream(entry);
+                output = new FileOutputStream(outFile);
+                int temp = 0;
+                while((temp = input.read()) != -1){
+                    output.write(temp);
+                }
+                input.close();
+                output.close();
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 
+    /**
+     * 采用BufferedInputStream的方式加载文件
+     */
+    public static long checksumBufferedInputStream(String filepath) throws IOException {
+        InputStream inputStream = new BufferedInputStream(new FileInputStream(filepath));
+        CRC32 crc = new CRC32();
+        byte[] bytes = new byte[1024];
+        int cnt;
+        while ((cnt = inputStream.read(bytes)) != -1) {
+            crc.update(bytes, 0, cnt);
+        }
+        inputStream.close();
+        return crc.getValue();
+    }
 
 
-
+    /**
+     * 使用CheckedInputStream计算CRC
+     */
+    public static Long getCRC32(String filepath) throws IOException {
+        CRC32 crc32 = new CRC32();
+        FileInputStream fileinputstream = new FileInputStream(new File(filepath));
+        CheckedInputStream checkedinputstream = new CheckedInputStream(fileinputstream, crc32);
+        while (checkedinputstream.read() != -1) {
+        }
+        checkedinputstream.close();
+        return crc32.getValue();
+    }
 
 
 

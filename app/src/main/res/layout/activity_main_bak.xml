@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:background="@android:color/black"
+    android:baselineAligned="false">
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/infoLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <include android:id="@+id/main_test_cab"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="12dp"
+                android:visibility="gone"
+                android:layout_weight="12"
+                android:orientation="horizontal"
+                layout="@layout/main_test_cab"
+                />
+
+
+            <LinearLayout
+                android:id="@+id/mainLLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="12dp"
+                android:background="@null"
+                android:visibility="visible"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/statusLayout5599"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginTop="12dp"
+                    android:background="@null"
+                    android:visibility="visible"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/statusLayout"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:visibility="visible"
+                        android:layout_weight="6"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:id="@+id/statusLayout22"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:visibility="visible"
+                            android:orientation="horizontal">
+
+                            <cn.com.sany.symc.zg.ui.CameraSurfaceView
+                                android:id="@+id/cameraView"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:clickable="true"
+                                android:visibility="visible" />.
+
+                        </LinearLayout>
+
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/statusLayout1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:visibility="visible"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:id="@+id/statusLayout66"
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:visibility="visible"
+                            android:orientation="horizontal"
+                            android:paddingLeft="5dp"
+                            android:paddingRight="5dp"
+                            android:gravity="center"
+                            android:baselineAligned="false">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:visibility="visible"
+                                android:layout_weight="5"
+                                android:orientation="horizontal">
+
+
+
+                                <FrameLayout
+                                    android:id="@+id/signalStrengthLayout"
+                                    android:layout_width="80dp"
+                                    android:layout_height="40dp"
+                                    android:layout_marginTop="8dp"
+                                    android:gravity="center"
+                                    android:visibility="visible"
+                                    android:orientation="horizontal">
+
+                                    <LinearLayout
+                                        android:id="@+id/tvSignal1"
+                                        android:layout_width="40dp"
+                                        android:layout_height="40dp"
+                                        android:background="@drawable/ic_signal1"
+                                        android:visibility="gone"
+                                        android:orientation="horizontal">
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:id="@+id/tvSignal2"
+                                        android:layout_width="40dp"
+                                        android:layout_height="40dp"
+                                        android:background="@drawable/ic_signal2"
+                                        android:visibility="visible"
+                                        android:orientation="horizontal">
+                                    </LinearLayout>
+
+                                    <TextView
+                                        android:id="@+id/signalStrength"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="22dp"
+                                        android:layout_gravity="right|bottom"
+                                        android:layout_marginRight="10dp"
+                                        android:layout_marginBottom="0dp"
+                                        android:gravity="right|bottom"
+                                        android:text=""
+                                        android:textSize="18sp"
+                                        android:textColor="@color/white"
+                                        android:visibility="invisible"
+                                        android:orientation="horizontal">
+
+                                    </TextView>
+
+                                </FrameLayout>
+
+                                <FrameLayout
+                                    android:id="@+id/signalStrengthLayout1"
+                                    android:layout_width="80dp"
+                                    android:layout_height="40dp"
+                                    android:layout_marginTop="8dp"
+                                    android:gravity="center"
+                                    android:visibility="gone"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:id="@+id/signalStrength1"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_gravity="center"
+                                        android:gravity="center"
+                                        android:text="有线"
+                                        android:textSize="18sp"
+                                        android:textColor="@color/white"
+                                        android:orientation="horizontal">
+
+                                    </TextView>
+
+                                </FrameLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:visibility="visible"
+                                android:paddingLeft="5dp"
+                                android:layout_weight="3"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:id="@+id/haveBatteryLayout"
+                                    android:layout_width="42dp"
+                                    android:layout_height="20dp"
+                                    android:gravity="center"
+                                    android:visibility="visible"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="3dp"
+                                        android:layout_height="8dp"
+                                        android:layout_gravity="center"
+                                        android:gravity="center"
+                                        android:background="@drawable/shape_text_close1"
+                                        android:visibility="visible"
+                                        android:orientation="horizontal">
+
+                                    </TextView>
+
+                                    <LinearLayout
+                                        android:layout_width="39dp"
+                                        android:layout_height="18dp"
+                                        android:background="@drawable/shape_llayout_battery_bg"
+                                        android:visibility="visible"
+                                        android:orientation="horizontal">
+                                        <TextView
+                                            android:id="@+id/tvBattery4"
+                                            android:layout_width="4dp"
+                                            android:layout_height="8dp"
+                                            android:layout_marginLeft="5dp"
+                                            android:layout_gravity="center"
+                                            android:gravity="center"
+                                            android:background="@color/green"
+                                            android:visibility="visible"
+                                            android:orientation="horizontal"
+                                            />
+                                        <TextView
+                                            android:id="@+id/tvBattery3"
+                                            android:layout_width="4dp"
+                                            android:layout_height="8dp"
+                                            android:layout_gravity="center"
+                                            android:layout_marginLeft="4dp"
+                                            android:gravity="center"
+                                            android:background="@color/green"
+                                            android:visibility="visible"
+                                            android:orientation="horizontal"
+                                            />
+                                        <TextView
+                                            android:id="@+id/tvBattery2"
+                                            android:layout_width="4dp"
+                                            android:layout_height="8dp"
+                                            android:layout_gravity="center"
+                                            android:layout_marginLeft="4dp"
+                                            android:gravity="center"
+                                            android:background="@color/green"
+                                            android:visibility="visible"
+                                            android:orientation="horizontal"
+                                            />
+                                        <TextView
+                                            android:id="@+id/tvBattery1"
+                                            android:layout_width="4dp"
+                                            android:layout_height="8dp"
+                                            android:layout_gravity="center"
+                                            android:layout_marginLeft="4dp"
+                                            android:gravity="center"
+                                            android:background="@color/green"
+                                            android:visibility="visible"
+                                            android:orientation="horizontal"
+                                            />
+
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/lowBatteryLayout"
+                                    android:layout_width="42dp"
+                                    android:layout_height="20dp"
+                                    android:layout_marginTop="10dp"
+                                    android:gravity="center"
+                                    android:visibility="gone"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="3dp"
+                                        android:layout_height="8dp"
+                                        android:layout_gravity="center"
+                                        android:gravity="center"
+                                        android:background="@drawable/shape_text_close"
+                                        android:orientation="horizontal">
+
+                                    </TextView>
+
+                                    <LinearLayout
+                                        android:layout_width="39dp"
+                                        android:layout_height="18dp"
+                                        android:layout_marginLeft="1dp"
+                                        android:background="@drawable/shape_llayout_battery_empty"
+                                        android:orientation="horizontal">
+
+                                    </LinearLayout>
+
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/startLLayout"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:visibility="visible"
+                                android:layout_weight="4"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/RemoteCtrlStatus"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="@color/white"
+                                    android:text="未启动"
+                                    android:textSize="18sp"
+                                    />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <include
+                            android:id="@+id/workRLayout"
+                            layout="@layout/main_right_work"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:baselineAligned="false"
+                            android:orientation="horizontal"
+                            android:visibility="gone" />
+
+                        <include  android:id="@+id/driverRLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:visibility="visible"
+                            android:orientation="horizontal"
+                            android:baselineAligned="false"
+                            layout="@layout/main_right_driver"
+                            />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <include android:id="@+id/driverBoLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp"
+                    android:visibility="visible"
+                    android:orientation="horizontal"
+                    android:baselineAligned="false"
+                    layout="@layout/main_bottom_driver"
+                    />
+
+                <include android:id="@+id/workBoLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp"
+                    android:visibility="gone"
+                    android:orientation="horizontal"
+                    android:baselineAligned="false"
+                    layout="@layout/main_bottom_work"
+                    />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/warnLLayout"
+            android:layout_width="200dp"
+            android:layout_height="150dp"
+            android:focusable="false"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:background="@drawable/shape_warn_bg">
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:scaleType="fitXY"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_warn"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:text="警告"
+                    android:textColor="@color/yellow"
+                    android:textSize="24dp"/>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center"
+                    android:layout_gravity="center"
+                    android:text="@string/warn_info"
+                    android:textColor="@color/yellow"
+                    android:textSize="24dp"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+</LinearLayout>

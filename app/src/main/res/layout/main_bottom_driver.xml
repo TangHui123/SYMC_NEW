@@ -1,0 +1,487 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="90dp"
+    android:orientation="horizontal"
+    android:baselineAligned="false"
+    android:background="@null"
+    >
+
+    <LinearLayout
+        android:id="@+id/statusLayout44"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:visibility="visible"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:background="@color/deep_blue"
+        android:baselineAligned="false">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:visibility="visible"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="1"
+                android:textColor="@color/white"
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="5dp"
+                android:text="水罐水位"
+                android:textSize="15sp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:visibility="visible"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/haveWaterlevelLayout"
+                android:layout_width="20dp"
+                android:layout_height="90dp"
+                android:layout_marginTop="4dp"
+                android:gravity="center"
+                android:visibility="visible"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    android:layout_width="18dp"
+                    android:layout_height="80dp"
+                    android:background="@drawable/shape_llayout_battery_bg"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/tvWaterlevel1"
+                        android:layout_width="8dp"
+                        android:layout_height="5dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:background="@color/white"
+                        android:orientation="vertical"
+                        />
+                    <TextView
+                        android:id="@+id/tvWaterlevel2"
+                        android:layout_width="8dp"
+                        android:layout_height="5dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:background="@color/white"
+                        android:orientation="vertical"
+                        />
+                    <TextView
+                        android:id="@+id/tvWaterlevel3"
+                        android:layout_width="8dp"
+                        android:layout_height="5dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:background="@color/white"
+                        android:orientation="vertical"
+                        />
+                    <TextView
+                        android:id="@+id/tvWaterlevel4"
+                        android:layout_width="8dp"
+                        android:layout_height="5dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:background="@color/white"
+                        android:orientation="vertical"
+                        />
+                    <TextView
+                        android:id="@+id/tvWaterlevel5"
+                        android:layout_width="8dp"
+                        android:layout_height="5dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:background="@color/white"
+                        android:orientation="vertical"
+                        />
+                    <TextView
+                        android:id="@+id/tvWaterlevel6"
+                        android:layout_width="8dp"
+                        android:layout_height="5dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:background="@color/white"
+                        android:orientation="vertical"
+                        />
+                    <TextView
+                        android:id="@+id/tvWaterlevel7"
+                        android:layout_width="8dp"
+                        android:layout_height="5dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:background="@color/white"
+                        android:orientation="vertical"
+                        />
+                    <TextView
+                        android:id="@+id/tvWaterlevel8"
+                        android:layout_width="8dp"
+                        android:layout_height="5dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:background="@color/white"
+                        android:orientation="vertical"
+                        />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/statusLayout55"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:visibility="visible"
+        android:layout_weight="15"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:visibility="visible"
+            android:background="@color/deep_blue"
+            android:paddingLeft="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="转塔对中状态"
+                android:textSize="18sp"/>
+
+            <LinearLayout
+                android:id="@+id/turretHitok"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/shape_text_close2"
+                android:gravity="center"
+                android:visibility="visible"
+                android:orientation="horizontal">
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:textColor="@color/white"
+                android:text="支腿调平"
+                android:textSize="18sp"/>
+
+            <LinearLayout
+                android:id="@+id/zttp_lay"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/shape_text_close3"
+                android:gravity="center"
+                android:visibility="visible"
+                android:orientation="horizontal">
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:textColor="@color/white"
+                android:text="支腿收到位"
+                android:textSize="18sp"/>
+
+            <LinearLayout
+                android:id="@+id/ztsh_lay"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/shape_text_close3"
+                android:gravity="center"
+                android:visibility="visible"
+                android:orientation="horizontal">
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:textColor="@color/white"
+                android:text="水泵运行状态："
+                android:textSize="18sp"/>
+
+            <TextView
+                android:id="@+id/WaterPumpStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="停止"
+                android:textSize="18sp"/>
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:visibility="visible"-->
+<!--                android:layout_marginLeft="30dp"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:text="亮度百分比："-->
+<!--                android:textSize="18sp"/>-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/tvBright"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:visibility="visible"-->
+<!--                android:textColor="@color/white"-->
+<!--                android:text=""-->
+<!--                android:textSize="18sp"/>-->
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:visibility="visible"
+            android:background="@color/black"
+            android:orientation="horizontal">
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="@color/deep_blue"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:visibility="visible">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="故障代码："
+                android:textColor="@color/red"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/ErrCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="无"
+                android:textColor="@color/red"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/black"
+            android:orientation="horizontal"
+            android:visibility="visible"></LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="@color/deep_blue"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:visibility="visible">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/red"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text=" "
+                android:textColor="@color/red"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:visibility="visible"
+        android:background="@color/deep_blue"
+        android:layout_weight="1"
+        android:gravity="right"
+        android:orientation="horizontal"
+        android:baselineAligned="false">
+
+        <LinearLayout
+            android:layout_width="20dp"
+            android:layout_height="match_parent"
+            android:visibility="visible"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/haveFoamlevelLayout"
+                android:layout_width="20dp"
+                android:layout_height="90dp"
+
+                android:gravity="bottom"
+                android:visibility="visible"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    android:layout_width="18dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="bottom"
+                    android:background="@drawable/shape_llayout_battery_bg"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvFormlevel1"
+                        android:layout_width="8dp"
+                        android:layout_height="5dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:background="@color/white"
+                        android:orientation="vertical"
+                        />
+                    <TextView
+                        android:id="@+id/tvFormlevel2"
+                        android:layout_width="8dp"
+                        android:layout_height="5dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:background="@color/white"
+                        android:orientation="vertical"
+                        />
+                    <TextView
+                        android:id="@+id/tvFormlevel3"
+                        android:layout_width="8dp"
+                        android:layout_height="5dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:background="@color/white"
+                        android:orientation="vertical"
+                        />
+                    <TextView
+                        android:id="@+id/tvFormlevel4"
+                        android:layout_width="8dp"
+                        android:layout_height="5dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:background="@color/white"
+                        android:orientation="vertical"
+                        />
+                    <TextView
+                        android:id="@+id/tvFormlevel5"
+                        android:layout_width="8dp"
+                        android:layout_height="5dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:background="@color/white"
+                        android:orientation="vertical"
+                        />
+                    <TextView
+                        android:id="@+id/tvFormlevel6"
+                        android:layout_width="8dp"
+                        android:layout_height="5dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:background="@color/white"
+                        android:orientation="vertical"
+                        />
+                    <TextView
+                        android:id="@+id/tvFormlevel7"
+                        android:layout_width="8dp"
+                        android:layout_height="5dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:background="@color/white"
+                        android:orientation="vertical"
+                        />
+                    <TextView
+                        android:id="@+id/tvFormlevel8"
+                        android:layout_width="8dp"
+                        android:layout_height="5dp"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:background="@color/white"
+                        android:orientation="vertical"
+                        />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:visibility="visible"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="1"
+                android:textColor="@color/white"
+                android:layout_gravity="right|bottom"
+                android:layout_marginTop="2dp"
+                android:text="泡沫液位"
+                android:textSize="15sp"/>
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+</LinearLayout>
+
+
+
+
+
+

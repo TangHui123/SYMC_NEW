@@ -202,7 +202,7 @@ public class DashBoardView extends View{
         canvas.drawText(titleDial, 0, -radiusDial / 3, titlePaint);
         if(titleDial != null && titleDial.contains("发动机")) {
             titlePaint.setTextSize(titleDialSize*2/3);
-            canvas.drawText("r/min * 1000", 0, -radiusDial / 3 + titleDialSize, titlePaint);
+            canvas.drawText("r/min * 100", 0, -radiusDial / 3 + titleDialSize, titlePaint);
         }
 
         if (currentValue <= 20){

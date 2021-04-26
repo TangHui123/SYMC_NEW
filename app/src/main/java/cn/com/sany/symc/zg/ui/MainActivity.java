@@ -20,12 +20,11 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import java.lang.ref.WeakReference;
+import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Timer;
 import java.util.TimerTask;
-
 import cn.com.sany.symc.zg.R;
 import cn.com.sany.symc.zg.entity.MultipleStateInfo;
 import cn.com.sany.symc.zg.entity.SystemBrightManager;
@@ -36,6 +35,9 @@ import cn.com.sany.symc.zg.ui.fragment.MessageShowFragment;
 import cn.com.sany.symc.zg.ui.fragment.PasswordInputFragment;
 import cn.com.sany.symc.zg.util.CacheData;
 import cn.com.sany.symc.zg.util.LogUtil;
+import cn.com.sany.symc.zg.util.NumberBytes;
+
+import android.support.v4.content.ContextCompat;
 
 /**
  * 首页应用
@@ -48,6 +50,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private byte[] temp_1 = new byte[1];
     private byte[] temp_3 = new byte[3];
     private byte[] temp_2 = new byte[2];
+    private byte[] temp_4 = new byte[4];
 
     private int tmp_0;
     private int tmp_1;
@@ -57,23 +60,35 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private int tmp_5;
     private int tmp_6;
     private int tmp_7;
+    private int bj_down;
 
     private TextView signalStrength;
     private TextView BatteryElectricity;
     private FrameLayout signalStrengthLayout;
     private FrameLayout signalStrengthLayout1;
     private LinearLayout waterLLayout;
-    // private LinearLayout startLLayout;
+    private LinearLayout dwLLayout;
     private TextView WirelessLinkStatus;
     private TextView RemoteCtrlStatus;
+    private TextView b45_tv;
 
 
 
     private LinearLayout noSignal;
     private LinearLayout haveSignal;
 
-    private LinearLayout testB98LLayout;    //测试界面
+    private LinearLayout main_test_cab;    //测试界面
     private LinearLayout mainLLayout;    //内容显示主界面
+
+    private LinearLayout driverBoLayout;    //行驶界面
+    private LinearLayout driverRLayout;    //火场监控界面
+    private LinearLayout workBoLayout;    //行驶界面
+    private LinearLayout workRLayout;    //火场监控界面 （工作）
+
+
+
+    private LinearLayout statusLayout22;
+
 
     private static int change_page_old = 0;  //保存之前一次上升沿  0x01从0到1切换
 
@@ -86,9 +101,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView Battery3;
     private TextView Battery4;
 
-    private TextView tvLeftXz;
+    private int page = 0;
 
-    private TextView tvRightXz;
+
 
     private boolean syncFlag = true;  //报第一次经纬度执行一次
     private CameraSurfaceView cameraView; //预览
@@ -111,76 +126,151 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static int cameraTime_flag = 0;
 
     //测试界面控件  start
-    private ImageView b80_1_iv;
-    private ImageView b80_0_iv;
+    private LinearLayout b80_1_lay;  // 行驶模式
+    private LinearLayout b81_1_lay;  // 取力模式
+    private LinearLayout b82_1_lay;  // 驻车模式
+
+   // private LinearLayout b86_1_lay;  //转台角度符合
+    private LinearLayout b87_1_lay;  //发动机启
+    private String turret_angle_negtive = "";
 
 
-    private ImageView b81_iv;
-    private ImageView b82_iv;
+    private ImageView b90_up_iv;
+    private ImageView b90_down_iv;
+    private ImageView b9012_up_iv;
+    private ImageView b9012_down_iv;
 
-    private ImageView b83_1_iv;
-    private ImageView b83_0_iv;
+    private ImageView b32_iv;
 
-    private ImageView b84_1_iv;
-    private ImageView b84_0_iv;
+    private TextView formLevel1;
+    private TextView formLevel2;
+    private TextView formLevel3;
+    private TextView formLevel4;
+    private TextView formLevel5;
+    private TextView formLevel6;
+    private TextView formLevel7;
+    private TextView formLevel8;
 
-    private ImageView b85_1_iv;
-    private ImageView b85_0_iv;
+    private TextView waterLevel1;
+    private TextView waterLevel2;
+    private TextView waterLevel3;
+    private TextView waterLevel4;
+    private TextView waterLevel5;
+    private TextView waterLevel6;
+    private TextView waterLevel7;
+    private TextView waterLevel8;
 
-    private ImageView b86_iv;
-    private ImageView b87_iv;
+    private ImageView ivStop1111;
+    private TextView  tvStop1111;
 
-    private ImageView  b90_1_iv;
-    private ImageView  b90_0_iv;
-    private ImageView  b91_iv;
-    private ImageView  b925_iv;
-    private ImageView  b967_1001_iv;
+    private TextView TurretAngle;
+    private TextView EngineSpeed;
+    private TextView HydraulicPress;
+    private TextView PumpVentPress;
+    private TextView ErrCode;
+    private TextView ErrCode1;
 
-    private ImageView  b102_1_iv;
-    private ImageView  b102_0_iv;
-    private ImageView  b103_iv;
-    private ImageView  b104_iv;
-    private ImageView  b105_iv;
-    private ImageView  b106_iv;
-    private ImageView  b107_iv;
+    private TextView WaterPumpStatus;
+    private LinearLayout turretHitok;
 
+    private LinearLayout zttp_lay;  //
+    private LinearLayout ztsh_lay;  //
 
-    private ImageView ivLeftFour1111;
-    private ImageView ivLeftFour1122;
-    private ImageView ivLeftFour1133;
-    private ImageView ivLeftFour1144;
+    private TextView ArmAngle1;
+    private TextView ArmAngle2;
+    private TextView ArmAngle3;
 
-    private TextView tvLeftFour1111;
-    private TextView tvLeftFour1122;
-    private TextView tvLeftFour1133;
-    private TextView tvLeftFour1144;
+    private TextView WaterFlow;
+    private TextView oilPostion;
+    private TextView oilPos;
 
-    private ImageView ivRightFour1111;
-    private ImageView ivRightFour1122;
-    private ImageView ivRightFour1133;
-    private ImageView ivRightFour1144;
+    private TextView carSpeed;
+    private TextView oil_tv;
+    private TextView brake_tv;
+    private TextView directionArml;
 
-    private TextView tvRightFour1111;
-    private TextView tvRightFour1122;
-    private TextView tvRightFour1133;
-    private TextView tvRightFour1144;
+    private ImageView b370_iv;
 
-    private ImageView b1920_down_iv;
-    private ImageView b1920_up_iv;
-    private TextView  b1920_tv;
+    private ImageView b37_12_up;
+    private ImageView b37_12_mid;
+    private ImageView b37_12_down;
 
-    private ImageView b2122_down_iv;
-    private ImageView b2122_up_iv;
-    private TextView  b2122_tv;
+    private ImageView b37_34_up;
+    private ImageView b37_34_mid;
+    private ImageView b37_34_down;
 
-    private ImageView b2324_down_iv;
-    private ImageView b2324_up_iv;
-    private TextView  b2324_tv;
+    private ImageView b37_56_up;
+    private ImageView b37_56_mid;
+    private ImageView b37_56_down;
 
-    private ImageView b25_01_iv;
-    private ImageView b25_00_iv;
-    private ImageView b25_11_iv;
-    private ImageView b25_10_iv;
+    private ImageView b377_iv;
+
+    private ImageView b38_14_up;
+    private ImageView b38_14_mid;
+    private ImageView b38_14_down;
+
+    private ImageView b385_iv;
+    private ImageView b387_up_iv;
+    private ImageView b387_down_iv;
+
+    private ImageView b39_01_up;
+    private ImageView b39_01_mid;
+    private ImageView b39_01_down;
+
+    private ImageView b39_45_up;
+    private ImageView b39_45_mid;
+    private ImageView b39_45_down;
+
+    private ImageView b393_iv;
+
+    private ImageView b40_0_up;
+    private ImageView b40_0_mid;
+    private ImageView b40_0_down;
+
+    private ImageView b40_12_up;
+    private ImageView b40_12_mid;
+    private ImageView b40_12_down;
+
+    private ImageView b40_34_up;
+   // private ImageView b40_34_mid;
+    private ImageView b40_34_down;
+
+    private ImageView b40_567_up;
+    private ImageView b40_567_mid;
+    private ImageView b40_567_down;
+
+    private LinearLayout b40_N_up;
+    private LinearLayout b40_D_up;
+    private LinearLayout b40_R_up;
+
+    private ImageView b41_01_up;
+    private ImageView b41_01_mid;
+    private ImageView b41_01_down;
+    private ImageView b41_2_up;
+    private ImageView b41_2_mid;
+    private ImageView b41_2_down;
+    private ImageView b41_3_up;
+    private ImageView b41_3_down;
+    private ImageView b41_45_up;
+    private ImageView b41_45_mid;
+    private ImageView b41_45_down;
+    private ImageView b416_iv;
+    private ImageView b417_iv;
+
+    private ImageView ivDown11Up;
+    private ImageView ivDown11Down;
+    private TextView tvDown11;
+
+    private ImageView ivDown22Up;
+    private ImageView ivDown22Down;
+    private TextView tvDown22;
+
+    private ImageView ivDown33Up;
+    private ImageView ivDown33Down;
+    private TextView tvDown33;
+
+    private TextView b925_iv;
+
 
     //电池
     private LinearLayout lowBatteryTest;
@@ -196,47 +286,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private FrameLayout signalStrengthLayoutTest;
     private FrameLayout signalStrengthLayout1Test;
 
-    private LinearLayout fileManagerLL;
-
-    //tanghui add for SYMC new
-    private ImageView b32_iv;
-    private ImageView b32_page_iv;
-    private TextView b33_tv;
-    private DashBoardView b34_tv;
-    private TextView b35_tv;
-    private TextView b36_tv;
-    
-    private TextView b3738_tv;
-    private TextView b39_tv;
-    private TextView b40_tv;
-    private DashBoardView b4142_tv;
-    private TextView b4344_tv;
-    
-    private TextView b4546_tv;
-    private TextView b4748_tv;
-    private TextView b4950_tv;
-    private TextView b51_tv;
-    
-    private TextView b52_tv;
-    private TextView b53_tv;
-    private TextView b54_tv;
-    private TextView b55_tv;
-    
-    private TextView b56_tv;
-    private TextView b57_tv;
-    private TextView b5859_tv;
-    private TextView b6061_tv;
-    
-    private TextView b6263_tv;
-    private TextView b6465_tv;
-    private TextView b6667_tv;
-    private TextView b6869_tv;
-    
-    private TextView b700_tv;
-
-
-    
-    private TextView b71_tv;
 
     private String question_old = "";
 
@@ -258,7 +307,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         | View.SYSTEM_UI_FLAG_IMMERSIVE
                         | View.STATUS_BAR_HIDDEN);
 
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main_bak);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
             StrictMode.setVmPolicy(builder.build());
@@ -324,54 +373,72 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     
     private void initMainView() {
 
-        fileManagerLL =  (LinearLayout) findViewById(R.id.fileManagerLL);
-        fileManagerLL.setOnClickListener(this);
+        b80_1_lay =  (LinearLayout) findViewById(R.id.b80_1_lay);  // 行驶模式
+        b81_1_lay =  (LinearLayout) findViewById(R.id.b81_1_lay);  // 取力模式
+        b82_1_lay =  (LinearLayout) findViewById(R.id.b82_1_lay);  // 驻车模式
 
-        b4142_tv = (DashBoardView) findViewById(R.id.b4142_tv);
-        String[] pointer_4142 = new String[] {"0", "2.5","5","7.5","10", "12.5","15","17.5","20", "22.5","25"};
-        b4142_tv.setCompleteDegree(0f);
-        b4142_tv.setPointerMain(pointer_4142);
+      //  b86_1_lay =  (LinearLayout) findViewById(R.id.b86_1_lay);  //转台角度符合
+        b87_1_lay =  (LinearLayout) findViewById(R.id.b87_1_lay);  //发动机启
 
-        String[] pointer_33 = new String[] {"0","1","2","3", "4","5","6","7", "8","9","10"};
-        b34_tv = (DashBoardView) findViewById(R.id.b34_tv);
+        b90_up_iv =  (ImageView) findViewById(R.id.b90_up_iv);
+        b90_down_iv =  (ImageView) findViewById(R.id.b90_down_iv);
+        b9012_up_iv =  (ImageView) findViewById(R.id.b9012_up_iv);
+        b9012_up_iv.setOnClickListener(this);
+        b9012_down_iv =  (ImageView) findViewById(R.id.b9012_down_iv);
 
-        b34_tv.setCompleteDegree(0f);
-        b34_tv.setPointerMain(pointer_33);
+        formLevel1 = (TextView) findViewById(R.id.tvFormlevel1);
+        formLevel2 = (TextView) findViewById(R.id.tvFormlevel2);
+        formLevel3 = (TextView) findViewById(R.id.tvFormlevel3);
+        formLevel4 = (TextView) findViewById(R.id.tvFormlevel4);
+        formLevel5 = (TextView) findViewById(R.id.tvFormlevel5);
+        formLevel6 = (TextView) findViewById(R.id.tvFormlevel6);
+        formLevel7 = (TextView) findViewById(R.id.tvFormlevel7);
+        formLevel8 = (TextView) findViewById(R.id.tvFormlevel8);
 
-        b32_iv =  (ImageView) findViewById(R.id.b32_iv);
-        b32_page_iv =  (ImageView) findViewById(R.id.b32_page_iv);
+        waterLevel1 = (TextView) findViewById(R.id.tvWaterlevel1);
+        waterLevel2 = (TextView) findViewById(R.id.tvWaterlevel2);
+        waterLevel3 = (TextView) findViewById(R.id.tvWaterlevel3);
+        waterLevel4 = (TextView) findViewById(R.id.tvWaterlevel4);
+        waterLevel5 = (TextView) findViewById(R.id.tvWaterlevel5);
+        waterLevel6 = (TextView) findViewById(R.id.tvWaterlevel6);
+        waterLevel7 = (TextView) findViewById(R.id.tvWaterlevel7);
+        waterLevel8 = (TextView) findViewById(R.id.tvWaterlevel8);
 
-        b33_tv = (TextView) findViewById(R.id.b33_tv);
-        b35_tv = (TextView) findViewById(R.id.b35_tv);
-        b36_tv = (TextView) findViewById(R.id.b36_tv);
+        ivStop1111 = (ImageView)findViewById(R.id.ivStop1111);
+        tvStop1111 = (TextView) findViewById(R.id.tvStop1111);
+        ivStop1111.setOnClickListener(this);
 
-        b3738_tv = (TextView) findViewById(R.id.b3738_tv);
-        b39_tv = (TextView) findViewById(R.id.b39_tv);
-        b40_tv = (TextView) findViewById(R.id.b40_tv);
-        b4142_tv = (DashBoardView) findViewById(R.id.b4142_tv);
+        TurretAngle = (TextView) findViewById(R.id.TurretAngle);
+        EngineSpeed = (TextView) findViewById(R.id.EngineSpeed);
+        HydraulicPress = (TextView) findViewById(R.id.HydraulicPress);
+        PumpVentPress = (TextView) findViewById(R.id.PumpVentPress);
+        ErrCode = (TextView) findViewById(R.id.ErrCode);
+        ErrCode.setOnClickListener(this);
+        ErrCode1 = (TextView) findViewById(R.id.ErrCode1);
+        ErrCode1.setOnClickListener(this);
 
-        b4344_tv = (TextView) findViewById(R.id.b4344_tv);
-        b4546_tv = (TextView) findViewById(R.id.b4546_tv);
-        b4748_tv = (TextView) findViewById(R.id.b4748_tv);
-        b4950_tv = (TextView) findViewById(R.id.b4950_tv);
+        ArmAngle1 = (TextView) findViewById(R.id.ArmAngle1);
+        ArmAngle2 = (TextView) findViewById(R.id.ArmAngle2);
+        ArmAngle3 = (TextView) findViewById(R.id.ArmAngle3);
+        WaterFlow = (TextView) findViewById(R.id.WaterFlow);
+        oilPostion = (TextView) findViewById(R.id.oilPostion);
+        oilPos = (TextView) findViewById(R.id.oilPos);
+        WaterPumpStatus = (TextView) findViewById(R.id.WaterPumpStatus);
 
-        b51_tv = (TextView) findViewById(R.id.b51_tv);
-        b52_tv = (TextView) findViewById(R.id.b52_tv);
-        b53_tv = (TextView) findViewById(R.id.b53_tv);
-        b54_tv = (TextView) findViewById(R.id.b54_tv);
+        turretHitok = (LinearLayout) findViewById(R.id.turretHitok);  // 转塔对中
+        zttp_lay = (LinearLayout) findViewById(R.id.zttp_lay);  // 支腿调平
+        ztsh_lay = (LinearLayout) findViewById(R.id.ztsh_lay);  // 支腿收到位
 
-        b55_tv = (TextView) findViewById(R.id.b55_tv);
-        b56_tv = (TextView) findViewById(R.id.b56_tv);
-        b57_tv = (TextView) findViewById(R.id.b57_tv);
-        b5859_tv = (TextView) findViewById(R.id.b5859_tv);
-        b6061_tv = (TextView) findViewById(R.id.b6061_tv);
+        carSpeed = (TextView) findViewById(R.id.carSpeed);  //车速
+        oil_tv = (TextView) findViewById(R.id.oil_tv);      //油门
+        brake_tv = (TextView) findViewById(R.id.brake_tv);  //刹车
+        directionArml = (TextView) findViewById(R.id.directionArml);  //方向盘转角
 
-        b6263_tv = (TextView) findViewById(R.id.b6263_tv);
-        b6465_tv = (TextView) findViewById(R.id.b6465_tv);
-        b6667_tv = (TextView) findViewById(R.id.b6667_tv);
-        b6869_tv = (TextView) findViewById(R.id.b6869_tv);
+        waterLLayout = (LinearLayout) findViewById(R.id.waterLLayout);
+        waterLLayout.setOnClickListener(this);
 
-        b700_tv = (TextView) findViewById(R.id.b700_tv);
+        dwLLayout = (LinearLayout) findViewById(R.id.dwLLayout);
+        dwLLayout.setOnClickListener(this);
 
     }
 
@@ -398,96 +465,103 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      */
     private void initBaseInfo() {
 
-        testB98LLayout = (LinearLayout) findViewById(R.id.testB98LLayout);
+        main_test_cab = (LinearLayout) findViewById(R.id.main_test_cab);
         mainLLayout = (LinearLayout) findViewById(R.id.mainLLayout);
 
-        b80_1_iv = (ImageView) findViewById(R.id.b80_1_iv);
-        b80_0_iv = (ImageView) findViewById(R.id.b80_0_iv);
+        driverBoLayout = (LinearLayout) findViewById(R.id.driverBoLayout);
 
-        b81_iv = (ImageView) findViewById(R.id.b81_iv);
-        b82_iv = (ImageView) findViewById(R.id.b82_iv);
+        driverRLayout = (LinearLayout) findViewById(R.id.driverRLayout);
+        workBoLayout = (LinearLayout) findViewById(R.id.workBoLayout);
+        workRLayout = (LinearLayout) findViewById(R.id.workRLayout);
 
-        b83_1_iv = (ImageView) findViewById(R.id.b83_1_iv);
-        b83_0_iv = (ImageView) findViewById(R.id.b83_0_iv);
+        statusLayout22 = (LinearLayout) findViewById(R.id.statusLayout22);
 
-        b84_1_iv = (ImageView) findViewById(R.id.b84_1_iv);
-        b84_0_iv = (ImageView) findViewById(R.id.b84_0_iv);
+        b370_iv = (ImageView) findViewById(R.id.b370_iv);
 
-        b85_1_iv = (ImageView) findViewById(R.id.b85_1_iv);
-        b85_0_iv = (ImageView) findViewById(R.id.b85_0_iv);
-
-        b86_iv = (ImageView) findViewById(R.id.b86_iv);
-        b87_iv = (ImageView) findViewById(R.id.b87_iv);
+        b32_iv = (ImageView) findViewById(R.id.b32_iv);
 
 
-        b90_1_iv = (ImageView) findViewById(R.id.b90_1_iv);
-        b90_0_iv = (ImageView) findViewById(R.id.b90_0_iv);
-        b91_iv = (ImageView) findViewById(R.id.b91_iv);
-        b925_iv = (ImageView) findViewById(R.id.b925_iv);
-        b967_1001_iv = (ImageView) findViewById(R.id.b967_1001_iv);
+        b37_12_up = (ImageView) findViewById(R.id.b37_12_up);
+        b37_12_mid = (ImageView) findViewById(R.id.b37_12_mid);
+        b37_12_down = (ImageView) findViewById(R.id.b37_12_down);
 
+        b37_34_up = (ImageView) findViewById(R.id.b37_34_up);
+        b37_34_mid = (ImageView) findViewById(R.id.b37_34_mid);
+        b37_34_down = (ImageView) findViewById(R.id.b37_34_down);
 
-        b102_1_iv = (ImageView) findViewById(R.id.b102_1_iv);
-        b102_0_iv = (ImageView) findViewById(R.id.b102_0_iv);
+        b37_56_up = (ImageView) findViewById(R.id.b37_56_up);
+        b37_56_mid = (ImageView) findViewById(R.id.b37_56_mid);
+        b37_56_down = (ImageView) findViewById(R.id.b37_56_down);
+        b377_iv = (ImageView) findViewById(R.id.b377_iv);
 
-        b103_iv = (ImageView) findViewById(R.id.b103_iv);
-        b104_iv = (ImageView) findViewById(R.id.b104_iv);
-        b105_iv = (ImageView) findViewById(R.id.b105_iv);
-        b106_iv = (ImageView) findViewById(R.id.b106_iv);
-        b107_iv = (ImageView) findViewById(R.id.b107_iv);
+        b38_14_up = (ImageView) findViewById(R.id.b38_14_up);
+        b38_14_mid = (ImageView) findViewById(R.id.b38_14_mid);
+        b38_14_down = (ImageView) findViewById(R.id.b38_14_down);
 
-        b85_1_iv = (ImageView) findViewById(R.id.b85_1_iv);
-        b85_0_iv = (ImageView) findViewById(R.id.b85_0_iv);
+        b385_iv = (ImageView) findViewById(R.id.b385_iv);
 
-        b86_iv = (ImageView) findViewById(R.id.b86_iv);
-        b87_iv = (ImageView) findViewById(R.id.b87_iv);
+        b387_up_iv = (ImageView) findViewById(R.id.b387_up_iv);
+        b387_down_iv = (ImageView) findViewById(R.id.b387_down_iv);
 
+        b39_01_up = (ImageView) findViewById(R.id.b39_01_up);
+        b39_01_mid = (ImageView) findViewById(R.id.b39_01_mid);
+        b39_01_down = (ImageView) findViewById(R.id.b39_01_down);
 
-        ivLeftFour1111 = (ImageView) findViewById(R.id.ivLeftFour1111); //动臂下降
-        ivLeftFour1122 = (ImageView) findViewById(R.id.ivLeftFour1122); //动臂上升
-        ivLeftFour1133 = (ImageView) findViewById(R.id.ivLeftFour1133); //铲斗挖掘
-        ivLeftFour1144 = (ImageView) findViewById(R.id.ivLeftFour1144); //铲斗卸载
+        b39_45_up = (ImageView) findViewById(R.id.b39_45_up);
+        b39_45_mid = (ImageView) findViewById(R.id.b39_45_mid);
+        b39_45_down = (ImageView) findViewById(R.id.b39_45_down);
+        b393_iv = (ImageView) findViewById(R.id.b393_iv);
 
-        tvLeftFour1111 = (TextView) findViewById(R.id.tvLeftFour1111);  //斗杆卸载
-        tvLeftFour1122 = (TextView) findViewById(R.id.tvLeftFour1122);  //斗杆挖掘
-        tvLeftFour1133 = (TextView) findViewById(R.id.tvLeftFour1133);  //左回旋
-        tvLeftFour1144 = (TextView) findViewById(R.id.tvLeftFour1144);  //右回旋
+        b40_0_up = (ImageView) findViewById(R.id.b40_0_up);
+        b40_0_mid = (ImageView) findViewById(R.id.b40_0_mid);
+        b40_0_down = (ImageView) findViewById(R.id.b40_0_down);
 
-        ivRightFour1111 = (ImageView) findViewById(R.id.ivRightFour1111);
-        ivRightFour1122 = (ImageView) findViewById(R.id.ivRightFour1122);
-        ivRightFour1133 = (ImageView) findViewById(R.id.ivRightFour1133);
-        ivRightFour1144 = (ImageView) findViewById(R.id.ivRightFour1144);
+        b40_12_up = (ImageView) findViewById(R.id.b40_12_up);
+        b40_12_mid = (ImageView) findViewById(R.id.b40_12_mid);
+        b40_12_down = (ImageView) findViewById(R.id.b40_12_down);
 
-        tvRightFour1111 = (TextView) findViewById(R.id.tvRightFour1111);
-        tvRightFour1122 = (TextView) findViewById(R.id.tvRightFour1122);
-        tvRightFour1133 = (TextView) findViewById(R.id.tvRightFour1133);
-        tvRightFour1144 = (TextView) findViewById(R.id.tvRightFour1144);
+        b40_567_up = (ImageView) findViewById(R.id.b40_567_up);
+        b40_567_mid = (ImageView) findViewById(R.id.b40_567_mid);
+        b40_567_down = (ImageView) findViewById(R.id.b40_567_down);
 
-        b1920_down_iv = (ImageView) findViewById(R.id.b1920_down_iv);
-        b1920_down_iv.setOnClickListener(this);
-        b1920_up_iv = (ImageView) findViewById(R.id.b1920_up_iv);
-        b1920_tv = (TextView) findViewById(R.id.b1920_tv);
+        b40_34_up = (ImageView) findViewById(R.id.b40_34_up);
+        //b40_34_mid = (ImageView) findViewById(R.id.b40_34_mid);
+        b40_34_down = (ImageView) findViewById(R.id.b40_34_down);
+        b40_N_up = (LinearLayout) findViewById(R.id.b40_N_up);
+        b40_D_up = (LinearLayout) findViewById(R.id.b40_D_up);
+        b40_R_up = (LinearLayout) findViewById(R.id.b40_R_up);
 
-        b2122_down_iv = (ImageView) findViewById(R.id.b2122_down_iv);
-        b2122_down_iv.setOnClickListener(this);
-        b2122_up_iv = (ImageView) findViewById(R.id.b2122_up_iv);
-        b2122_tv = (TextView) findViewById(R.id.b2122_tv);
+        b41_01_up = (ImageView) findViewById(R.id.b41_01_up);
+        b41_01_mid = (ImageView) findViewById(R.id.b41_01_mid);
+        b41_01_down = (ImageView) findViewById(R.id.b41_01_down);
 
-        b2324_down_iv = (ImageView) findViewById(R.id.b2324_down_iv);
-        b2324_up_iv = (ImageView) findViewById(R.id.b2324_up_iv);
-        b2324_tv = (TextView) findViewById(R.id.b2324_tv);
+        b41_2_up = (ImageView) findViewById(R.id.b41_2_up);
+        b41_2_mid = (ImageView) findViewById(R.id.b41_2_mid);
+        b41_2_down = (ImageView) findViewById(R.id.b41_2_down);
 
-        b25_01_iv = (ImageView) findViewById(R.id.b25_01_iv);
-        b25_00_iv = (ImageView) findViewById(R.id.b25_00_iv);
-        b25_11_iv = (ImageView) findViewById(R.id.b25_11_iv);
-        b25_10_iv = (ImageView) findViewById(R.id.b25_10_iv);
+        b41_3_up = (ImageView) findViewById(R.id.b41_3_up);
+        b41_3_down = (ImageView) findViewById(R.id.b41_3_down);
+        b41_45_up = (ImageView) findViewById(R.id.b41_45_up);
 
-        //臂架旋转
-        tvLeftXz = (TextView) findViewById(R.id.tvLeftXz);
+        b41_45_mid = (ImageView) findViewById(R.id.b41_45_mid);
+        b41_45_down = (ImageView) findViewById(R.id.b41_45_down);
+        b416_iv = (ImageView) findViewById(R.id.b416_iv);
+        b417_iv = (ImageView) findViewById(R.id.b417_iv);
 
-        //备用旋转
-        tvRightXz = (TextView) findViewById(R.id.tvRightXz);
+        ivDown11Up = (ImageView) findViewById(R.id.ivDown11Up);
+        ivDown11Down = (ImageView) findViewById(R.id.ivDown11Down);
+        tvDown11 = (TextView) findViewById(R.id.tvDown11);
 
+        ivDown22Up = (ImageView) findViewById(R.id.ivDown22Up);
+        ivDown22Down = (ImageView) findViewById(R.id.ivDown22Down);
+        tvDown22 = (TextView) findViewById(R.id.tvDown22);
+
+        ivDown33Up = (ImageView) findViewById(R.id.ivDown33Up);
+        ivDown33Down = (ImageView) findViewById(R.id.ivDown33Down);
+        tvDown33 = (TextView) findViewById(R.id.tvDown33);
+
+        b925_iv = (TextView) findViewById(R.id.b925_iv);
+        b925_iv.setOnClickListener(this);
 
         noSignalTest = (LinearLayout) findViewById(R.id.noSignalTest);
         haveSignalTest = (LinearLayout) findViewById(R.id.haveSignalTest);
@@ -515,16 +589,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onClick(View view) {
                 mainLLayout.setVisibility(View.GONE);
-                testB98LLayout.setVisibility(View.VISIBLE);
+                main_test_cab.setVisibility(View.VISIBLE);
             }
         });
 
         signalStrengthLayout.setOnClickListener(this);
         signalStrengthLayout1.setOnClickListener(this);
-//        waterLLayout.setOnClickListener(this);
 
-        tvLeftXz.setOnClickListener(this);
-        tvRightXz.setOnClickListener(this);
+        b45_tv = (TextView) findViewById(R.id.b45_tv);
 
         noSignal = (LinearLayout) findViewById(R.id.tvSignal2);
         haveSignal = (LinearLayout) findViewById(R.id.tvSignal1);
@@ -565,37 +637,94 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    private void changePage(int flag) {
+    /**
+     *
+     * 切页界面
+     * @param flag
+     *
+     */
+    private void changePage(int flag){
         int val;
-        Log.i(TAG,"click changePage flag=" + flag);
-        // CacheData.setMsg_info("=======changePage====flag====flag========="+flag,1);
-        if ((flag & 0x1) == 0x1) {
-            if (change_page_old == 0) {
-//                SharedPreferences share = getSharedPreferences("Acitivity", Context.MODE_WORLD_READABLE);
-//                int page = share.getInt("page", 0);
-                if (mainLLayout.getVisibility() == View.VISIBLE) {  //0表示内容显示界面， 1：表示测试诊断界面
-                    // page = 1;
-                    mainLLayout.setVisibility(View.GONE);
-                    testB98LLayout.setVisibility(View.VISIBLE);
-                } else {
-                    // page = 0;
+        if((flag&0x1) == 0x01) {
+            if(change_page_old == 0){
+              //  CacheData.setMsg_info("===========flag============="+flag,1);
+//
+                if (page == 0) {  //0表示内容显示界面， 1：表示测试诊断界面
+                    page = 1;
                     mainLLayout.setVisibility(View.VISIBLE);
-                    testB98LLayout.setVisibility(View.GONE);
-                }
+                    main_test_cab.setVisibility(View.GONE);
 
-                b32_page_iv.setImageResource(R.drawable.ic_round_red);
+                    driverBoLayout.setVisibility(View.VISIBLE);
+                    driverRLayout.setVisibility(View.VISIBLE);
+
+                    workBoLayout.setVisibility(View.GONE);
+                    workRLayout.setVisibility(View.GONE);
+
+                }else if(page == 1) {
+                    page = 2;
+                    mainLLayout.setVisibility(View.GONE);
+                    main_test_cab.setVisibility(View.VISIBLE);
+
+                    driverBoLayout.setVisibility(View.VISIBLE);
+                    driverRLayout.setVisibility(View.VISIBLE);
+
+                    workBoLayout.setVisibility(View.GONE);
+                    workRLayout.setVisibility(View.GONE);
+
+                }else {
+                    page = 0;
+                    mainLLayout.setVisibility(View.VISIBLE);
+                    main_test_cab.setVisibility(View.GONE);
+
+                    driverBoLayout.setVisibility(View.GONE);
+                    driverRLayout.setVisibility(View.GONE);
+
+                    workBoLayout.setVisibility(View.VISIBLE);
+                    workRLayout.setVisibility(View.VISIBLE);
+                }
 //                SharedPreferences.Editor editor = share.edit();//获取编辑器
 //                editor.putInt("page", page);
 //                editor.commit();
             }
             change_page_old = 1;
-            b32_page_iv.setImageResource(R.drawable.ic_round_white);
-        } else {
+        }else{
             change_page_old = 0;
-            b32_page_iv.setImageResource(R.drawable.ic_round_white);
         }
 
     }
+
+
+    /**
+     *
+     * 行驶 和 取力
+     * @param flag 为 true:显示 行驶界面 ，false 显示 作业界面
+     *
+     */
+    private void changePageMain(boolean flag){
+        if(flag) {
+            if(page == 0 ) { // 作业界面
+                driverBoLayout.setVisibility(View.GONE);
+                driverRLayout.setVisibility(View.GONE);
+
+                workBoLayout.setVisibility(View.VISIBLE);
+                workRLayout.setVisibility(View.VISIBLE);
+                page = 1;
+            }
+        }else {
+            if(page == 1 ) {  // 行驶界面
+                driverBoLayout.setVisibility(View.VISIBLE);
+                driverRLayout.setVisibility(View.VISIBLE);
+
+                workBoLayout.setVisibility(View.GONE);
+                workRLayout.setVisibility(View.GONE);
+
+                page = 0;
+            }
+
+        }
+
+    }
+
 
 
     /**
@@ -609,8 +738,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         try {
             switch (id) {
 
-                //左边圆圈
-                case R.id.b2122_down_iv: {
+                //调速器
+                case R.id.b925_iv: {
                     //弹出调试信息显示框
                     if (messageShowFragment == null) {
                         messageShowFragment = new MessageShowFragment();
@@ -621,33 +750,52 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
                     break;
                 }
-                //右边圆圈
-                case R.id.b1920_down_iv: {
-                    //往linux发送视频摄像头打开指令
+
+                case R.id.ivStop1111: {
                     dealPasswordValidate(IConstant.SOURCE_SETTING);
                     break;
                 }
 
+                // 换页
+                case R.id.b9012_up_iv: {
+                    changePage(1);
+                    break;
+                }
 
-                case R.id.fileManagerLL:{
+                // 换页
+                case R.id.ErrCode: {
+                    changePage(1);
+                    break;
+                }
+
+                // 换页
+                case R.id.ErrCode1: {
+                    changePage(1);
+                    break;
+                }
+
+                case R.id.dwLLayout:{
                     dealPasswordValidate(IConstant.SOURCE_SETTING);
                 }
-                case R.id.signalStrengthLayout1: {
-
-                    //弹出调试信息显示框
-                    if (messageShowFragment == null) {
-                        messageShowFragment = new MessageShowFragment();
-                    }
-
-                    if (!messageShowFragment.isAdded() && !messageShowFragment.isVisible() && !messageShowFragment.isRemoving()) {
-                        messageShowFragment.show(getSupportFragmentManager(), "messageLogId");
-                    }
-                    //进入文件系统目录
-//                    dealPasswordValidate(IConstant.SOURCE_SETTING);
-
-                    break;
-
+                case R.id.waterLLayout:{
+                    dealPasswordValidate(IConstant.SOURCE_SETTING);
                 }
+//                case R.id.signalStrengthLayout1: {
+//
+//                    //弹出调试信息显示框
+//                    if (messageShowFragment == null) {
+//                        messageShowFragment = new MessageShowFragment();
+//                    }
+//
+//                    if (!messageShowFragment.isAdded() && !messageShowFragment.isVisible() && !messageShowFragment.isRemoving()) {
+//                        messageShowFragment.show(getSupportFragmentManager(), "messageLogId");
+//                    }
+//                    //进入文件系统目录
+////                    dealPasswordValidate(IConstant.SOURCE_SETTING);
+//
+//                    break;
+//
+//                }
 
 
             }
@@ -659,17 +807,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
+
     private void  brightNess(int flag){
         int val;
-       // CacheData.setMsg_info("=================brightNess==========tvBright=======flag======="+"" + flag,1);
-       // CacheData.setMsg_info("=================brightNess==========true=======flag======="+"" + ((flag & 0x4) == 0x1),1);
-        if(flag == 1) {
+
+       // CacheData.setMsg_info("=================brightNess==========true=======flag======="+"" + ((flag & 0x4) == 0x4),1);
+        if((flag&0x4) == 0x4) {
           //  CacheData.setMsg_info("=================brightNess==========change_bright_old == 0==========="+"" + (change_bright_old == 0),1);
             if(change_bright_old == 0){
-               // CacheData.setMsg_info("=================brightNess========1111====="+"" + change_bright_old,1);
+              //  CacheData.setMsg_info("=================brightNess========1111====="+"" + change_bright_old,1);
                 SharedPreferences share = getSharedPreferences("aaa", Context.MODE_PRIVATE);
                 val = share.getInt("value", 200);
-               // CacheData.setMsg_info("=================brightNess========2222====="+"" + (change_bright_old == 0),1);
+              //  CacheData.setMsg_info("=================brightNess========2222====="+"" + (change_bright_old == 0),1);
                 if (val >= 250) {
                     val = 2;
                 }else if(val >= 200){
@@ -677,7 +826,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }else{
                     val = val + 50;
                 }
-               // CacheData.setMsg_info("=================brightNess==========3333=============="+"" + val + "%",1);
+              //  CacheData.setMsg_info("=================brightNess==========3333=============="+"" + val + "%",1);
 
                 SharedPreferences.Editor editor = share.edit();//获取编辑器
                 editor.putInt("value", val);
@@ -691,8 +840,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             change_bright_old = 0;
             b32_iv.setImageResource(R.drawable.ic_round_white);
         }
-
-
 
     }
 
@@ -892,10 +1039,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      */
     private void dealOtherData(byte[] content) {
 
-        // CacheData.setMsg_info("============dealOtherData=========content===================>" + NumberBytes.byteArrayToHexStr(content), IConstant.MESSAGE_INFO_ALL);
-        //B40对应181_b0 遥控启动
-        //181数据解析
-        if (content.length > 0) {
+         CacheData.setMsg_info("============dealOtherData=========content===================>" + NumberBytes.byteArrayToHexStr(content), IConstant.MESSAGE_INFO_ALL);
+        if(content.length>49){
             temp = content[0];
             tmp_0 = (temp >> 0) & 0x1;
             tmp_1 = (temp >> 1) & 0x1;
@@ -905,72 +1050,64 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             tmp_5 = (temp >> 5) & 0x1;
             tmp_6 = (temp >> 6) & 0x1;
             tmp_7 = (temp >> 7) & 0x1;
-
-            //遥控启动
+            //行驶模式
             if (tmp_0 == 1) {
-                b80_1_iv.setImageResource(R.drawable.ic_22_up_red);
-                b80_0_iv.setImageResource(R.drawable.ic_22_do_wh);
-
+                b80_1_lay.setBackgroundResource(R.drawable.shape_ring_connect_press);
             } else {
-                b80_1_iv.setImageResource(R.drawable.ic_22_up_wh);
-                b80_0_iv.setImageResource(R.drawable.ic_22_do_red);
-
+                b80_1_lay.setBackgroundResource(R.drawable.shape_ring_connect_nor);
             }
 
+            //取力模式
             if (tmp_1 == 1) {
-                b81_iv.setImageResource(R.drawable.shape_ring_bg_press);
+                b81_1_lay.setBackgroundResource(R.drawable.shape_ring_connect_press);
             } else {
-                b81_iv.setImageResource(R.drawable.shape_ring_bg_normal);
+                b81_1_lay.setBackgroundResource(R.drawable.shape_ring_connect_nor);
             }
 
+            if(tmp_0 == 1 && tmp_1 == 0){
+                changePageMain(true);
+            }else if(tmp_0 == 0 && tmp_1 == 1){
+                changePageMain(false);
+            }
+
+            // 驻车
             if (tmp_2 == 1) {
-                b82_iv.setImageResource(R.drawable.shape_ring_bg_press);
+                b82_1_lay.setBackgroundResource(R.drawable.shape_ring_connect_press);
             } else {
-                b82_iv.setImageResource(R.drawable.shape_ring_bg_normal);
+                b82_1_lay.setBackgroundResource(R.drawable.shape_ring_connect_nor);
             }
 
+            //D
             if (tmp_3 == 1) {
-                b83_1_iv.setImageResource(R.drawable.ic_22_up_red);
-                b83_0_iv.setImageResource(R.drawable.ic_22_do_wh);
-
+                b40_D_up.setBackgroundResource(R.drawable.shape_ring_connect_press);
             } else {
-                b83_1_iv.setImageResource(R.drawable.ic_22_up_wh);
-                b83_0_iv.setImageResource(R.drawable.ic_22_do_red);
-
+                b40_D_up.setBackgroundResource(R.drawable.shape_ring_connect_nor);
             }
 
+            //N
             if (tmp_4 == 1) {
-                b84_1_iv.setImageResource(R.drawable.ic_22_up_red);
-                b84_0_iv.setImageResource(R.drawable.ic_22_do_wh);
-
+                b40_N_up.setBackgroundResource(R.drawable.shape_ring_connect_press);
             } else {
-                b84_1_iv.setImageResource(R.drawable.ic_22_up_wh);
-                b84_0_iv.setImageResource(R.drawable.ic_22_do_red);
+                b40_N_up.setBackgroundResource(R.drawable.shape_ring_connect_nor);
             }
 
+            //R
             if (tmp_5 == 1) {
-                b85_1_iv.setImageResource(R.drawable.ic_22_up_red);
-                b85_0_iv.setImageResource(R.drawable.ic_22_do_wh);
+                b40_R_up.setBackgroundResource(R.drawable.shape_ring_connect_press);
             } else {
-                b85_1_iv.setImageResource(R.drawable.ic_22_up_wh);
-                b85_0_iv.setImageResource(R.drawable.ic_22_do_red);
+                b40_R_up.setBackgroundResource(R.drawable.shape_ring_connect_nor);
             }
 
-            if (tmp_6 == 1) {
-                b86_iv.setImageResource(R.drawable.shape_ring_bg_press);
-            } else {
-                b86_iv.setImageResource(R.drawable.shape_ring_bg_normal);
-            }
+            //转台角度符号
+            turret_angle_negtive = "" + ((temp>>6) & 0x1);
 
+            // 发动机启
             if (tmp_7 == 1) {
-                b87_iv.setImageResource(R.drawable.shape_ring_bg_press);
+                b87_1_lay.setBackgroundResource(R.drawable.shape_ring_connect_press);
             } else {
-                b87_iv.setImageResource(R.drawable.shape_ring_bg_normal);
+                b87_1_lay.setBackgroundResource(R.drawable.shape_ring_connect_nor);
             }
 
-        }
-
-        if (content.length > 1) {
             temp = content[1];
             tmp_0 = (temp >> 0) & 0x1;
             tmp_1 = (temp >> 1) & 0x1;
@@ -981,118 +1118,843 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             tmp_6 = (temp >> 6) & 0x1;
             tmp_7 = (temp >> 7) & 0x1;
 
-            //B9
+            //自动
             if (tmp_0 == 1) {
-                b90_1_iv.setImageResource(R.drawable.ic_22_up_red);
-                b90_0_iv.setImageResource(R.drawable.ic_22_do_wh);
+                b90_up_iv.setImageResource(R.drawable.ic_22_up_wh);
+                b90_down_iv.setImageResource(R.drawable.ic_22_do_red);
             } else {
-                b90_1_iv.setImageResource(R.drawable.ic_22_up_wh);
-                b90_0_iv.setImageResource(R.drawable.ic_22_do_red);
+                b90_up_iv.setImageResource(R.drawable.ic_22_up_red);
+                b90_down_iv.setImageResource(R.drawable.ic_22_do_wh);
 
             }
 
-            if (tmp_1 == 1) {
-                b91_iv.setImageResource(R.drawable.ic_round_red);
+            //泡沫罐液位
+            String foam_level = ""+((temp >> 6) & 0x1) + ""+((temp >> 5) & 0x1) + ""+((temp >> 4) & 0x1)  + ""+((temp >> 3) & 0x1);
+            if (IConstant.FOAM_LEVEL_0000.equals(foam_level)){
+                formLevel1.setVisibility(View.INVISIBLE);
+                formLevel2.setVisibility(View.INVISIBLE);
+                formLevel3.setVisibility(View.INVISIBLE);
+                formLevel4.setVisibility(View.INVISIBLE);
+                formLevel5.setVisibility(View.INVISIBLE);
+                formLevel6.setVisibility(View.INVISIBLE);
+                formLevel7.setVisibility(View.INVISIBLE);
+                formLevel8.setVisibility(View.INVISIBLE);
+            }else if(IConstant.FOAM_LEVEL_0001.equals(foam_level)){
+                formLevel1.setVisibility(View.INVISIBLE);
+                formLevel2.setVisibility(View.INVISIBLE);
+                formLevel3.setVisibility(View.INVISIBLE);
+                formLevel4.setVisibility(View.INVISIBLE);
+                formLevel5.setVisibility(View.INVISIBLE);
+                formLevel6.setVisibility(View.INVISIBLE);
+                formLevel7.setVisibility(View.INVISIBLE);
+                formLevel8.setVisibility(View.VISIBLE);
+            }else if(IConstant.FOAM_LEVEL_0010.equals(foam_level)){
+                formLevel1.setVisibility(View.INVISIBLE);
+                formLevel2.setVisibility(View.INVISIBLE);
+                formLevel3.setVisibility(View.INVISIBLE);
+                formLevel4.setVisibility(View.INVISIBLE);
+                formLevel5.setVisibility(View.INVISIBLE);
+                formLevel6.setVisibility(View.INVISIBLE);
+                formLevel7.setVisibility(View.VISIBLE);
+                formLevel8.setVisibility(View.VISIBLE);
+            }else if(IConstant.FOAM_LEVEL_0011.equals(foam_level)){
+                formLevel1.setVisibility(View.INVISIBLE);
+                formLevel2.setVisibility(View.INVISIBLE);
+                formLevel3.setVisibility(View.INVISIBLE);
+                formLevel4.setVisibility(View.INVISIBLE);
+                formLevel5.setVisibility(View.INVISIBLE);
+                formLevel6.setVisibility(View.VISIBLE);
+                formLevel7.setVisibility(View.VISIBLE);
+                formLevel8.setVisibility(View.VISIBLE);
+            }else if(IConstant.FOAM_LEVEL_0100.equals(foam_level)){
+                formLevel1.setVisibility(View.INVISIBLE);
+                formLevel2.setVisibility(View.INVISIBLE);
+                formLevel3.setVisibility(View.INVISIBLE);
+                formLevel4.setVisibility(View.INVISIBLE);
+                formLevel5.setVisibility(View.VISIBLE);
+                formLevel6.setVisibility(View.VISIBLE);
+                formLevel7.setVisibility(View.VISIBLE);
+                formLevel8.setVisibility(View.VISIBLE);
+            }else if(IConstant.FOAM_LEVEL_0101.equals(foam_level)){
+                formLevel1.setVisibility(View.INVISIBLE);
+                formLevel2.setVisibility(View.INVISIBLE);
+                formLevel3.setVisibility(View.INVISIBLE);
+                formLevel4.setVisibility(View.VISIBLE);
+                formLevel5.setVisibility(View.VISIBLE);
+                formLevel6.setVisibility(View.VISIBLE);
+                formLevel7.setVisibility(View.VISIBLE);
+                formLevel8.setVisibility(View.VISIBLE);
+            }else if(IConstant.FOAM_LEVEL_0110.equals(foam_level)){
+                formLevel1.setVisibility(View.INVISIBLE);
+                formLevel2.setVisibility(View.INVISIBLE);
+                formLevel3.setVisibility(View.VISIBLE);
+                formLevel4.setVisibility(View.VISIBLE);
+                formLevel5.setVisibility(View.VISIBLE);
+                formLevel6.setVisibility(View.VISIBLE);
+                formLevel7.setVisibility(View.VISIBLE);
+                formLevel8.setVisibility(View.VISIBLE);
+            }else if(IConstant.FOAM_LEVEL_0111.equals(foam_level)){
+                formLevel1.setVisibility(View.INVISIBLE);
+                formLevel2.setVisibility(View.VISIBLE);
+                formLevel3.setVisibility(View.VISIBLE);
+                formLevel4.setVisibility(View.VISIBLE);
+                formLevel5.setVisibility(View.VISIBLE);
+                formLevel6.setVisibility(View.VISIBLE);
+                formLevel7.setVisibility(View.VISIBLE);
+                formLevel8.setVisibility(View.VISIBLE);
+            }else if(IConstant.FOAM_LEVEL_1000.equals(foam_level)){
+                formLevel1.setVisibility(View.VISIBLE);
+                formLevel2.setVisibility(View.VISIBLE);
+                formLevel3.setVisibility(View.VISIBLE);
+                formLevel4.setVisibility(View.VISIBLE);
+                formLevel5.setVisibility(View.VISIBLE);
+                formLevel6.setVisibility(View.VISIBLE);
+                formLevel7.setVisibility(View.VISIBLE);
+                formLevel8.setVisibility(View.VISIBLE);
+            }
+
+            //紧急停止
+            if (tmp_7 == 1 ) {
+                tvStop1111.setText(getString(R.string.scram));
+                ivStop1111.setImageResource(R.drawable.ic_jt_use);
             } else {
-                b91_iv.setImageResource(R.drawable.ic_round_white);
+                tvStop1111.setText(getString(R.string.shut_stop));
+                ivStop1111.setImageResource(R.drawable.ic_jt_stop);
             }
 
-          //  CacheData.setMsg_info("============dealOtherData========content[2]==================>" + content[2], IConstant.MESSAGE_INFO_ALL);
-            tmp_2 = (int) (((temp >> 5) & 0x1) * 8) + (int) (((temp >> 4) & 0x1) * 4) + (int) (((temp >> 3) & 0x1) * 2) + (int) ((temp >> 2) & 0x1);
-            tmp_2 = tmp_2 + 1;
-          //  CacheData.setMsg_info("============dealOtherData========content[2]=====tmp_2=============>" + tmp_2, IConstant.MESSAGE_INFO_ALL);
-            switch (tmp_2) {
-                case 1: {
-                    b925_iv.setImageResource(R.drawable.ic_925_1);
-                    break;
-                }
-                case 2: {
-                    b925_iv.setImageResource(R.drawable.ic_925_2);
-                    break;
-                }
 
-                case 3: {
-                    b925_iv.setImageResource(R.drawable.ic_925_3);
-                    break;
-                }
-
-                case 4: {
-                    b925_iv.setImageResource(R.drawable.ic_925_4);
-                    break;
-                }
-
-                case 5: {
-                    b925_iv.setImageResource(R.drawable.ic_925_5);
-                    break;
-                }
-
-                case 6: {
-                    b925_iv.setImageResource(R.drawable.ic_925_6);
-                    break;
-                }
-
-                case 7: {
-                    b925_iv.setImageResource(R.drawable.ic_925_7);
-                    break;
-                }
-
-                case 8: {
-                    b925_iv.setImageResource(R.drawable.ic_925_8);
-                    break;
-                }
-
-                case 9: {
-                    b925_iv.setImageResource(R.drawable.ic_925_9);
-                    break;
-                }
-
-                case 10: {
-                    b925_iv.setImageResource(R.drawable.ic_925_10);
-                    break;
-                }
-
-                case 11: {
-                    b925_iv.setImageResource(R.drawable.ic_925_11);
-                    break;
-                }
-
-                default: {
-                    b925_iv.setImageResource(R.drawable.ic_925_1);
-                    break;
-                }
-
+            System.arraycopy(content,2,temp_1,0,1);
+            float turretAngleL = Float.valueOf(binary(temp_1,10)).floatValue();//转塔角度L
+            System.arraycopy(content,3,temp_1,0,1);
+            float turretAngleH = Float.valueOf(binary(temp_1,10)).floatValue();//转塔角度H
+            float turretAngle = (turretAngleH * 256 + turretAngleL) / 10;
+            if(IConstant.TURRET_ANGEL_NEGTIVE.equals(turret_angle_negtive) )
+            {
+                TurretAngle.setText("-" + turretAngle);
+            }else{
+                TurretAngle.setText("" + turretAngle);
             }
 
-         //   CacheData.setMsg_info("============dealOtherData========content[2]=====tmp_6=============>" + tmp_6, IConstant.MESSAGE_INFO_ALL);
-            // 熄火
-            if (tmp_6 == 1) {
-                b967_1001_iv.setImageResource(R.drawable.ic_967_xh);
+            //发动机转速
+            System.arraycopy(content,4,temp_1,0,1);
+            int engineSpeedL = Integer.valueOf(binary(temp_1,10)).intValue();
+            System.arraycopy(content,5,temp_1,0,1);
+            int engineSpeedH = Integer.valueOf(binary(temp_1,10)).intValue();
+            int engine_speed = engineSpeedH * 256 + engineSpeedL;
+            EngineSpeed.setText("" + engine_speed);
+
+            //液压系统压力
+            System.arraycopy(content,6,temp_1,0,1);
+            HydraulicPress.setText(binary(temp_1,10));
+
+
+            //水泵出口压力
+            System.arraycopy(content,7,temp_1,0,1);
+            float pumpVentPress = Float.valueOf(binary(temp_1,10)).floatValue() / 10;
+            PumpVentPress.setText("" + pumpVentPress);
+
+            //故障代码
+            System.arraycopy(content,8,temp_1,0,1);
+            String err_code = binary(temp_1,10);
+            if (IConstant.ERR_CODE_0.equals(err_code)){
+                ErrCode.setText(getString(R.string.err_code_0));
+            } else if (IConstant.ERR_CODE_1.equals(err_code)) {
+                ErrCode.setText(getString(R.string.err_code_1));
+            } else if (IConstant.ERR_CODE_2.equals(err_code)) {
+                ErrCode.setText(getString(R.string.err_code_2));
+            } else if (IConstant.ERR_CODE_3.equals(err_code)) {
+                ErrCode.setText(getString(R.string.err_code_3));
+            } else if (IConstant.ERR_CODE_4.equals(err_code)) {
+                ErrCode.setText(getString(R.string.err_code_4));
+            } else if (IConstant.ERR_CODE_5.equals(err_code)) {
+                ErrCode.setText(getString(R.string.err_code_5));
+            } else if (IConstant.ERR_CODE_6.equals(err_code)) {
+                ErrCode.setText(getString(R.string.err_code_6));
+            } else if (IConstant.ERR_CODE_7.equals(err_code)) {
+                ErrCode.setText(getString(R.string.err_code_7));
+            } else if (IConstant.ERR_CODE_8.equals(err_code)) {
+                ErrCode.setText(getString(R.string.err_code_8));
+            } else if (IConstant.ERR_CODE_9.equals(err_code)) {
+                ErrCode.setText(getString(R.string.err_code_9));
+            } else if (IConstant.ERR_CODE_10.equals(err_code)) {
+                ErrCode.setText(getString(R.string.err_code_10));
+            } else if (IConstant.ERR_CODE_11.equals(err_code)) {
+                ErrCode.setText(getString(R.string.err_code_11));
+            } else if (IConstant.ERR_CODE_12.equals(err_code)) {
+                ErrCode.setText(getString(R.string.err_code_12));
+            } else if (IConstant.ERR_CODE_13.equals(err_code)) {
+                ErrCode.setText(getString(R.string.err_code_13));
+            } else if (IConstant.ERR_CODE_14.equals(err_code)) {
+                ErrCode.setText(getString(R.string.err_code_14));
+            } else if (IConstant.ERR_CODE_15.equals(err_code)) {
+                ErrCode.setText(getString(R.string.err_code_15));
+            } else if (IConstant.ERR_CODE_16.equals(err_code)) {
+                ErrCode.setText(getString(R.string.err_code_16));
+            } else if (IConstant.ERR_CODE_17.equals(err_code)) {
+                ErrCode.setText(getString(R.string.err_code_17));
+            } else if (IConstant.ERR_CODE_18.equals(err_code)) {
+                ErrCode.setText(getString(R.string.err_code_18));
+            } else if (IConstant.ERR_CODE_19.equals(err_code)) {
+                ErrCode.setText(getString(R.string.err_code_19));
+            } else if (IConstant.ERR_CODE_20.equals(err_code)) {
+                ErrCode.setText(getString(R.string.err_code_20));
+            } else if (IConstant.ERR_CODE_21.equals(err_code)) {
+                ErrCode.setText(getString(R.string.err_code_21));
+            } else if (IConstant.ERR_CODE_22.equals(err_code)) {
+                ErrCode.setText(getString(R.string.err_code_22));
+            } else if (IConstant.ERR_CODE_23.equals(err_code)) {
+                ErrCode.setText(getString(R.string.err_code_23));
+            } else if (IConstant.ERR_CODE_24.equals(err_code)) {
+                ErrCode.setText(getString(R.string.err_code_24));
+            } else if (IConstant.ERR_CODE_25.equals(err_code)) {
+                ErrCode.setText(getString(R.string.err_code_25));
+            } else if (IConstant.ERR_CODE_26.equals(err_code)) {
+                ErrCode.setText(getString(R.string.err_code_26));
+            } else if (IConstant.ERR_CODE_27.equals(err_code)) {
+                ErrCode.setText(getString(R.string.err_code_27));
+            } else if (IConstant.ERR_CODE_28.equals(err_code)) {
+                ErrCode.setText(getString(R.string.err_code_28));
+            } else if (IConstant.ERR_CODE_29.equals(err_code)) {
+                ErrCode.setText(getString(R.string.err_code_29));
+            } else if (IConstant.ERR_CODE_30.equals(err_code)) {
+                ErrCode.setText(getString(R.string.err_code_30));
+            } else if (IConstant.ERR_CODE_31.equals(err_code)) {
+                ErrCode.setText(getString(R.string.err_code_31));
+            } else if (IConstant.ERR_CODE_32.equals(err_code)) {
+                ErrCode.setText(getString(R.string.err_code_32));
+            } else if (IConstant.ERR_CODE_33.equals(err_code)) {
+                ErrCode.setText(getString(R.string.err_code_33));
+            } else if (IConstant.ERR_CODE_34.equals(err_code)) {
+                ErrCode.setText(getString(R.string.err_code_34));
+            } else if (IConstant.ERR_CODE_35.equals(err_code)) {
+                ErrCode.setText(getString(R.string.err_code_35));
+            } else if (IConstant.ERR_CODE_36.equals(err_code)) {
+                ErrCode.setText(getString(R.string.err_code_36));
+            } else if (IConstant.ERR_CODE_37.equals(err_code)) {
+                ErrCode.setText(getString(R.string.err_code_37));
+            } else if (IConstant.ERR_CODE_38.equals(err_code)) {
+                ErrCode.setText(getString(R.string.err_code_38));
+            } else if (IConstant.ERR_CODE_39.equals(err_code)) {
+                ErrCode.setText(getString(R.string.err_code_39));
+            } else if (IConstant.ERR_CODE_40.equals(err_code)) {
+                ErrCode.setText(getString(R.string.err_code_40));
+            } else if (IConstant.ERR_CODE_41.equals(err_code)) {
+                ErrCode.setText(getString(R.string.err_code_41));
+            } else if (IConstant.ERR_CODE_42.equals(err_code)) {
+                ErrCode.setText(getString(R.string.err_code_42));
+            } else if (IConstant.ERR_CODE_43.equals(err_code)) {
+                ErrCode.setText(getString(R.string.err_code_43));
+            } else if (IConstant.ERR_CODE_44.equals(err_code)) {
+                ErrCode.setText(getString(R.string.err_code_44));
+            } else if (IConstant.ERR_CODE_45.equals(err_code)) {
+                ErrCode.setText(getString(R.string.err_code_45));
+            } else if (IConstant.ERR_CODE_46.equals(err_code)) {
+                ErrCode.setText(getString(R.string.err_code_46));
+            } else if (IConstant.ERR_CODE_47.equals(err_code)) {
+                ErrCode.setText(getString(R.string.err_code_47));
+            } else if (IConstant.ERR_CODE_48.equals(err_code)) {
+                ErrCode.setText(getString(R.string.err_code_48));
+            }else if (IConstant.ERR_CODE_49.equals(err_code)) {
+                ErrCode.setText(getString(R.string.err_code_49));
+            }else {
+                ErrCode.setText("");
             }
 
-          //  CacheData.setMsg_info("============dealOtherData========content[2]=====tmp_7=============>" + tmp_7, IConstant.MESSAGE_INFO_ALL);
-            // 上电
-            if (tmp_7 == 1) {
-                b967_1001_iv.setImageResource(R.drawable.ic_967_sd);
-            }
-
-            temp = content[2];
+            temp = content[9];
             tmp_0 = (temp >> 0) & 0x1;
             tmp_1 = (temp >> 1) & 0x1;
+            tmp_6 = (temp >> 6) & 0x1;
+            tmp_7 = (temp >> 7) & 0x1;
 
-            // 启动
-            if (tmp_0 == 1) {
-                b967_1001_iv.setImageResource(R.drawable.ic_967_qd);
+            //1:水泵运行状态
+            String water_pump_status = "" + tmp_0;
+            if (IConstant.WATER_PUMP_START.equals(water_pump_status)){
+                WaterPumpStatus.setText(getString(R.string.started));
+            } else if (IConstant.WATER_PUMP_STOP.equals(water_pump_status)) {
+                WaterPumpStatus.setText(getString(R.string.stop));
             }
 
-            // 急停
-//            if (tmp_1 == 1) {
-//                b967_1001_iv.setImageResource(R.drawable.ic_967_fdj);
+           // 1:塔台对中状态
+            if (tmp_1 == 1) {
+                turretHitok.setBackgroundResource(R.drawable.shape_ring_connect_press);
+            } else {
+                turretHitok.setBackgroundResource(R.drawable.shape_ring_connect_nor);
+            }
+
+            //水罐液位
+            String water_level = "" + ((temp >> 5) & 0x1)  + "" + ((temp >> 4) & 0x1) + "" + ((temp >> 3) & 0x1) + "" + ((temp >> 2) & 0x1);
+            if (IConstant.WATER_LEVEL_0000.equals(water_level)){
+                waterLevel1.setVisibility(View.INVISIBLE);
+                waterLevel2.setVisibility(View.INVISIBLE);
+                waterLevel3.setVisibility(View.INVISIBLE);
+                waterLevel4.setVisibility(View.INVISIBLE);
+                waterLevel5.setVisibility(View.INVISIBLE);
+                waterLevel6.setVisibility(View.INVISIBLE);
+                waterLevel7.setVisibility(View.INVISIBLE);
+                waterLevel8.setVisibility(View.INVISIBLE);
+            }else if(IConstant.WATER_LEVEL_0001.equals(water_level)){
+                waterLevel1.setVisibility(View.INVISIBLE);
+                waterLevel2.setVisibility(View.INVISIBLE);
+                waterLevel3.setVisibility(View.INVISIBLE);
+                waterLevel4.setVisibility(View.INVISIBLE);
+                waterLevel5.setVisibility(View.INVISIBLE);
+                waterLevel6.setVisibility(View.INVISIBLE);
+                waterLevel7.setVisibility(View.INVISIBLE);
+                waterLevel8.setVisibility(View.VISIBLE);
+            }else if(IConstant.WATER_LEVEL_0010.equals(water_level)){
+                waterLevel1.setVisibility(View.INVISIBLE);
+                waterLevel2.setVisibility(View.INVISIBLE);
+                waterLevel3.setVisibility(View.INVISIBLE);
+                waterLevel4.setVisibility(View.INVISIBLE);
+                waterLevel5.setVisibility(View.INVISIBLE);
+                waterLevel6.setVisibility(View.INVISIBLE);
+                waterLevel7.setVisibility(View.VISIBLE);
+                waterLevel8.setVisibility(View.VISIBLE);
+            }else if(IConstant.WATER_LEVEL_0011.equals(water_level)){
+                waterLevel1.setVisibility(View.INVISIBLE);
+                waterLevel2.setVisibility(View.INVISIBLE);
+                waterLevel3.setVisibility(View.INVISIBLE);
+                waterLevel4.setVisibility(View.INVISIBLE);
+                waterLevel5.setVisibility(View.INVISIBLE);
+                waterLevel6.setVisibility(View.VISIBLE);
+                waterLevel7.setVisibility(View.VISIBLE);
+                waterLevel8.setVisibility(View.VISIBLE);
+            }else if(IConstant.WATER_LEVEL_0100.equals(water_level)){
+                waterLevel1.setVisibility(View.INVISIBLE);
+                waterLevel2.setVisibility(View.INVISIBLE);
+                waterLevel3.setVisibility(View.INVISIBLE);
+                waterLevel4.setVisibility(View.INVISIBLE);
+                waterLevel5.setVisibility(View.VISIBLE);
+                waterLevel6.setVisibility(View.VISIBLE);
+                waterLevel7.setVisibility(View.VISIBLE);
+                waterLevel8.setVisibility(View.VISIBLE);
+            }else if(IConstant.WATER_LEVEL_0101.equals(water_level)){
+                waterLevel1.setVisibility(View.INVISIBLE);
+                waterLevel2.setVisibility(View.INVISIBLE);
+                waterLevel3.setVisibility(View.INVISIBLE);
+                waterLevel4.setVisibility(View.VISIBLE);
+                waterLevel5.setVisibility(View.VISIBLE);
+                waterLevel6.setVisibility(View.VISIBLE);
+                waterLevel7.setVisibility(View.VISIBLE);
+                waterLevel8.setVisibility(View.VISIBLE);
+            }else if(IConstant.WATER_LEVEL_0110.equals(water_level)){
+                waterLevel1.setVisibility(View.INVISIBLE);
+                waterLevel2.setVisibility(View.INVISIBLE);
+                waterLevel3.setVisibility(View.VISIBLE);
+                waterLevel4.setVisibility(View.VISIBLE);
+                waterLevel5.setVisibility(View.VISIBLE);
+                waterLevel6.setVisibility(View.VISIBLE);
+                waterLevel7.setVisibility(View.VISIBLE);
+                waterLevel8.setVisibility(View.VISIBLE);
+            }else if(IConstant.WATER_LEVEL_0111.equals(water_level)){
+                waterLevel1.setVisibility(View.INVISIBLE);
+                waterLevel2.setVisibility(View.VISIBLE);
+                waterLevel3.setVisibility(View.VISIBLE);
+                waterLevel4.setVisibility(View.VISIBLE);
+                waterLevel5.setVisibility(View.VISIBLE);
+                waterLevel6.setVisibility(View.VISIBLE);
+                waterLevel7.setVisibility(View.VISIBLE);
+                waterLevel8.setVisibility(View.VISIBLE);
+            }else if(IConstant.WATER_LEVEL_1000.equals(water_level)){
+                waterLevel1.setVisibility(View.VISIBLE);
+                waterLevel2.setVisibility(View.VISIBLE);
+                waterLevel3.setVisibility(View.VISIBLE);
+                waterLevel4.setVisibility(View.VISIBLE);
+                waterLevel5.setVisibility(View.VISIBLE);
+                waterLevel6.setVisibility(View.VISIBLE);
+                waterLevel7.setVisibility(View.VISIBLE);
+                waterLevel8.setVisibility(View.VISIBLE);
+            }
+
+            // 1: 支腿调平
+            if (tmp_6 == 1) {
+                zttp_lay.setBackgroundResource(R.drawable.shape_ring_connect_press);
+            } else {
+                zttp_lay.setBackgroundResource(R.drawable.shape_ring_connect_nor);
+            }
+
+            // 1:支腿收到位
+            if (tmp_7 == 1) {
+                ztsh_lay.setBackgroundResource(R.drawable.shape_ring_connect_press);
+            } else {
+                ztsh_lay.setBackgroundResource(R.drawable.shape_ring_connect_nor);
+            }
+
+            //1 臂架角度
+            System.arraycopy(content,10,temp_1,0,1);
+            int arm_Angle1L = Integer.valueOf(binary(temp_1,10)).intValue();
+            System.arraycopy(content,11,temp_1,0,1);
+            int arm_Angle1H = Integer.valueOf(binary(temp_1,10)).intValue();
+            int arm_Angle1 = arm_Angle1H * 256 + arm_Angle1L;
+            ArmAngle1.setText("" + arm_Angle1);
+
+            // 2#臂架角度
+            System.arraycopy(content,12,temp_1,0,1);
+            //2#臂架角度L
+            int arm_Angle2L = Integer.valueOf(binary(temp_1,10)).intValue();
+            System.arraycopy(content,13,temp_1,0,1);
+           //2#臂架角度H
+            int arm_Angle2H = Integer.valueOf(binary(temp_1,10)).intValue();
+            int arm_Angle2 = arm_Angle2H * 256 + arm_Angle2L;
+            ArmAngle2.setText("" + arm_Angle2);
+
+            System.arraycopy(content,14,temp_1,0,1);
+            //3#臂架角度L
+            int arm_Angle3L = Integer.valueOf(binary(temp_1,10)).intValue();
+            System.arraycopy(content,15,temp_1,0,1);
+            //3#臂架角度H
+            int arm_Angle3H = Integer.valueOf(binary(temp_1,10)).intValue();
+            int arm_Angle3 = arm_Angle3H * 256 + arm_Angle3L;
+            ArmAngle3.setText("" + arm_Angle3);
+
+            System.arraycopy(content,22,temp_1,0,1);
+            //水流量L
+            int water_FlowL = Integer.valueOf(binary(temp_1,10)).intValue();
+            System.arraycopy(content,23,temp_1,0,1);
+            //水流量H
+            int water_FlowH = Integer.valueOf(binary(temp_1,10)).intValue();
+            int water_Flow = water_FlowH * 256 + water_FlowL;
+            WaterFlow.setText("" + water_Flow);
+
+            //车速
+            System.arraycopy(content,24,temp_1,0,1);
+            int speed = Integer.valueOf(binary(temp_1,10)).intValue();
+            carSpeed.setText("" + speed + "km/h");
+
+            //油门
+            System.arraycopy(content,25,temp_1,0,1);
+            int oil = Integer.valueOf(binary(temp_1,10)).intValue();
+            oil_tv.setText("" + oil + "%");
+
+
+
+            //刹车
+            System.arraycopy(content,26,temp_1,0,1);
+            int breakData = Integer.valueOf(binary(temp_1,10)).intValue();
+            brake_tv.setText("" + breakData + "%");
+
+            // 方向盘转角
+            System.arraycopy(content,27,temp_1,0,1);
+            int directionArmlLL = Integer.valueOf(binary(temp_1,10)).intValue();
+            System.arraycopy(content,28,temp_1,0,1);
+            int directionArmlL = Integer.valueOf(binary(temp_1,10)).intValue();
+
+            System.arraycopy(content,29,temp_1,0,1);
+            int directionArmlH = Integer.valueOf(binary(temp_1,10)).intValue();
+            System.arraycopy(content,30,temp_1,0,1);
+            int directionArmlHH = Integer.valueOf(binary(temp_1,10)).intValue();
+
+            int direction = directionArmlHH * 256 * 256 * 256 +  + directionArmlH * 256 * 256 + directionArmlL * 256 + directionArmlLL;
+            directionArml.setText("" + direction + "°");
+
+        }
+
+        System.arraycopy(content, 32, temp_1, 0, 1);
+        String battery_electricity = binary(temp_1, 10);
+
+        if (IConstant.BATTARY_STATUS_0.equals(battery_electricity)) {
+            lowBattery.setVisibility(LinearLayout.VISIBLE);
+            haveBattery.setVisibility(LinearLayout.GONE);
+
+            lowBatteryTest.setVisibility(LinearLayout.VISIBLE);
+            haveBatteryTest.setVisibility(LinearLayout.GONE);
+        } else if (IConstant.BATTARY_STATUS_1.equals(battery_electricity)) {
+            haveBattery.setVisibility(LinearLayout.VISIBLE);
+            lowBattery.setVisibility(LinearLayout.GONE);
+            Battery1.setVisibility(View.VISIBLE);
+            Battery2.setVisibility(View.INVISIBLE);
+            Battery3.setVisibility(View.INVISIBLE);
+            Battery4.setVisibility(View.INVISIBLE);
+
+            haveBatteryTest.setVisibility(LinearLayout.VISIBLE);
+            lowBatteryTest.setVisibility(LinearLayout.GONE);
+            tvBatteryTest1.setVisibility(View.VISIBLE);
+            tvBatteryTest2.setVisibility(View.INVISIBLE);
+            tvBatteryTest3.setVisibility(View.INVISIBLE);
+            tvBatteryTest4.setVisibility(View.INVISIBLE);
+        } else if (IConstant.BATTARY_STATUS_2.equals(battery_electricity)) {
+            haveBattery.setVisibility(LinearLayout.VISIBLE);
+            lowBattery.setVisibility(LinearLayout.GONE);
+            Battery1.setVisibility(View.VISIBLE);
+            Battery2.setVisibility(View.VISIBLE);
+            Battery3.setVisibility(View.INVISIBLE);
+            Battery4.setVisibility(View.INVISIBLE);
+
+            haveBatteryTest.setVisibility(LinearLayout.VISIBLE);
+            lowBatteryTest.setVisibility(LinearLayout.GONE);
+            tvBatteryTest1.setVisibility(View.VISIBLE);
+            tvBatteryTest2.setVisibility(View.VISIBLE);
+            tvBatteryTest3.setVisibility(View.INVISIBLE);
+            tvBatteryTest4.setVisibility(View.INVISIBLE);
+        } else if (IConstant.BATTARY_STATUS_3.equals(battery_electricity)) {
+            haveBattery.setVisibility(LinearLayout.VISIBLE);
+            lowBattery.setVisibility(LinearLayout.GONE);
+            Battery1.setVisibility(View.VISIBLE);
+            Battery2.setVisibility(View.VISIBLE);
+            Battery3.setVisibility(View.VISIBLE);
+            Battery4.setVisibility(View.INVISIBLE);
+
+            haveBatteryTest.setVisibility(LinearLayout.VISIBLE);
+            lowBatteryTest.setVisibility(LinearLayout.GONE);
+            tvBatteryTest1.setVisibility(View.VISIBLE);
+            tvBatteryTest2.setVisibility(View.VISIBLE);
+            tvBatteryTest3.setVisibility(View.VISIBLE);
+            tvBatteryTest4.setVisibility(View.INVISIBLE);
+        } else if (IConstant.BATTARY_STATUS_4.equals(battery_electricity)) {
+            haveBattery.setVisibility(LinearLayout.VISIBLE);
+            lowBattery.setVisibility(LinearLayout.GONE);
+            Battery1.setVisibility(View.VISIBLE);
+            Battery2.setVisibility(View.VISIBLE);
+            Battery3.setVisibility(View.VISIBLE);
+            Battery4.setVisibility(View.VISIBLE);
+
+            haveBatteryTest.setVisibility(LinearLayout.VISIBLE);
+            lowBatteryTest.setVisibility(LinearLayout.GONE);
+            tvBatteryTest1.setVisibility(View.VISIBLE);
+            tvBatteryTest2.setVisibility(View.VISIBLE);
+            tvBatteryTest3.setVisibility(View.VISIBLE);
+            tvBatteryTest4.setVisibility(View.VISIBLE);
+        }
+
+
+        System.arraycopy(content, 33, temp_1, 0, 1);
+        int signal_strength = bytes2int(temp_1);
+        System.arraycopy(content, 34, temp_1, 0, 1);
+        String wireless_link_status = binary(temp_1, 10); //无线连接状态
+
+        if (signal_strength > 127) {
+            signal_strength = 256 - signal_strength;
+            signalStrength.setText(("-" + signal_strength));
+            signalStrengthTest.setText(("-" + signal_strength));
+        } else {
+            signalStrength.setText("" + signal_strength);
+            signalStrengthTest.setText(("" + signal_strength));
+        }
+
+        //signalStrength.setText(wireless_link_status + "-" + signal_strength);
+        if (IConstant.WIRELESS_LINK_0.equals(wireless_link_status)) {
+            signalStrengthLayout.setVisibility(FrameLayout.VISIBLE);
+            signalStrengthLayout1.setVisibility(FrameLayout.GONE);
+            noSignal.setVisibility(LinearLayout.VISIBLE);
+            haveSignal.setVisibility(LinearLayout.GONE);
+            signalStrength.setVisibility(View.GONE);
+
+            signalStrengthLayoutTest.setVisibility(FrameLayout.VISIBLE);
+            signalStrengthLayout1Test.setVisibility(FrameLayout.GONE);
+            noSignalTest.setVisibility(LinearLayout.VISIBLE);
+            haveSignalTest.setVisibility(LinearLayout.GONE);
+            signalStrengthTest.setVisibility(View.GONE);
+
+        } else if (IConstant.WIRELESS_LINK_1.equals(wireless_link_status)) {
+            signalStrengthLayout.setVisibility(FrameLayout.VISIBLE);
+            signalStrengthLayout1.setVisibility(FrameLayout.GONE);
+            noSignal.setVisibility(LinearLayout.GONE);
+            haveSignal.setVisibility(LinearLayout.VISIBLE);
+            signalStrength.setVisibility(View.VISIBLE);
+
+            signalStrengthLayoutTest.setVisibility(FrameLayout.VISIBLE);
+            signalStrengthLayout1Test.setVisibility(FrameLayout.GONE);
+            noSignalTest.setVisibility(LinearLayout.GONE);
+            haveSignalTest.setVisibility(LinearLayout.VISIBLE);
+            signalStrengthTest.setVisibility(View.VISIBLE);
+        } else if (IConstant.WIRELESS_LINK_2.equals(wireless_link_status)) {
+            signalStrengthLayout.setVisibility(FrameLayout.GONE);
+            signalStrengthLayout1.setVisibility(FrameLayout.VISIBLE);
+            noSignal.setVisibility(LinearLayout.GONE);
+            haveSignal.setVisibility(LinearLayout.GONE);
+            signalStrength.setVisibility(View.GONE);
+
+            signalStrengthLayoutTest.setVisibility(FrameLayout.GONE);
+            signalStrengthLayout1Test.setVisibility(FrameLayout.VISIBLE);
+            noSignalTest.setVisibility(LinearLayout.GONE);
+            haveSignalTest.setVisibility(LinearLayout.GONE);
+        }
+
+        System.arraycopy(content, 36, temp_1, 0, 1);
+        int remote_ctrl_status = Integer.valueOf(binary(temp_1, 10)).intValue();
+
+        if ((remote_ctrl_status & 0x2) == 0x2) {
+            RemoteCtrlStatus.setText(getString(R.string.scram));
+            tvStartStaTest.setText(getString(R.string.scram));
+            tvStop1111.setText(getString(R.string.scram));
+            ivStop1111.setImageResource(R.drawable.ic_jt_use);
+        } else if ((remote_ctrl_status & 0x1) == 0x1) {
+            RemoteCtrlStatus.setText(getString(R.string.started));
+            tvStartStaTest.setText(getString(R.string.started));
+             tvStop1111.setText(getString(R.string.shut_stop));
+            ivStop1111.setImageResource(R.drawable.ic_jt_stop);
+        } else if ((remote_ctrl_status & 0x1) == 0x0) {
+            RemoteCtrlStatus.setText(getString(R.string.not_started));
+            tvStartStaTest.setText(getString(R.string.not_started));
+            tvStop1111.setText(getString(R.string.shut_stop));
+             ivStop1111.setImageResource(R.drawable.ic_jt_stop);
+        }
+
+
+        try {
+            System.arraycopy(content,37,temp_1,0,1);
+            int brightness = Integer.valueOf(binary(temp_1,10)).intValue();
+          //  CacheData.setMsg_info("============dealOtherData=========content==========37====2222=temp======>" + temp, IConstant.MESSAGE_INFO_ALL);
+
+            brightNess(brightness);
+            changePage(brightness);
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        temp = content[40];
+            tmp_0 = (temp >> 0) & 0x1;
+            tmp_7 = (temp >> 7) & 0x1;
+
+            // 遥控启动
+//            if (tmp_0 == 1) {
+//                b370_iv.setImageResource(R.drawable.ic_round_red);
+//            } else {
+//                b370_iv.setImageResource(R.drawable.ic_round_white);
 //            }
 
-            if(tmp_0 == 0 && tmp_1 == 0 && tmp_6 == 0 && tmp_7 == 0){
-                b967_1001_iv.setImageResource(R.drawable.ic_967_xh);
+            String b37_12 = "" + ((temp>>1) & 0x1) + ((temp>>2) & 0x1);    //1 直流  2 喷雾
+            if(IConstant.STATE_10.equals(b37_12)){   //直流
+                b37_12_up.setImageResource(R.drawable.ic_3_up_red);
+                b37_12_mid.setImageResource(R.drawable.ic_3_mi_wh);
+                b37_12_down.setImageResource(R.drawable.ic_3_do_wh);
+            }else if(IConstant.STATE_00.equals(b37_12)){
+                b37_12_up.setImageResource(R.drawable.ic_3_up_wh);
+                b37_12_mid.setImageResource(R.drawable.ic_3_mi_red);
+                b37_12_down.setImageResource(R.drawable.ic_3_do_wh);
+            }else if(IConstant.STATE_01.equals(b37_12)){   //喷雾
+                b37_12_up.setImageResource(R.drawable.ic_3_up_wh);
+                b37_12_mid.setImageResource(R.drawable.ic_3_mi_wh);
+                b37_12_down.setImageResource(R.drawable.ic_3_do_red);
             }
 
+        String b37_34 = "" + ((temp>>3) & 0x1) + ((temp>>4) & 0x1);    //3 水炮上  4 水炮下
+        if(IConstant.STATE_10.equals(b37_34)){   //水炮上
+            b37_34_up.setImageResource(R.drawable.ic_3_up_red);
+            b37_34_mid.setImageResource(R.drawable.ic_3_mi_wh);
+            b37_34_down.setImageResource(R.drawable.ic_3_do_wh);
+        }else if(IConstant.STATE_00.equals(b37_34)){
+            b37_34_up.setImageResource(R.drawable.ic_3_up_wh);
+            b37_34_mid.setImageResource(R.drawable.ic_3_mi_red);
+            b37_34_down.setImageResource(R.drawable.ic_3_do_wh);
+        }else if(IConstant.STATE_01.equals(b37_34)){   //水炮下
+            b37_34_up.setImageResource(R.drawable.ic_3_up_wh);
+            b37_34_mid.setImageResource(R.drawable.ic_3_mi_wh);
+            b37_34_down.setImageResource(R.drawable.ic_3_do_red);
+        }
+
+        String b37_56 = "" + ((temp>>5) & 0x1) + ((temp>>6) & 0x1);    //1 左  2 右
+        if(IConstant.STATE_10.equals(b37_56)){   // 左
+            b37_56_up.setImageResource(R.drawable.ic_3_up_red);
+            b37_56_mid.setImageResource(R.drawable.ic_3_mi_wh);
+            b37_56_down.setImageResource(R.drawable.ic_3_do_wh);
+        }else if(IConstant.STATE_00.equals(b37_56)){
+            b37_56_up.setImageResource(R.drawable.ic_3_up_wh);
+            b37_56_mid.setImageResource(R.drawable.ic_3_mi_red);
+            b37_56_down.setImageResource(R.drawable.ic_3_do_wh);
+        }else if(IConstant.STATE_01.equals(b37_56)){   //右
+            b37_56_up.setImageResource(R.drawable.ic_3_up_wh);
+            b37_56_mid.setImageResource(R.drawable.ic_3_mi_wh);
+            b37_56_down.setImageResource(R.drawable.ic_3_do_red);
+        }
+
+        // 喇叭
+        if (tmp_7 == 1) {
+            b377_iv.setImageResource(R.drawable.ic_round_red);
+        } else {
+            b377_iv.setImageResource(R.drawable.ic_round_white);
+        }
+
+        temp = content[41];
+        tmp_0 = (temp >> 0) & 0x1;
+        tmp_1 = (temp >> 1) & 0x1;
+        tmp_2 = (temp >> 2) & 0x1;
+        tmp_3 = (temp >> 3) & 0x1;
+        tmp_4 = (temp >> 4) & 0x1;
+        tmp_5 = (temp >> 5) & 0x1;
+        tmp_6 = (temp >> 6) & 0x1;
+        tmp_7 = (temp >> 7) & 0x1;
+
+        // 遥控手动
+        if (tmp_0 == 1) {
+            b90_up_iv.setImageResource(R.drawable.ic_22_up_red);
+            b90_down_iv.setImageResource(R.drawable.ic_22_do_wh);
+           // CacheData.setMsg_info("============dealOtherData=======content=====temp====41==========>" + temp, IConstant.MESSAGE_INFO_ALL);
+
+
+        } else {
+            b90_up_iv.setImageResource(R.drawable.ic_22_up_wh);
+            b90_down_iv.setImageResource(R.drawable.ic_22_do_red);
+        }
+
+        String b37_14 = "" + ((temp>>1) & 0x1) + ((temp>>4) & 0x1);    //1 臂架使能  4 支腿使能
+        if(IConstant.STATE_10.equals(b37_14)){   //臂架使能
+            b38_14_up.setImageResource(R.drawable.ic_3_up_red);
+            b38_14_mid.setImageResource(R.drawable.ic_3_mi_wh);
+            b38_14_down.setImageResource(R.drawable.ic_3_do_wh);
+        }else if(IConstant.STATE_00.equals(b37_14)){
+            b38_14_up.setImageResource(R.drawable.ic_3_up_wh);
+            b38_14_mid.setImageResource(R.drawable.ic_3_mi_red);
+            b38_14_down.setImageResource(R.drawable.ic_3_do_wh);
+        }else if(IConstant.STATE_01.equals(b37_14)){   //支腿使能  有问题
+            b38_14_up.setImageResource(R.drawable.ic_3_up_wh);
+            b38_14_mid.setImageResource(R.drawable.ic_3_mi_wh);
+            b38_14_down.setImageResource(R.drawable.ic_3_do_red);
+        }
+
+
+        // 强制动作
+        if (tmp_5 == 1) {
+            b385_iv.setImageResource(R.drawable.ic_round_red);
+        } else {
+            b385_iv.setImageResource(R.drawable.ic_round_white);
+        }
+
+        // 末端供电（备用）不知到
+//        if (tmp_6 == 1) {
+//            b385_iv.setImageResource(R.drawable.ic_round_red);
+//        } else {
+//            b385_iv.setImageResource(R.drawable.ic_round_white);
+//        }
+
+        //  快 慢档
+        if (tmp_7 == 1) {
+            b387_up_iv.setImageResource(R.drawable.ic_22_up_red);
+            b387_down_iv.setImageResource(R.drawable.ic_22_do_wh);
+        } else {
+            b387_up_iv.setImageResource(R.drawable.ic_22_up_wh);
+            b387_down_iv.setImageResource(R.drawable.ic_22_do_red);
+        }
+
+
+        temp = content[42];
+        tmp_0 = (temp >> 0) & 0x1;
+        tmp_1 = (temp >> 1) & 0x1;
+        tmp_2 = (temp >> 2) & 0x1;
+        tmp_3 = (temp >> 3) & 0x1;
+        tmp_4 = (temp >> 4) & 0x1;
+        tmp_5 = (temp >> 5) & 0x1;
+        bj_down = (temp >> 6) & 0x1; //视频变焦 往下
+        tmp_7 = (temp >> 7) & 0x1;
+        String b39_01 = "" + ((temp>>0) & 0x1) + ((temp>>1) & 0x1);    //0 水炮自摆  1 水炮复位
+        if(IConstant.STATE_10.equals(b39_01)){   //水炮自摆
+            b39_01_up.setImageResource(R.drawable.ic_3_up_red);
+            b39_01_mid.setImageResource(R.drawable.ic_3_mi_wh);
+            b39_01_down.setImageResource(R.drawable.ic_3_do_wh);
+        }else if(IConstant.STATE_00.equals(b39_01)){
+            b39_01_up.setImageResource(R.drawable.ic_3_up_wh);
+            b39_01_mid.setImageResource(R.drawable.ic_3_mi_red);
+            b39_01_down.setImageResource(R.drawable.ic_3_do_wh);
+        }else if(IConstant.STATE_01.equals(b39_01)){   //水炮复位
+            b39_01_up.setImageResource(R.drawable.ic_3_up_wh);
+            b39_01_mid.setImageResource(R.drawable.ic_3_mi_wh);
+            b39_01_down.setImageResource(R.drawable.ic_3_do_red);
+        }
+
+        //
+
+
+
+        if (tmp_2 == 1) {
+            b370_iv.setImageResource(R.drawable.ic_round_red);
+        } else {
+            b370_iv.setImageResource(R.drawable.ic_round_white);
+        }
+
+        // 回转对中
+        if (tmp_3 == 1) {
+            b393_iv.setImageResource(R.drawable.ic_round_red);
+        } else {
+            b393_iv.setImageResource(R.drawable.ic_round_white);
+        }
+
+        String b39_45 = "" + ((temp>>4) & 0x1) + ((temp>>5) & 0x1);    //0 水炮自摆  1 水炮复位
+        if(IConstant.STATE_10.equals(b39_45)){    // 水炮自摆
+            b39_45_up.setImageResource(R.drawable.ic_3_up_red);
+            b39_45_mid.setImageResource(R.drawable.ic_3_mi_wh);
+            b39_45_down.setImageResource(R.drawable.ic_3_do_wh);
+        }else if(IConstant.STATE_00.equals(b39_45)){
+            b39_45_up.setImageResource(R.drawable.ic_3_up_wh);
+            b39_45_mid.setImageResource(R.drawable.ic_3_mi_red);
+            b39_45_down.setImageResource(R.drawable.ic_3_do_wh);
+        }else if(IConstant.STATE_01.equals(b39_45)){   //水炮复位
+            b39_45_up.setImageResource(R.drawable.ic_3_up_wh);
+            b39_45_mid.setImageResource(R.drawable.ic_3_mi_wh);
+            b39_45_down.setImageResource(R.drawable.ic_3_do_red);
+        }
+
+
+//        if (tmp_3 == 2) {
+//            b397_iv.setImageResource(R.drawable.ic_round_red);
+//        } else {
+//            b397_iv.setImageResource(R.drawable.ic_round_white);
+//        }
+
+
+        temp = content[43];
+        tmp_0 = (temp >> 0) & 0x1;
+        tmp_1 = (temp >> 1) & 0x1;
+        tmp_2 = (temp >> 2) & 0x1;
+        tmp_3 = (temp >> 3) & 0x1;
+        tmp_4 = (temp >> 4) & 0x1;
+        tmp_5 = (temp >> 5) & 0x1;
+        tmp_6 = (temp >> 6) & 0x1;
+        tmp_7 = (temp >> 7) & 0x1;
+
+        // 切换使能
+        if (tmp_0 == 1) {
+            b40_0_up.setImageResource(R.drawable.ic_3_up_red);
+            b40_0_mid.setImageResource(R.drawable.ic_3_mi_wh);
+            b40_0_down.setImageResource(R.drawable.ic_3_do_wh);
+        } else {
+            b40_0_up.setImageResource(R.drawable.ic_3_up_wh);
+            b40_0_mid.setImageResource(R.drawable.ic_3_mi_red);
+            b40_0_down.setImageResource(R.drawable.ic_3_do_wh);
+        }
+
+        String b40_12 = "" + ((temp>>1) & 0x1) + ((temp>>2) & 0x1);    //0 行驶  1 取力
+        if(IConstant.STATE_10.equals(b40_12)){    // 水炮自摆
+            b40_12_up.setImageResource(R.drawable.ic_3_up_red);
+            b40_12_mid.setImageResource(R.drawable.ic_3_mi_wh);
+            b40_12_down.setImageResource(R.drawable.ic_3_do_wh);
+        }else if(IConstant.STATE_00.equals(b40_12)){
+            b40_12_up.setImageResource(R.drawable.ic_3_up_wh);
+            b40_12_mid.setImageResource(R.drawable.ic_3_mi_red);
+            b40_12_down.setImageResource(R.drawable.ic_3_do_wh);
+        }else if(IConstant.STATE_01.equals(b40_12)){   //水炮复位
+            b40_12_up.setImageResource(R.drawable.ic_3_up_wh);
+            b40_12_mid.setImageResource(R.drawable.ic_3_mi_wh);
+            b40_12_down.setImageResource(R.drawable.ic_3_do_red);
+        }
+
+        String b40_34 = "" + ((temp>>3) & 0x1) + ((temp>>4) & 0x1);    //0 驻车制动  1 解除
+        if (IConstant.STATE_10.equals(b40_34)) {
+            b40_34_up.setImageResource(R.drawable.ic_3_up_red);
+            b40_34_down.setImageResource(R.drawable.ic_3_do_wh);
+        } else {
+            b40_34_up.setImageResource(R.drawable.ic_3_up_wh);
+            b40_34_down.setImageResource(R.drawable.ic_3_do_red);
+        }
+
+        // D
+        if (tmp_5 == 1 && tmp_6 == 0  && tmp_7 == 0) {
+            b40_567_up.setImageResource(R.drawable.ic_3_up_red);
+            b40_567_mid.setImageResource(R.drawable.ic_3_mi_wh);
+            b40_567_down.setImageResource(R.drawable.ic_3_do_wh);
+        }else if (tmp_5 == 0 && tmp_6 == 1  && tmp_7 == 0) {  // N
+            b40_567_up.setImageResource(R.drawable.ic_3_up_wh);
+            b40_567_mid.setImageResource(R.drawable.ic_3_mi_red);
+            b40_567_down.setImageResource(R.drawable.ic_3_do_wh);
+        }else if (tmp_5 == 0 && tmp_6 == 0  && tmp_7 == 1) {  // R
+            b40_567_up.setImageResource(R.drawable.ic_3_up_wh);
+            b40_567_mid.setImageResource(R.drawable.ic_3_mi_wh);
+            b40_567_down.setImageResource(R.drawable.ic_3_do_red);
+        }
+
+
+            temp = content[44];
+            tmp_0 = (temp >> 0) & 0x1;
+            tmp_1 = (temp >> 1) & 0x1;
             tmp_2 = (temp >> 2) & 0x1;
             tmp_3 = (temp >> 3) & 0x1;
             tmp_4 = (temp >> 4) & 0x1;
@@ -1100,581 +1962,181 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             tmp_6 = (temp >> 6) & 0x1;
             tmp_7 = (temp >> 7) & 0x1;
 
-            //自动控制
+            String b41_01 = "" + ((temp>>0) & 0x1) + ((temp>>1) & 0x1);    //0 发动机启  1 发动机停
+            if(IConstant.STATE_10.equals(b41_01)){    // 发动机启
+                b41_01_up.setImageResource(R.drawable.ic_3_up_red);
+                b41_01_mid.setImageResource(R.drawable.ic_3_mi_wh);
+                b41_01_down.setImageResource(R.drawable.ic_3_do_wh);
+            }else if(IConstant.STATE_00.equals(b41_01)){
+                b41_01_up.setImageResource(R.drawable.ic_3_up_wh);
+                b41_01_mid.setImageResource(R.drawable.ic_3_mi_red);
+                b41_01_down.setImageResource(R.drawable.ic_3_do_wh);
+            }else if(IConstant.STATE_01.equals(b41_01)){   //发动机停
+                b41_01_up.setImageResource(R.drawable.ic_3_up_wh);
+                b41_01_mid.setImageResource(R.drawable.ic_3_mi_wh);
+                b41_01_down.setImageResource(R.drawable.ic_3_do_red);
+            }
+
+            // 视频变焦
             if (tmp_2 == 1) {
-                b102_1_iv.setImageResource(R.drawable.ic_22_up_red);
-                b102_0_iv.setImageResource(R.drawable.ic_22_do_wh);
-            } else {
-                b102_1_iv.setImageResource(R.drawable.ic_22_up_wh);
-                b102_0_iv.setImageResource(R.drawable.ic_22_do_red);
+                b41_2_up.setImageResource(R.drawable.ic_3_up_red);
+                b41_2_mid.setImageResource(R.drawable.ic_3_mi_wh);
+                b41_2_down.setImageResource(R.drawable.ic_3_do_wh);
+            } else if(bj_down == 1){
+                b41_2_up.setImageResource(R.drawable.ic_3_up_wh);
+                b41_2_mid.setImageResource(R.drawable.ic_3_mi_wh);
+                b41_2_down.setImageResource(R.drawable.ic_3_do_red);
+            }else{
+                b41_2_up.setImageResource(R.drawable.ic_3_up_wh);
+                b41_2_mid.setImageResource(R.drawable.ic_3_mi_red);
+                b41_2_down.setImageResource(R.drawable.ic_3_do_wh);
             }
 
-            // 灯光
+            // 水泵启动
             if (tmp_3 == 1) {
-                b103_iv.setImageResource(R.drawable.ic_round_red);
+                b41_3_up.setImageResource(R.drawable.ic_3_up_red);
+                b41_3_down.setImageResource(R.drawable.ic_3_do_wh);
             } else {
-                b103_iv.setImageResource(R.drawable.ic_round_white);
+                b41_3_up.setImageResource(R.drawable.ic_3_up_wh);
+                b41_3_down.setImageResource(R.drawable.ic_3_do_red);
             }
 
-            // 备用一
-            if (tmp_4 == 1) {
-                b104_iv.setImageResource(R.drawable.ic_round_red);
-            } else {
-                b104_iv.setImageResource(R.drawable.ic_round_white);
-            }
-
-            // 备用二
-            if (tmp_5 == 1) {
-                b105_iv.setImageResource(R.drawable.ic_round_red);
-            } else {
-                b105_iv.setImageResource(R.drawable.ic_round_white);
-            }
-
-            // 备用三
-            if (tmp_6 == 1) {
-                b106_iv.setImageResource(R.drawable.ic_round_red);
-            } else {
-                b106_iv.setImageResource(R.drawable.ic_round_white);
-            }
-
-            // 遥控启动
-            if (tmp_7 == 1) {
-                b107_iv.setImageResource(R.drawable.ic_round_red);
-            } else {
-                b107_iv.setImageResource(R.drawable.ic_round_white);
-            }
-
-            //动臂上升下降
-            System.arraycopy(content, 3, temp_2, 0, 2);
-            int temp_1112 = bytes2int(temp_2);
-            if (temp_1112 < 8190 && temp_1112 > 0) {   //  1为上，0为下  图片的设置
-                ivRightFour1111.setImageResource(R.drawable.ic_up_select);
-                tvRightFour1111.setText("" + temp_1112);
-                ivRightFour1122.setImageResource(R.drawable.ic_down_default);
-                tvRightFour1122.setText("");
-
-            } else if (temp_1112 > 8190) {
-                ivRightFour1111.setImageResource(R.drawable.ic_up_default);
-                tvRightFour1111.setText("");
-                ivRightFour1122.setImageResource(R.drawable.ic_down_select);
-                tvRightFour1122.setText("" + temp_1112);
-            } else {
-                ivRightFour1111.setImageResource(R.drawable.ic_up_default);
-                tvRightFour1111.setText("" );
-                ivRightFour1122.setImageResource(R.drawable.ic_down_default);
-                tvRightFour1122.setText("");
-            }
-
-            //斗杆卸载
-            System.arraycopy(content, 5, temp_2, 0, 2);
-            int temp_1314 = bytes2int(temp_2);
-            if (temp_1314 < 8190 && temp_1314 > 0) {   //  1为上，0为下  图片的设置
-                ivLeftFour1111.setImageResource(R.drawable.ic_up_select);
-                tvLeftFour1111.setText("" + temp_1314);
-                ivLeftFour1122.setImageResource(R.drawable.ic_down_default);
-                tvLeftFour1122.setText("");
-
-            } else if (temp_1314 > 8190) {
-                ivLeftFour1111.setImageResource(R.drawable.ic_up_default);
-                tvLeftFour1111.setText("");
-                ivLeftFour1122.setImageResource(R.drawable.ic_down_select);
-                tvLeftFour1122.setText("" + temp_1314);
-            } else {
-                ivLeftFour1111.setImageResource(R.drawable.ic_up_default);
-                tvLeftFour1111.setText("" );
-                ivLeftFour1122.setImageResource(R.drawable.ic_down_default);
-                tvLeftFour1122.setText("");
-            }
-
-
-            //铲斗挖掘
-            System.arraycopy(content, 7, temp_2, 0, 2);
-            int temp_1516 = bytes2int(temp_2);
-            if (temp_1516 < 8190 && temp_1314 > 0) {   //  1为上，0为下  图片的设置
-                ivRightFour1133.setImageResource(R.drawable.ic_left_select);
-                tvRightFour1133.setText("" + temp_1516);
-                ivRightFour1144.setImageResource(R.drawable.ic_right_default);
-                tvRightFour1144.setText("");
-
-            } else if (temp_1516 > 8190) {
-                ivRightFour1133.setImageResource(R.drawable.ic_left_default);
-                tvRightFour1133.setText("");
-                ivRightFour1144.setImageResource(R.drawable.ic_right_select);
-                tvRightFour1144.setText("" + temp_1516);
-            } else {
-                ivRightFour1133.setImageResource(R.drawable.ic_left_default);
-                tvRightFour1133.setText("" );
-                ivRightFour1144.setImageResource(R.drawable.ic_right_default);
-                tvRightFour1144.setText("");
-            }
-
-            //左右回旋转
-            System.arraycopy(content, 9, temp_2, 0, 2);
-            int temp_1718 = bytes2int(temp_2);
-            if (temp_1718 < 8190 && temp_1718 > 0) {   //  1为上，0为下  图片的设置
-                ivLeftFour1133.setImageResource(R.drawable.ic_left_select);
-                tvLeftFour1133.setText("" + temp_1718);
-                ivLeftFour1144.setImageResource(R.drawable.ic_right_default);
-                tvLeftFour1144.setText("");
-
-            } else if (temp_1718 > 8190) {
-                ivLeftFour1133.setImageResource(R.drawable.ic_left_default);
-                tvLeftFour1133.setText("");
-                ivLeftFour1144.setImageResource(R.drawable.ic_right_select);
-                tvLeftFour1144.setText("" + temp_1718);
-            } else {
-                ivLeftFour1133.setImageResource(R.drawable.ic_left_default);
-                tvLeftFour1111.setText("");
-                ivLeftFour1144.setImageResource(R.drawable.ic_right_default);
-                tvLeftFour1144.setText("");
-            }
-
-
-            //左行前进、后退
-            System.arraycopy(content, 11, temp_2, 0, 2);
-            int temp_1920 = bytes2int(temp_2);
-            if (temp_1920 < 8190 && temp_1920 > 0) {   //  1为上，0为下  图片的设置
-                b1920_down_iv.setImageResource(R.drawable.ic_2_up_red);
-                b1920_up_iv.setImageResource(R.drawable.ic_2_do_wh);
-
-            } else if (temp_1920 > 8190) {
-                b1920_down_iv.setImageResource(R.drawable.ic_2_up_wh);
-                b1920_up_iv.setImageResource(R.drawable.ic_2_do_red);
-            } else {
-                b1920_down_iv.setImageResource(R.drawable.ic_2_up_wh);
-                b1920_up_iv.setImageResource(R.drawable.ic_2_do_wh);
-            }
-            b1920_tv.setText((temp_1920 == 0 || temp_1920 == 8190 )? "" : "" + temp_1920);
-
-            //右行前进、后退
-            System.arraycopy(content, 13, temp_2, 0, 2);
-            int temp_2122 = bytes2int(temp_2);
-            if (temp_2122 < 8190 && temp_2122 > 0) {   //  1为上，0为下  图片的设置
-                b2122_down_iv.setImageResource(R.drawable.ic_2_up_red);
-                b2122_up_iv.setImageResource(R.drawable.ic_2_do_wh);
-            } else if (temp_2122 > 8190) {
-                b2122_down_iv.setImageResource(R.drawable.ic_2_up_wh);
-                b2122_up_iv.setImageResource(R.drawable.ic_2_do_red);
-            } else {
-                b2122_down_iv.setImageResource(R.drawable.ic_2_up_wh);
-                b2122_up_iv.setImageResource(R.drawable.ic_2_do_wh);
-            }
-            b2122_tv.setText((temp_2122 == 0 || temp_2122 == 8190  ) ? "" : "" + temp_2122);
-
-            //液压剪/破碎锤开合
-            System.arraycopy(content, 15, temp_2, 0, 2);
-            int temp_2324 = bytes2int(temp_2);
-            if (temp_2324 < 8190 && temp_2324 > 0) {   //  1为上，0为下  图片的设置
-                b2324_down_iv.setImageResource(R.drawable.ic_2_left_red);
-                b2324_up_iv.setImageResource(R.drawable.ic_2_right_wh);
-            } else if (temp_2324 > 8190) {
-                b2324_down_iv.setImageResource(R.drawable.ic_2_left_wh);
-                b2324_up_iv.setImageResource(R.drawable.ic_2_right_red);
-            } else {
-                b2324_down_iv.setImageResource(R.drawable.ic_2_left_wh);
-                b2324_up_iv.setImageResource(R.drawable.ic_2_right_wh);
-            }
-            b2324_tv.setText((temp_2324 == 0 || temp_2324 == 8190) ? "" : "" + temp_2324);
-
-
-            if (content.length > 24) {
-
-                temp = content[17];
-                tmp_0 = (temp >> 0) & 0x1;
-                tmp_1 = (temp >> 1) & 0x1;
-
-                // 平地
-                if (tmp_0 == 1) {
-                    b25_01_iv.setImageResource(R.drawable.ic_22_up_red);
-                    b25_00_iv.setImageResource(R.drawable.ic_22_do_wh);
-                } else {
-                    b25_01_iv.setImageResource(R.drawable.ic_22_up_wh);
-                    b25_00_iv.setImageResource(R.drawable.ic_22_do_red);
-                }
-
-                // 修坡
-                if (tmp_1 == 1) {
-                    b25_11_iv.setImageResource(R.drawable.ic_22_up_red);
-                    b25_10_iv.setImageResource(R.drawable.ic_22_do_wh);
-                } else {
-                    b25_11_iv.setImageResource(R.drawable.ic_22_up_wh);
-                    b25_10_iv.setImageResource(R.drawable.ic_22_do_red);
-                }
-
-
-                System.arraycopy(content, 19, temp_1, 0, 1);
-                String battery_electricity = binary(temp_1, 10);
-
-                if (IConstant.BATTARY_STATUS_0.equals(battery_electricity)) {
-                    lowBattery.setVisibility(LinearLayout.VISIBLE);
-                    haveBattery.setVisibility(LinearLayout.GONE);
-
-                    lowBatteryTest.setVisibility(LinearLayout.VISIBLE);
-                    haveBatteryTest.setVisibility(LinearLayout.GONE);
-                } else if (IConstant.BATTARY_STATUS_1.equals(battery_electricity)) {
-                    haveBattery.setVisibility(LinearLayout.VISIBLE);
-                    lowBattery.setVisibility(LinearLayout.GONE);
-                    Battery1.setVisibility(View.VISIBLE);
-                    Battery2.setVisibility(View.INVISIBLE);
-                    Battery3.setVisibility(View.INVISIBLE);
-                    Battery4.setVisibility(View.INVISIBLE);
-
-                    haveBatteryTest.setVisibility(LinearLayout.VISIBLE);
-                    lowBatteryTest.setVisibility(LinearLayout.GONE);
-                    tvBatteryTest1.setVisibility(View.VISIBLE);
-                    tvBatteryTest2.setVisibility(View.INVISIBLE);
-                    tvBatteryTest3.setVisibility(View.INVISIBLE);
-                    tvBatteryTest4.setVisibility(View.INVISIBLE);
-                } else if (IConstant.BATTARY_STATUS_2.equals(battery_electricity)) {
-                    haveBattery.setVisibility(LinearLayout.VISIBLE);
-                    lowBattery.setVisibility(LinearLayout.GONE);
-                    Battery1.setVisibility(View.VISIBLE);
-                    Battery2.setVisibility(View.VISIBLE);
-                    Battery3.setVisibility(View.INVISIBLE);
-                    Battery4.setVisibility(View.INVISIBLE);
-
-                    haveBatteryTest.setVisibility(LinearLayout.VISIBLE);
-                    lowBatteryTest.setVisibility(LinearLayout.GONE);
-                    tvBatteryTest1.setVisibility(View.VISIBLE);
-                    tvBatteryTest2.setVisibility(View.VISIBLE);
-                    tvBatteryTest3.setVisibility(View.INVISIBLE);
-                    tvBatteryTest4.setVisibility(View.INVISIBLE);
-                } else if (IConstant.BATTARY_STATUS_3.equals(battery_electricity)) {
-                    haveBattery.setVisibility(LinearLayout.VISIBLE);
-                    lowBattery.setVisibility(LinearLayout.GONE);
-                    Battery1.setVisibility(View.VISIBLE);
-                    Battery2.setVisibility(View.VISIBLE);
-                    Battery3.setVisibility(View.VISIBLE);
-                    Battery4.setVisibility(View.INVISIBLE);
-
-                    haveBatteryTest.setVisibility(LinearLayout.VISIBLE);
-                    lowBatteryTest.setVisibility(LinearLayout.GONE);
-                    tvBatteryTest1.setVisibility(View.VISIBLE);
-                    tvBatteryTest2.setVisibility(View.VISIBLE);
-                    tvBatteryTest3.setVisibility(View.VISIBLE);
-                    tvBatteryTest4.setVisibility(View.INVISIBLE);
-                } else if (IConstant.BATTARY_STATUS_4.equals(battery_electricity)) {
-                    haveBattery.setVisibility(LinearLayout.VISIBLE);
-                    lowBattery.setVisibility(LinearLayout.GONE);
-                    Battery1.setVisibility(View.VISIBLE);
-                    Battery2.setVisibility(View.VISIBLE);
-                    Battery3.setVisibility(View.VISIBLE);
-                    Battery4.setVisibility(View.VISIBLE);
-
-                    haveBatteryTest.setVisibility(LinearLayout.VISIBLE);
-                    lowBatteryTest.setVisibility(LinearLayout.GONE);
-                    tvBatteryTest1.setVisibility(View.VISIBLE);
-                    tvBatteryTest2.setVisibility(View.VISIBLE);
-                    tvBatteryTest3.setVisibility(View.VISIBLE);
-                    tvBatteryTest4.setVisibility(View.VISIBLE);
-                }
-
-
-                System.arraycopy(content, 20, temp_1, 0, 1);
-                int signal_strength = bytes2int(temp_1);
-                System.arraycopy(content, 21, temp_1, 0, 1);
-                String wireless_link_status = binary(temp_1, 10); //无线连接状态
-
-                if (signal_strength > 127) {
-                    signal_strength = 256 - signal_strength;
-                    signalStrength.setText(("-" + signal_strength));
-                    signalStrengthTest.setText(("-" + signal_strength));
-                } else {
-                    signalStrength.setText("" + signal_strength);
-                    signalStrengthTest.setText(("" + signal_strength));
-                }
-
-                //signalStrength.setText(wireless_link_status + "-" + signal_strength);
-                if (IConstant.WIRELESS_LINK_0.equals(wireless_link_status)) {
-                    signalStrengthLayout.setVisibility(FrameLayout.VISIBLE);
-                    signalStrengthLayout1.setVisibility(FrameLayout.GONE);
-                    noSignal.setVisibility(LinearLayout.VISIBLE);
-                    haveSignal.setVisibility(LinearLayout.GONE);
-                    signalStrength.setVisibility(View.GONE);
-
-                    signalStrengthLayoutTest.setVisibility(FrameLayout.VISIBLE);
-                    signalStrengthLayout1Test.setVisibility(FrameLayout.GONE);
-                    noSignalTest.setVisibility(LinearLayout.VISIBLE);
-                    haveSignalTest.setVisibility(LinearLayout.GONE);
-                    signalStrengthTest.setVisibility(View.GONE);
-
-                } else if (IConstant.WIRELESS_LINK_1.equals(wireless_link_status)) {
-                    signalStrengthLayout.setVisibility(FrameLayout.VISIBLE);
-                    signalStrengthLayout1.setVisibility(FrameLayout.GONE);
-                    noSignal.setVisibility(LinearLayout.GONE);
-                    haveSignal.setVisibility(LinearLayout.VISIBLE);
-                    signalStrength.setVisibility(View.VISIBLE);
-
-                    signalStrengthLayoutTest.setVisibility(FrameLayout.VISIBLE);
-                    signalStrengthLayout1Test.setVisibility(FrameLayout.GONE);
-                    noSignalTest.setVisibility(LinearLayout.GONE);
-                    haveSignalTest.setVisibility(LinearLayout.VISIBLE);
-                    signalStrengthTest.setVisibility(View.VISIBLE);
-                } else if (IConstant.WIRELESS_LINK_2.equals(wireless_link_status)) {
-                    signalStrengthLayout.setVisibility(FrameLayout.GONE);
-                    signalStrengthLayout1.setVisibility(FrameLayout.VISIBLE);
-                    noSignal.setVisibility(LinearLayout.GONE);
-                    haveSignal.setVisibility(LinearLayout.GONE);
-                    signalStrength.setVisibility(View.GONE);
-
-                    signalStrengthLayoutTest.setVisibility(FrameLayout.GONE);
-                    signalStrengthLayout1Test.setVisibility(FrameLayout.VISIBLE);
-                    noSignalTest.setVisibility(LinearLayout.GONE);
-                    haveSignalTest.setVisibility(LinearLayout.GONE);
-                }
-
-                System.arraycopy(content, 23, temp_1, 0, 1);
-                int remote_ctrl_status = Integer.valueOf(binary(temp_1, 10)).intValue();
-
-                if ((remote_ctrl_status & 0x2) == 0x2) {
-                    RemoteCtrlStatus.setText(getString(R.string.scram));
-                    tvStartStaTest.setText(getString(R.string.scram));
-                    //tvStop1111.setText(getString(R.string.scram));
-                    //ivStop1111.setImageResource(R.drawable.ic_jt_use);
-                } else if ((remote_ctrl_status & 0x1) == 0x1) {
-                    RemoteCtrlStatus.setText(getString(R.string.started));
-                    tvStartStaTest.setText(getString(R.string.started));
-                   // tvStop1111.setText(getString(R.string.shut_stop));
-                    //ivStop1111.setImageResource(R.drawable.ic_jt_stop);
-                } else if ((remote_ctrl_status & 0x1) == 0x0) {
-                    RemoteCtrlStatus.setText(getString(R.string.not_started));
-                    tvStartStaTest.setText(getString(R.string.not_started));
-                   // tvStop1111.setText(getString(R.string.shut_stop));
-                   // ivStop1111.setImageResource(R.drawable.ic_jt_stop);
-                }
-
-                System.arraycopy(content, 24, temp_1, 0, 1);
-                try {
-                    int brightness = Integer.valueOf(binary(temp_1, 10)).intValue();
-                    temp = content[24];
-                    tmp_0 = (temp >> 0) & 0x1;
-                    tmp_1 = (temp >> 1) & 0x1;
-                    tmp_2 = (temp >> 2) & 0x1;
-                    tmp_3 = (temp >> 3) & 0x1;
-                    tmp_4 = (temp >> 4) & 0x1;
-                    tmp_5 = (temp >> 5) & 0x1;
-                    tmp_6 = (temp >> 6) & 0x1;
-                    tmp_7 = (temp >> 7) & 0x1;
-
-                    brightNess(tmp_2);
-                    changePage(brightness);
-                }catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-
-            }
-
-            if (content.length > 62) {
-                // 油门挡位
-                System.arraycopy(content, 25, temp_1, 0, 1);
-                int b33 = bytes2int(temp_1);
-                b33_tv.setText("" + (b33>11?11:b33));
-
-                // 燃油油位
-                System.arraycopy(content, 26, temp_1, 0, 1);
-                int b34 = bytes2int(temp_1);
-                b34_tv.setCompleteDegree(b34>100?100:b34);  //8888
-
-                //水温
-                System.arraycopy(content, 27, temp_1, 0, 1);
-                int b35 = bytes2int(temp_1);
-                if(b35 >40 && b35 <215){
-                    b35 = 40;
-                }else if(b35>215 && b35 < 256){
-                    b35 = b35 - 256;
-                }else{
-                    b35 = 0;
-                }
-                b35_tv.setText("" +  b35 + "\u00B0");
-
-                //液压油温
-                System.arraycopy(content, 28, temp_1, 0, 1);
-                int b36 = bytes2int(temp_1);
-                b36_tv.setText("" + (b36>150?150:b36) + "\u00B0");
-
-                // 机油压力
-                System.arraycopy(content, 29, temp_2, 0, 2);
-                int b3738 = bytes2int(temp_2);
-                b3738_tv.setText("" + (b3738>1000?1000:b3738) + "KPa");
-
-                // 功率模式
-                System.arraycopy(content, 31, temp_1, 0, 1);
-                int b39 = bytes2int(temp_1);
-                if(b39==0) {
-                    b39_tv.setText("NG");
-                }else if(b39==1) {
-                    b39_tv.setText("F");
-                }else if(b39==2) {
-                    b39_tv.setText("B");
-                }else if(b39==3) {
-                    b39_tv.setText("G");
-                }
-
-                // 作业模式
-                System.arraycopy(content, 32, temp_1, 0, 1);
-                int b40 = bytes2int(temp_1);
-                if(b40==0) {
-                    b40_tv.setText("动臂优先");
-                }else if(b40==1) {
-                    b40_tv.setText("回转优先");
-                }else if(b40==2) {
-                    b40_tv.setText("微操作模式");
-                }else if(b40==3) {
-                    b40_tv.setText("平地模式");
-                }else if(b40==4) {
-                    b40_tv.setText("修坡模式");
-                }
-
-
-                // 发动机转速
-                System.arraycopy(content, 33, temp_2, 0, 2);
-                int b4142 = bytes2int(temp_2);
-                b4142 = b4142>2500?2500:b4142;
-                b4142_tv.setCompleteDegree((b4142/2500f)*100); //
-
-                // 泵1压力
-                System.arraycopy(content, 35, temp_2, 0, 2);
-                int b4344 = bytes2int(temp_2);
-                b4344_tv.setText("" + (b4344>500?500:b4344) + "bar");
-
-                // 泵2压力
-                System.arraycopy(content, 37, temp_2, 0, 2);
-                int b4546 = bytes2int(temp_2);
-                b4546_tv.setText("" + (b4546>500?500:b4546) + "bar");
-
-                // 泵1电流
-                System.arraycopy(content, 39, temp_2, 0, 2);
-                int b4748 = bytes2int(temp_2);
-                b4748_tv.setText("" + (b4748>1000?1000:b4748) + "mA");
-
-                // 泵2电流
-                System.arraycopy(content, 41, temp_2, 0, 2);
-                int b4950 = bytes2int(temp_2);
-                b4950_tv.setText("" + (b4950>1000?1000:b4950)  + "mA");
-
-                // 先导压力
-                System.arraycopy(content, 43, temp_1, 0, 1);
-                int b51 = bytes2int(temp_1);
-                b51_tv.setText("" + (b51>50?50:b51) + "bar");
-
-                //动臂操作
-                System.arraycopy(content, 44, temp_1, 0, 1);
-                int b52 = bytes2int(temp_1);
-                b52 = dataTranInfo(b52);
-                b52_tv.setText("" + b52 + "\u00B0");
-
-                // 斗杆操作
-                System.arraycopy(content, 45, temp_1, 0, 1);
-                int b53 = bytes2int(temp_1);
-                b53 = dataTranInfo(b53);
-                b53_tv.setText("" + b53 + "\u00B0");
-
-                // 铲斗操作
-                System.arraycopy(content, 46, temp_1, 0, 1);
-                int b54 = bytes2int(temp_1);
-                b54 = dataTranInfo(b54);
-                b54_tv.setText("" + b54 + "\u00B0");
-
-                // 回转操作
-                System.arraycopy(content, 47, temp_1, 0, 1);
-                int b55 = bytes2int(temp_1);
-                b55 = dataTranInfo(b55);
-                b55_tv.setText("" + b55 + "\u00B0");
-
-                // 左行走
-                System.arraycopy(content, 48, temp_1, 0, 1);
-                int b56 = bytes2int(temp_1);
-                b56 = dataTranInfo(b56);
-                b56_tv.setText("" + b56 + "\u00B0");
-
-                // 右行走
-                System.arraycopy(content, 49, temp_1, 0, 1);
-                int b57 = bytes2int(temp_1);
-                b57 = dataTranInfo(b57);
-                b57_tv.setText("" + b57 + "\u00B0");
-
-                // 动臂角度
-                System.arraycopy(content, 50, temp_2, 0, 2);
-                int b5859 = bytes2int(temp_2);
-                b5859_tv.setText("" + (b5859>360?360:b5859) + "\u00B0");
-
-                // 斗杆角度
-                System.arraycopy(content, 52, temp_2, 0, 2);
-                int b6061 = bytes2int(temp_2);
-               // CacheData.setMsg_info("=================b6061==========b6061=============="+"" + b6061,1);
-                b6061_tv.setText("" + (b6061>360?360:b6061) + "\u00B0");
-
-                // 铲斗角度
-                System.arraycopy(content, 54, temp_2, 0, 2);
-                int b6263 = bytes2int(temp_2);
-                b6263_tv.setText("" + (b6263>360?360:b6263) + "\u00B0");
-
-                // 回转角度
-                System.arraycopy(content, 56, temp_2, 0, 2);
-                int b6465 = bytes2int(temp_2);
-                b6465_tv.setText("" + (b6465>360?360:b6465) + "\u00B0");
-
-                // 前后倾角
-                System.arraycopy(content, 58, temp_2, 0, 2);
-                int b6667 = bytes2int(temp_2);
-                b6667_tv.setText("" + (b6667>360?360:b6667) + "\u00B0");
-
-                // 左右倾角
-                System.arraycopy(content, 60, temp_2, 0, 2);
-                int b6869 = bytes2int(temp_2);
-                b6869_tv.setText("" + (b6869>360?360:b6869) + "\u00B0");
-
-                temp = content[62];
-                tmp_0 = (temp >> 0) & 0x1;
-                tmp_1 = (temp >> 1) & 0x1;
-                tmp_2 = (temp >> 2) & 0x1;
-                tmp_3 = (temp >> 3) & 0x1;
-                tmp_4 = (temp >> 4) & 0x1;
-                tmp_5 = (temp >> 5) & 0x1;
-                tmp_6 = (temp >> 6) & 0x1;
-                tmp_7 = (temp >> 7) & 0x1;
-
-                String question = "故障信息:";
-                question = question + (tmp_0 == 1? "\u3000蓄电池供电":"");
-                question = question + (tmp_1 == 1? "\u3000机油压力低":"");
-                question = question + (tmp_2 == 1? "\u3000水温高":"");
-                question = question + (tmp_3 == 1? "\u3000空滤阻塞":"");
-                question = question + (tmp_4 == 1? "\u3000油水分离器水位高":"");
-//                question = question + (tmp_5 == 1? "\u3000\u3000":"");
-//                question = question + (tmp_6 == 1? "\u3000\u3000":"");
-//                question = question + (tmp_7 == 1? "\u3000\u3000":"");
-
-                if("故障信息:".equals(question.trim())) {
-                    b700_tv.setVisibility(View.INVISIBLE);
-                } else {
-                    b700_tv.setText(question);
-                    b700_tv.setVisibility(View.VISIBLE);
-                }
-
-                // 启动
-//                if (tmp_0 == 1) {
-//                    b967_1001_iv.setImageResource(R.drawable.ic_round_red);
-//                } else {
-//                    b967_1001_iv.setImageResource(R.drawable.ic_round_white);
-//                }
-
-            }
+        String b41_45 = "" + ((temp>>4) & 0x1) + ((temp>>5) & 0x1);    //0 备用上  1 备用下
+        if(IConstant.STATE_10.equals(b41_45)){    // 备用上
+            b41_45_up.setImageResource(R.drawable.ic_3_up_red);
+            b41_45_mid.setImageResource(R.drawable.ic_3_mi_wh);
+            b41_45_down.setImageResource(R.drawable.ic_3_do_wh);
+        }else if(IConstant.STATE_00.equals(b41_45)){
+            b41_45_up.setImageResource(R.drawable.ic_3_up_wh);
+            b41_45_mid.setImageResource(R.drawable.ic_3_mi_red);
+            b41_45_down.setImageResource(R.drawable.ic_3_do_wh);
+        }else if(IConstant.STATE_01.equals(b41_45)){   //备用下
+            b41_45_up.setImageResource(R.drawable.ic_3_up_wh);
+            b41_45_mid.setImageResource(R.drawable.ic_3_mi_wh);
+            b41_45_down.setImageResource(R.drawable.ic_3_do_red);
+        }
+
+        // 水炮照明
+        if (tmp_6 == 1) {
+            b416_iv.setImageResource(R.drawable.ic_round_red);
+        } else {
+            b416_iv.setImageResource(R.drawable.ic_round_white);
+        }
+
+        // 遥控器照明
+        if (tmp_7 == 1) {
+            b417_iv.setImageResource(R.drawable.ic_round_red);
+        } else {
+            b417_iv.setImageResource(R.drawable.ic_round_white);
+        }
+
+        System.arraycopy(content, 45, temp_1, 0, 1);
+        int temp_45 = bytes2int(temp_1);
+        if (temp_45==0) {
+            b9012_up_iv.setImageResource(R.drawable.ic_2_left_wh);
+            b9012_down_iv.setImageResource(R.drawable.ic_2_right_wh);
+            b45_tv.setText("" + temp_45);
+        } else if(temp_45<=127 && temp_45>0){
+            b9012_up_iv.setImageResource(R.drawable.ic_2_left_wh);
+            b9012_down_iv.setImageResource(R.drawable.ic_2_right_red);
+            b45_tv.setText("" + temp_45);
+        }else{
+            b9012_up_iv.setImageResource(R.drawable.ic_2_left_red);
+            b9012_down_iv.setImageResource(R.drawable.ic_2_right_wh);
+            b45_tv.setText(("-" + temp_45));
 
         }
+
+        if (temp_45 > 127) {
+            temp_45 = 256 - temp_45;
+            b45_tv.setText(("-" + temp_45));
+        } else {
+            b45_tv.setText("" + temp_45);
+        }
+
+
+        //一臂手柄信号
+        System.arraycopy(content,46,temp_1,0,1);
+        int ybsb = bytes2int(temp_1);
+        if(ybsb==0){
+            ivDown11Up.setImageResource(R.drawable.ic_2_up_wh);
+            ivDown11Down.setImageResource(R.drawable.ic_2_do_wh);
+            tvDown11.setText("" + ybsb);
+        }else if(ybsb<=127 && ybsb>0){
+            ivDown11Up.setImageResource(R.drawable.ic_2_up_wh);
+            ivDown11Down.setImageResource(R.drawable.ic_2_do_red);
+            tvDown11.setText("" + ybsb);
+        }else{
+            ivDown11Up.setImageResource(R.drawable.ic_2_up_red);
+            ivDown11Down.setImageResource(R.drawable.ic_2_do_wh);
+            tvDown11.setText("-" + (256-ybsb));
+        }
+
+        //二臂手柄信号
+        System.arraycopy(content,47,temp_1,0,1);
+        int ebsb =bytes2int(temp_1);
+        if(ebsb==0){
+            ivDown22Up.setImageResource(R.drawable.ic_2_up_wh);
+            ivDown22Down.setImageResource(R.drawable.ic_2_do_wh);
+            tvDown22.setText("" + ebsb);
+        }else if(ebsb<=127 && ebsb>0){
+            ivDown22Up.setImageResource(R.drawable.ic_2_up_wh);
+            ivDown22Down.setImageResource(R.drawable.ic_2_do_red);
+            tvDown22.setText("" + ebsb);
+        }else{
+            ivDown22Up.setImageResource(R.drawable.ic_2_up_red);
+            ivDown22Down.setImageResource(R.drawable.ic_2_do_wh);
+            tvDown22.setText("-" + (256-ebsb));
+        }
+
+
+        //三臂手柄信号
+        System.arraycopy(content,48,temp_1,0,1);
+        int sanbsb = bytes2int(temp_1);
+        if(sanbsb==0){
+            ivDown33Up.setImageResource(R.drawable.ic_2_up_wh);
+            ivDown33Down.setImageResource(R.drawable.ic_2_do_wh);
+            tvDown33.setText("" + sanbsb);
+        }else if(sanbsb<=127 && sanbsb>0){
+            ivDown33Up.setImageResource(R.drawable.ic_2_up_wh);
+            ivDown33Down.setImageResource(R.drawable.ic_2_do_red);
+            tvDown33.setText("" + sanbsb);
+        }else{
+            ivDown33Up.setImageResource(R.drawable.ic_2_up_red);
+            ivDown33Down.setImageResource(R.drawable.ic_2_do_wh);
+            tvDown33.setText("-" + (256-sanbsb));
+        }
+
+       // temp = content[49];
+
+        //  CacheData.setMsg_info("============dealOtherData========content[2]==================>" + content[2], IConstant.MESSAGE_INFO_ALL);
+        System.arraycopy(content,49,temp_1,0,1);
+        int sbts = bytes2int(temp_1);
+        b925_iv.setText("" + sbts);
+          //  CacheData.setMsg_info("============dealOtherData========content[2]=====tmp_2=============>" + tmp_2, IConstant.MESSAGE_INFO_ALL);
+
+
+        //油门
+        System.arraycopy(content,50,temp_1,0,1);
+        int oil = Integer.valueOf(binary(temp_1,10)).intValue();
+        oilPostion.setText("" + oil + "%");
+        oilPos.setText("" + oil + "%");
+
+
 
     }
 
 
-    private int dataTranInfo(int num){
-        if(num >= 20 && num <235){
-            num = 20;
-        }else if(num>235 && num < 256){
-            num = num - 256;
-        }else{
-            num = 0;
-        }
-        return num;
+    /**
+     * 保留两位小数  四舍五入
+     * @param num
+     * @return
+     */
+    private String dataTranInfo(float num){
+        BigDecimal b = new BigDecimal(num);
+        float f1 = b.setScale(2, BigDecimal.ROUND_HALF_UP).floatValue();
+        String for_num = String.format("%.2f",f1);
+        return for_num;
     }
 
 
