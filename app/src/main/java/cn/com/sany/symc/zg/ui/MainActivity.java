@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView Battery3;
     private TextView Battery4;
 
-    private int page = 0;
+    private int page = 2;  //0表示驾驶界面， 1：表示测试诊断界面  2：表示作业显示界面
 
 
 
@@ -639,7 +639,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     /**
      *
-     * 切页界面
+     * 按菜单键切页界面
      * @param flag
      *
      */
@@ -649,21 +649,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if(change_page_old == 0){
               //  CacheData.setMsg_info("===========flag============="+flag,1);
 //
-                if (page == 0) {  //0表示内容显示界面， 1：表示测试诊断界面
+                if (page == 0) {  //0表示驾驶界面， 1：表示测试诊断界面  2：表示作业显示界面
                     page = 1;
-                    mainLLayout.setVisibility(View.VISIBLE);
-                    main_test_cab.setVisibility(View.GONE);
 
-                    driverBoLayout.setVisibility(View.VISIBLE);
-                    driverRLayout.setVisibility(View.VISIBLE);
+                    mainLLayout.setVisibility(View.GONE);
+                    main_test_cab.setVisibility(View.VISIBLE);
+
+                    driverBoLayout.setVisibility(View.GONE);
+                    driverRLayout.setVisibility(View.GONE);
 
                     workBoLayout.setVisibility(View.GONE);
                     workRLayout.setVisibility(View.GONE);
 
                 }else if(page == 1) {
                     page = 2;
-                    mainLLayout.setVisibility(View.GONE);
-                    main_test_cab.setVisibility(View.VISIBLE);
+
+                    mainLLayout.setVisibility(View.VISIBLE);
+                    main_test_cab.setVisibility(View.GONE);
 
                     driverBoLayout.setVisibility(View.VISIBLE);
                     driverRLayout.setVisibility(View.VISIBLE);
@@ -671,16 +673,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     workBoLayout.setVisibility(View.GONE);
                     workRLayout.setVisibility(View.GONE);
 
+
                 }else {
                     page = 0;
                     mainLLayout.setVisibility(View.VISIBLE);
                     main_test_cab.setVisibility(View.GONE);
+
 
                     driverBoLayout.setVisibility(View.GONE);
                     driverRLayout.setVisibility(View.GONE);
 
                     workBoLayout.setVisibility(View.VISIBLE);
                     workRLayout.setVisibility(View.VISIBLE);
+
+
                 }
 //                SharedPreferences.Editor editor = share.edit();//获取编辑器
 //                editor.putInt("page", page);
@@ -700,27 +706,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * @param flag 为 true:显示 行驶界面 ，false 显示 作业界面
      *
      */
-    private void changePageMain(boolean flag){
-        if(flag) {
-            if(page == 0 ) { // 作业界面
-                driverBoLayout.setVisibility(View.GONE);
-                driverRLayout.setVisibility(View.GONE);
+    private void changePageMain(boolean flag){ // 为 true:显示 行驶界面 ，false 显示 作业界面
+        //0表示驾驶界面， 1：表示测试诊断界面  2：表示作业显示界面
+        if(page!=1){  // 不再测试界面的时候，切换
+            if(flag) { // 行驶行驶界面
+                if(page == 2) {
+                    driverBoLayout.setVisibility(View.GONE);
+                    driverRLayout.setVisibility(View.GONE);
 
-                workBoLayout.setVisibility(View.VISIBLE);
-                workRLayout.setVisibility(View.VISIBLE);
-                page = 1;
+                    workBoLayout.setVisibility(View.VISIBLE);
+                    workRLayout.setVisibility(View.VISIBLE);
+                    page = 0;
+                }
+            }else { // 行驶作业界面
+                if(page == 0 ) {  // 行驶界面
+                    driverBoLayout.setVisibility(View.VISIBLE);
+                    driverRLayout.setVisibility(View.VISIBLE);
+
+                    workBoLayout.setVisibility(View.GONE);
+                    workRLayout.setVisibility(View.GONE);
+                    page = 2;
+                }
+
             }
-        }else {
-            if(page == 1 ) {  // 行驶界面
-                driverBoLayout.setVisibility(View.VISIBLE);
-                driverRLayout.setVisibility(View.VISIBLE);
-
-                workBoLayout.setVisibility(View.GONE);
-                workRLayout.setVisibility(View.GONE);
-
-                page = 0;
-            }
-
         }
 
     }
@@ -776,9 +784,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 case R.id.dwLLayout:{
                     dealPasswordValidate(IConstant.SOURCE_SETTING);
+                    break;
                 }
                 case R.id.waterLLayout:{
                     dealPasswordValidate(IConstant.SOURCE_SETTING);
+                    break;
                 }
 //                case R.id.signalStrengthLayout1: {
 //
@@ -1039,7 +1049,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      */
     private void dealOtherData(byte[] content) {
 
-         CacheData.setMsg_info("============dealOtherData=========content===================>" + NumberBytes.byteArrayToHexStr(content), IConstant.MESSAGE_INFO_ALL);
+        // CacheData.setMsg_info("============dealOtherData=========content===================>" + NumberBytes.byteArrayToHexStr(content), IConstant.MESSAGE_INFO_ALL);
         if(content.length>49){
             temp = content[0];
             tmp_0 = (temp >> 0) & 0x1;
@@ -1064,10 +1074,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 b81_1_lay.setBackgroundResource(R.drawable.shape_ring_connect_nor);
             }
 
-            if(tmp_0 == 1 && tmp_1 == 0){
-                changePageMain(true);
-            }else if(tmp_0 == 0 && tmp_1 == 1){
-                changePageMain(false);
+            if(tmp_0 == 1){
+                changePageMain(true); // 为 true:显示 行驶界面 ，false 显示 作业界面
+            }
+            if(tmp_1 == 1){
+                changePageMain(false); // 为 true:显示 行驶界面 ，false 显示 作业界面
             }
 
             // 驻车
@@ -1469,9 +1480,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             // 1: 支腿调平
             if (tmp_6 == 1) {
                 zttp_lay.setBackgroundResource(R.drawable.shape_ring_connect_press);
+
+                //如果再测试诊断界面不切换，不再显示遥控作业界面
+
+                changePageMain(false); // 为 true:显示 行驶界面 ，false 显示 作业界面
+
+
+
             } else {
                 zttp_lay.setBackgroundResource(R.drawable.shape_ring_connect_nor);
             }
+
 
             // 1:支腿收到位
             if (tmp_7 == 1) {
