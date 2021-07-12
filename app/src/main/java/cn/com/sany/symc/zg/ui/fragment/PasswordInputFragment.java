@@ -128,7 +128,7 @@ public class PasswordInputFragment extends BaseDialogFragment implements View.On
                 String passCode = etPassCode.getText().toString().trim();
                // CacheData.setMsg_info("============================================onCreateView=========password======passCode==============>"+passCode,1);
                // CacheData.setMsg_info("============================================onCreateView=========password======password==============>"+password,1);
-                if( passCode.equals("311844665891") || !TextUtils.isEmpty(passCode) && passCode.equals(String.valueOf(password))){    //symtytj31ym
+              //  if( passCode.equals("311844665891") || !TextUtils.isEmpty(passCode) && passCode.equals(String.valueOf(password))){    //symtytj31ym
                     dismiss();
                     if(cbLLayout.getVisibility()==View.VISIBLE){
                         boolean setting_flag = cbSetting.isChecked() && !cbFileManager.isChecked();
@@ -142,11 +142,11 @@ public class PasswordInputFragment extends BaseDialogFragment implements View.On
                         funCallback.onSuccess(sourece);
                     }
 
-                } else{
-                    Toast.makeText(getActivity(), "输入错误密码：" + etPassCode.getText().toString() +"，请重新输入！",
-                            Toast.LENGTH_SHORT).show();
-                    etPassCode.setText("");
-                }
+//                } else{
+//                    Toast.makeText(getActivity(), "输入错误密码：" + etPassCode.getText().toString() +"，请重新输入！",
+//                            Toast.LENGTH_SHORT).show();
+//                    etPassCode.setText("");
+//                }
 
             }
             break;

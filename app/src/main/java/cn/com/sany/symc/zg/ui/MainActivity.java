@@ -1077,9 +1077,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if(tmp_0 == 1){
                 changePageMain(true); // 为 true:显示 行驶界面 ，false 显示 作业界面
             }
-            if(tmp_1 == 1){
-                changePageMain(false); // 为 true:显示 行驶界面 ，false 显示 作业界面
-            }
+
+            // 取力模式不显示作业节目，支腿调平才显示
+//            if(tmp_1 == 1){
+//                changePageMain(false); // 为 true:显示 行驶界面 ，false 显示 作业界面
+//            }
 
             // 驻车
             if (tmp_2 == 1) {
@@ -1480,12 +1482,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             // 1: 支腿调平
             if (tmp_6 == 1) {
                 zttp_lay.setBackgroundResource(R.drawable.shape_ring_connect_press);
-
                 //如果再测试诊断界面不切换，不再显示遥控作业界面
-
                 changePageMain(false); // 为 true:显示 行驶界面 ，false 显示 作业界面
-
-
 
             } else {
                 zttp_lay.setBackgroundResource(R.drawable.shape_ring_connect_nor);
@@ -1554,16 +1552,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             // 方向盘转角
             System.arraycopy(content,27,temp_1,0,1);
-            int directionArmlLL = Integer.valueOf(binary(temp_1,10)).intValue();
+            long directionArmlLL = Integer.valueOf(binary(temp_1,10)).longValue();
             System.arraycopy(content,28,temp_1,0,1);
-            int directionArmlL = Integer.valueOf(binary(temp_1,10)).intValue();
+            long directionArmlL = Integer.valueOf(binary(temp_1,10)).longValue();
 
             System.arraycopy(content,29,temp_1,0,1);
-            int directionArmlH = Integer.valueOf(binary(temp_1,10)).intValue();
+            long directionArmlH = Integer.valueOf(binary(temp_1,10)).longValue();
             System.arraycopy(content,30,temp_1,0,1);
-            int directionArmlHH = Integer.valueOf(binary(temp_1,10)).intValue();
+            long directionArmlHH = Integer.valueOf(binary(temp_1,10)).longValue();
 
-            int direction = directionArmlHH * 256 * 256 * 256 +  + directionArmlH * 256 * 256 + directionArmlL * 256 + directionArmlLL;
+            long direction = directionArmlHH * 256 * 256 * 256 +  + directionArmlH * 256 * 256 + directionArmlL * 256 + directionArmlLL;
             directionArml.setText("" + direction + "°");
 
         }
@@ -2011,29 +2009,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 b41_2_down.setImageResource(R.drawable.ic_3_do_wh);
             }
 
-            // 水泵启动
-            if (tmp_3 == 1) {
+            String b41_34 = "" + tmp_3 + tmp_4;    //0 备用上  1 备用下
+            if (IConstant.STATE_01.equals(b41_34)) {   // 水泵启动
                 b41_3_up.setImageResource(R.drawable.ic_3_up_red);
-                b41_3_down.setImageResource(R.drawable.ic_3_do_wh);
-            } else {
+                b41_3_down.setImageResource(R.drawable.ic_3_mi_wh);
+                b41_45_up.setImageResource(R.drawable.ic_3_do_wh);
+            } else if(IConstant.STATE_00.equals(b41_34)){   // 水泵停止
                 b41_3_up.setImageResource(R.drawable.ic_3_up_wh);
-                b41_3_down.setImageResource(R.drawable.ic_3_do_red);
+                b41_3_down.setImageResource(R.drawable.ic_3_mi_red);
+                b41_45_up.setImageResource(R.drawable.ic_3_do_wh);
+            }else if(IConstant.STATE_10.equals(b41_34)){   // 一键炮出水
+                b41_3_up.setImageResource(R.drawable.ic_3_up_wh);
+                b41_3_down.setImageResource(R.drawable.ic_3_mi_wh);
+                b41_45_up.setImageResource(R.drawable.ic_3_do_red);
             }
 
-        String b41_45 = "" + ((temp>>4) & 0x1) + ((temp>>5) & 0x1);    //0 备用上  1 备用下
-        if(IConstant.STATE_10.equals(b41_45)){    // 备用上
-            b41_45_up.setImageResource(R.drawable.ic_3_up_red);
-            b41_45_mid.setImageResource(R.drawable.ic_3_mi_wh);
-            b41_45_down.setImageResource(R.drawable.ic_3_do_wh);
-        }else if(IConstant.STATE_00.equals(b41_45)){
-            b41_45_up.setImageResource(R.drawable.ic_3_up_wh);
-            b41_45_mid.setImageResource(R.drawable.ic_3_mi_red);
-            b41_45_down.setImageResource(R.drawable.ic_3_do_wh);
-        }else if(IConstant.STATE_01.equals(b41_45)){   //备用下
-            b41_45_up.setImageResource(R.drawable.ic_3_up_wh);
-            b41_45_mid.setImageResource(R.drawable.ic_3_mi_wh);
-            b41_45_down.setImageResource(R.drawable.ic_3_do_red);
-        }
+            if(tmp_5 == 1){    // 三臂展
+                b41_45_mid.setImageResource(R.drawable.ic_22_up_red);
+                b41_45_down.setImageResource(R.drawable.ic_22_do_wh);
+            }else {      // 三臂收
+                b41_45_mid.setImageResource(R.drawable.ic_22_up_wh);
+                b41_45_down.setImageResource(R.drawable.ic_22_do_red);
+            }
 
         // 水炮照明
         if (tmp_6 == 1) {
