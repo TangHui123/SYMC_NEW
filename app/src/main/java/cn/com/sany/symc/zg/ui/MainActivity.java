@@ -84,12 +84,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private LinearLayout driverRLayout;    //火场监控界面
     private LinearLayout workBoLayout;    //行驶界面
     private LinearLayout workRLayout;    //火场监控界面 （工作）
-
-
-
     private LinearLayout statusLayout22;
-
-
     private static int change_page_old = 0;  //保存之前一次上升沿  0x01从0到1切换
 
     private static int change_bright_old = 0;  //保存之前一次亮度上升沿   0x04从0到1切换
@@ -102,8 +97,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView Battery4;
 
     private int page = 2;  //0表示驾驶界面， 1：表示测试诊断界面  2：表示作业显示界面
-
-
 
     private boolean syncFlag = true;  //报第一次经纬度执行一次
     private CameraSurfaceView cameraView; //预览
@@ -285,12 +278,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView signalStrengthTest;
     private FrameLayout signalStrengthLayoutTest;
     private FrameLayout signalStrengthLayout1Test;
-
-
     private String question_old = "";
-
-
     //tanghui add en
+
+    // 自动模式
+    private LinearLayout autoModeLL;
+    // 臂架状态  自动展  自动收
+    private TextView tv_boom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -439,6 +433,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         dwLLayout = (LinearLayout) findViewById(R.id.dwLLayout);
         dwLLayout.setOnClickListener(this);
+
+        autoModeLL = (LinearLayout) findViewById(R.id.autoModeLL);   //刹车
+        tv_boom = (TextView) findViewById(R.id.tv_boom);             //方向盘转角
 
     }
 
@@ -1135,10 +1132,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if (tmp_0 == 1) {
                 b90_up_iv.setImageResource(R.drawable.ic_22_up_wh);
                 b90_down_iv.setImageResource(R.drawable.ic_22_do_red);
+                autoModeLL.setBackgroundResource(R.drawable.shape_ring_connect_press);
             } else {
                 b90_up_iv.setImageResource(R.drawable.ic_22_up_red);
                 b90_down_iv.setImageResource(R.drawable.ic_22_do_wh);
+                autoModeLL.setBackgroundResource(R.drawable.shape_ring_connect_nor);
+            }
 
+            // 自动展臂    内容界面显示
+            if (tmp_1 == 1) {
+                tv_boom.setText(getString(R.string.auto_open));
+            } else if(tmp_2 == 1){ // 自动收臂
+                tv_boom.setText(getString(R.string.auto_close));
             }
 
             //泡沫罐液位
@@ -1369,6 +1374,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 ErrCode.setText(getString(R.string.err_code_48));
             }else if (IConstant.ERR_CODE_49.equals(err_code)) {
                 ErrCode.setText(getString(R.string.err_code_49));
+            }else if (IConstant.ERR_CODE_49.equals(err_code)) {
+                ErrCode.setText(getString(R.string.err_code_49));
+            }else if (IConstant.err_code_50.equals(err_code)) {
+                ErrCode.setText(getString(R.string.err_code_50));
+            }else if (IConstant.err_code_51.equals(err_code)) {
+                ErrCode.setText(getString(R.string.err_code_51));
+            }else if (IConstant.err_code_52.equals(err_code)) {
+                ErrCode.setText(getString(R.string.err_code_52));
+            }else if (IConstant.err_code_53.equals(err_code)) {
+                ErrCode.setText(getString(R.string.err_code_53));
+            }else if (IConstant.err_code_54.equals(err_code)) {
+                ErrCode.setText(getString(R.string.err_code_54));
             }else {
                 ErrCode.setText("");
             }
@@ -1524,6 +1541,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             int arm_Angle3 = arm_Angle3H * 256 + arm_Angle3L;
             ArmAngle3.setText("" + arm_Angle3);
 
+            // 方向盘符号位
+            temp = content[16];
+            tmp_0 = (temp >> 0) & 0x1;  // 声光报警
+            tmp_1 = (temp >> 1) & 0x1;  // 方向盘符号位
+            tmp_6 = (temp >> 6) & 0x1;
+            tmp_7 = (temp >> 7) & 0x1;
+            int dire_fit = tmp_1;
+            // ===
+
             System.arraycopy(content,22,temp_1,0,1);
             //水流量L
             int water_FlowL = Integer.valueOf(binary(temp_1,10)).intValue();
@@ -1543,8 +1569,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             int oil = Integer.valueOf(binary(temp_1,10)).intValue();
             oil_tv.setText("" + oil + "%");
 
-
-
             //刹车
             System.arraycopy(content,26,temp_1,0,1);
             int breakData = Integer.valueOf(binary(temp_1,10)).intValue();
@@ -1562,7 +1586,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             long directionArmlHH = Integer.valueOf(binary(temp_1,10)).longValue();
 
             long direction = directionArmlHH * 256 * 256 * 256 +  + directionArmlH * 256 * 256 + directionArmlL * 256 + directionArmlLL;
-            directionArml.setText("" + direction + "°");
+            direction = direction>1000?1000:direction;
+            // 范围 -1000 到 1000
+            String dire_armgle = "" + direction;
+
+            dire_armgle = (dire_fit==1?("-"+dire_armgle):dire_armgle);
+            directionArml.setText("" + dire_armgle + "°");
 
         }
 
@@ -1797,8 +1826,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             b90_up_iv.setImageResource(R.drawable.ic_22_up_red);
             b90_down_iv.setImageResource(R.drawable.ic_22_do_wh);
            // CacheData.setMsg_info("============dealOtherData=======content=====temp====41==========>" + temp, IConstant.MESSAGE_INFO_ALL);
-
-
         } else {
             b90_up_iv.setImageResource(R.drawable.ic_22_up_wh);
             b90_down_iv.setImageResource(R.drawable.ic_22_do_red);

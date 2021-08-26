@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">SYMC3</string>
     <string name="ver_name">软件版本：vcab1.1.4</string>
-    <string name="err_code_0"> </string>
-    <string name="err_code_1"></string>
+    <string name="err_code_0">无</string>
+    <string name="err_code_1">无</string>
     <string name="err_code_2">禁止支腿动作</string>
     <string name="err_code_3">发动机测速故障</string>
     <string name="err_code_4">旋转编码器故障</string>
@@ -51,6 +51,12 @@
     <string name="err_code_47">泡沫罐液位传感器故障</string>
     <string name="err_code_48">臂架靠近高压线警告</string>
     <string name="err_code_49">二臂未回收到位，禁止对中</string>
+    <string name="err_code_50">请将水泵调速旋钮调至怠速位置</string>
+    <string name="err_code_51">主系统压力异常，请检查主阀组越权手柄</string>
+    <string name="err_code_52">请补充水罐液位≥50%，自动开启水泵</string>
+    <string name="err_code_53">臂架未展开，禁止开启一键炮出水</string>
+    <string name="err_code_54">二臂未收回到位，禁止收一臂</string>
+
     <string name="log_info">日志消息</string>
     <string name="title_close">关闭</string>
     <string name="not_started">未启动</string>
@@ -69,4 +75,6 @@
     <string name="button_confirm">确定</string>
     <string name="shut_stop">已关闭急停</string>
     <string name="warn_info">炮头碰撞预警！</string>
+    <string name="auto_open">自动展臂</string>
+    <string name="auto_close">自动收臂</string>
 </resources>
