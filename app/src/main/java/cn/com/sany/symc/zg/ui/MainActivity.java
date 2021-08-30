@@ -1749,30 +1749,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         temp = content[40];
-            tmp_0 = (temp >> 0) & 0x1;
-            tmp_7 = (temp >> 7) & 0x1;
+        tmp_0 = (temp >> 0) & 0x1;
+        tmp_7 = (temp >> 7) & 0x1;
 
-            // 遥控启动
-//            if (tmp_0 == 1) {
-//                b370_iv.setImageResource(R.drawable.ic_round_red);
-//            } else {
-//                b370_iv.setImageResource(R.drawable.ic_round_white);
-//            }
-
-            String b37_12 = "" + ((temp>>1) & 0x1) + ((temp>>2) & 0x1);    //1 直流  2 喷雾
-            if(IConstant.STATE_10.equals(b37_12)){   //直流
-                b37_12_up.setImageResource(R.drawable.ic_3_up_red);
-                b37_12_mid.setImageResource(R.drawable.ic_3_mi_wh);
-                b37_12_down.setImageResource(R.drawable.ic_3_do_wh);
-            }else if(IConstant.STATE_00.equals(b37_12)){
-                b37_12_up.setImageResource(R.drawable.ic_3_up_wh);
-                b37_12_mid.setImageResource(R.drawable.ic_3_mi_red);
-                b37_12_down.setImageResource(R.drawable.ic_3_do_wh);
-            }else if(IConstant.STATE_01.equals(b37_12)){   //喷雾
-                b37_12_up.setImageResource(R.drawable.ic_3_up_wh);
-                b37_12_mid.setImageResource(R.drawable.ic_3_mi_wh);
-                b37_12_down.setImageResource(R.drawable.ic_3_do_red);
-            }
+        String b37_12 = "" + ((temp>>1) & 0x1) + ((temp>>2) & 0x1);    //1 直流  2 喷雾
+        if(IConstant.STATE_10.equals(b37_12)){   //直流
+            b37_12_up.setImageResource(R.drawable.ic_3_up_red);
+            b37_12_mid.setImageResource(R.drawable.ic_3_mi_wh);
+            b37_12_down.setImageResource(R.drawable.ic_3_do_wh);
+        }else if(IConstant.STATE_00.equals(b37_12)){
+            b37_12_up.setImageResource(R.drawable.ic_3_up_wh);
+            b37_12_mid.setImageResource(R.drawable.ic_3_mi_red);
+            b37_12_down.setImageResource(R.drawable.ic_3_do_wh);
+        }else if(IConstant.STATE_01.equals(b37_12)){   //喷雾
+            b37_12_up.setImageResource(R.drawable.ic_3_up_wh);
+            b37_12_mid.setImageResource(R.drawable.ic_3_mi_wh);
+            b37_12_down.setImageResource(R.drawable.ic_3_do_red);
+        }
 
         String b37_34 = "" + ((temp>>3) & 0x1) + ((temp>>4) & 0x1);    //3 水炮上  4 水炮下
         if(IConstant.STATE_10.equals(b37_34)){   //水炮上
@@ -1814,8 +1807,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         temp = content[41];
         tmp_0 = (temp >> 0) & 0x1;
         tmp_1 = (temp >> 1) & 0x1;
-        tmp_2 = (temp >> 2) & 0x1;
-        tmp_3 = (temp >> 3) & 0x1;
+        tmp_2 = (temp >> 2) & 0x1;  //自动展臂
+        tmp_3 = (temp >> 3) & 0x1;  //自动收臂
         tmp_4 = (temp >> 4) & 0x1;
         tmp_5 = (temp >> 5) & 0x1;
         tmp_6 = (temp >> 6) & 0x1;
@@ -1831,28 +1824,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             b90_down_iv.setImageResource(R.drawable.ic_22_do_red);
         }
 
-        String b37_14 = "" + ((temp>>1) & 0x1) + ((temp>>4) & 0x1);    //1 臂架使能  4 支腿使能
-        if(IConstant.STATE_10.equals(b37_14)){   //臂架使能
-            b38_14_up.setImageResource(R.drawable.ic_3_up_red);
-            b38_14_mid.setImageResource(R.drawable.ic_3_mi_wh);
-            b38_14_down.setImageResource(R.drawable.ic_3_do_wh);
-        }else if(IConstant.STATE_00.equals(b37_14)){
-            b38_14_up.setImageResource(R.drawable.ic_3_up_wh);
-            b38_14_mid.setImageResource(R.drawable.ic_3_mi_red);
-            b38_14_down.setImageResource(R.drawable.ic_3_do_wh);
-        }else if(IConstant.STATE_01.equals(b37_14)){   //支腿使能  有问题
-            b38_14_up.setImageResource(R.drawable.ic_3_up_wh);
-            b38_14_mid.setImageResource(R.drawable.ic_3_mi_wh);
-            b38_14_down.setImageResource(R.drawable.ic_3_do_red);
+        String b37_14 = "" + ((temp>>1) & 0x1);   //1 臂架使能
+
+        String b41_45 = "" + ((temp>>4) & 0x1) + ((temp>>5) & 0x1);    //4 支腿收回  5 支腿调平
+        if(IConstant.STATE_10.equals(b41_45)){   //支腿收回
+            b39_45_up.setImageResource(R.drawable.ic_3_up_red);
+            b39_45_mid.setImageResource(R.drawable.ic_3_mi_wh);
+            b39_45_down.setImageResource(R.drawable.ic_3_do_wh);
+        }else if(IConstant.STATE_00.equals(b41_45)){
+            b39_45_up.setImageResource(R.drawable.ic_3_up_wh);
+            b39_45_mid.setImageResource(R.drawable.ic_3_mi_red);
+            b39_45_down.setImageResource(R.drawable.ic_3_do_wh);
+        }else if(IConstant.STATE_01.equals(b41_45)){   //支腿调平
+            b39_45_up.setImageResource(R.drawable.ic_3_up_wh);
+            b39_45_mid.setImageResource(R.drawable.ic_3_mi_wh);
+            b39_45_down.setImageResource(R.drawable.ic_3_do_red);
         }
 
 
-        // 强制动作
-        if (tmp_5 == 1) {
-            b385_iv.setImageResource(R.drawable.ic_round_red);
-        } else {
-            b385_iv.setImageResource(R.drawable.ic_round_white);
-        }
+
 
         // 末端供电（备用）不知到
 //        if (tmp_6 == 1) {
@@ -1876,9 +1866,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tmp_1 = (temp >> 1) & 0x1;
         tmp_2 = (temp >> 2) & 0x1;
         tmp_3 = (temp >> 3) & 0x1;
-        tmp_4 = (temp >> 4) & 0x1;
+        tmp_4 = (temp >> 4) & 0x1;  // 三臂伸缩使能
         tmp_5 = (temp >> 5) & 0x1;
-        bj_down = (temp >> 6) & 0x1; //视频变焦 往下
+        tmp_6 = (temp >> 6) & 0x1;
+       // bj_down = (temp >> 6) & 0x1; //视频变焦 往下
         tmp_7 = (temp >> 7) & 0x1;
         String b39_01 = "" + ((temp>>0) & 0x1) + ((temp>>1) & 0x1);    //0 水炮自摆  1 水炮复位
         if(IConstant.STATE_10.equals(b39_01)){   //水炮自摆
@@ -1895,14 +1886,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             b39_01_down.setImageResource(R.drawable.ic_3_do_red);
         }
 
-        //
-
-
-
-        if (tmp_2 == 1) {
-            b370_iv.setImageResource(R.drawable.ic_round_red);
-        } else {
-            b370_iv.setImageResource(R.drawable.ic_round_white);
+        b37_14 = "" + b37_14 + ((temp>>2) & 0x1);  //臂架使能   支腿使能
+        if(IConstant.STATE_10.equals(b37_14)){   //臂架使能
+            b38_14_up.setImageResource(R.drawable.ic_3_up_red);
+            b38_14_mid.setImageResource(R.drawable.ic_3_mi_wh);
+            b38_14_down.setImageResource(R.drawable.ic_3_do_wh);
+        }else if(IConstant.STATE_00.equals(b37_14)){
+            b38_14_up.setImageResource(R.drawable.ic_3_up_wh);
+            b38_14_mid.setImageResource(R.drawable.ic_3_mi_red);
+            b38_14_down.setImageResource(R.drawable.ic_3_do_wh);
+        }else if(IConstant.STATE_01.equals(b37_14)){   //支腿使能
+            b38_14_up.setImageResource(R.drawable.ic_3_up_wh);
+            b38_14_mid.setImageResource(R.drawable.ic_3_mi_wh);
+            b38_14_down.setImageResource(R.drawable.ic_3_do_red);
         }
 
         // 回转对中
@@ -1912,28 +1908,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             b393_iv.setImageResource(R.drawable.ic_round_white);
         }
 
-        String b39_45 = "" + ((temp>>4) & 0x1) + ((temp>>5) & 0x1);    //0 水炮自摆  1 水炮复位
-        if(IConstant.STATE_10.equals(b39_45)){    // 水炮自摆
-            b39_45_up.setImageResource(R.drawable.ic_3_up_red);
-            b39_45_mid.setImageResource(R.drawable.ic_3_mi_wh);
-            b39_45_down.setImageResource(R.drawable.ic_3_do_wh);
-        }else if(IConstant.STATE_00.equals(b39_45)){
-            b39_45_up.setImageResource(R.drawable.ic_3_up_wh);
-            b39_45_mid.setImageResource(R.drawable.ic_3_mi_red);
-            b39_45_down.setImageResource(R.drawable.ic_3_do_wh);
-        }else if(IConstant.STATE_01.equals(b39_45)){   //水炮复位
-            b39_45_up.setImageResource(R.drawable.ic_3_up_wh);
-            b39_45_mid.setImageResource(R.drawable.ic_3_mi_wh);
-            b39_45_down.setImageResource(R.drawable.ic_3_do_red);
+        if(tmp_4 == 1){    // 三臂伸缩使能
+            b41_45_mid.setImageResource(R.drawable.ic_22_up_red);
+            b41_45_down.setImageResource(R.drawable.ic_22_do_wh);
+        }else {      //
+            b41_45_mid.setImageResource(R.drawable.ic_22_up_wh);
+            b41_45_down.setImageResource(R.drawable.ic_22_do_red);
         }
 
+        // 遥控器照明
+        if (tmp_5 == 1) {
+            b417_iv.setImageResource(R.drawable.ic_round_red);
+        } else {
+            b417_iv.setImageResource(R.drawable.ic_round_white);
+        }
 
-//        if (tmp_3 == 2) {
-//            b397_iv.setImageResource(R.drawable.ic_round_red);
-//        } else {
-//            b397_iv.setImageResource(R.drawable.ic_round_white);
-//        }
-
+        // 启动按钮
+        if (tmp_6 == 1) {
+            b370_iv.setImageResource(R.drawable.ic_round_red);
+        } else {
+            b370_iv.setImageResource(R.drawable.ic_round_white);
+        }
 
         temp = content[43];
         tmp_0 = (temp >> 0) & 0x1;
@@ -2021,23 +2016,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 b41_01_down.setImageResource(R.drawable.ic_3_do_red);
             }
 
-            // 视频变焦
-            if (tmp_2 == 1) {
+            // 视频变焦上   下
+             String b44_23 = "" + tmp_3 + tmp_2;
+            if (IConstant.STATE_01.equals(b44_23)) {
                 b41_2_up.setImageResource(R.drawable.ic_3_up_red);
                 b41_2_mid.setImageResource(R.drawable.ic_3_mi_wh);
                 b41_2_down.setImageResource(R.drawable.ic_3_do_wh);
-            } else if(bj_down == 1){
-                b41_2_up.setImageResource(R.drawable.ic_3_up_wh);
-                b41_2_mid.setImageResource(R.drawable.ic_3_mi_wh);
-                b41_2_down.setImageResource(R.drawable.ic_3_do_red);
-            }else{
+            } else if(IConstant.STATE_00.equals(b44_23)){
                 b41_2_up.setImageResource(R.drawable.ic_3_up_wh);
                 b41_2_mid.setImageResource(R.drawable.ic_3_mi_red);
                 b41_2_down.setImageResource(R.drawable.ic_3_do_wh);
+            }else if(IConstant.STATE_10.equals(b44_23)){
+                b41_2_up.setImageResource(R.drawable.ic_3_up_wh);
+                b41_2_mid.setImageResource(R.drawable.ic_3_mi_wh);
+                b41_2_down.setImageResource(R.drawable.ic_3_do_red);
             }
 
-            String b41_34 = "" + tmp_3 + tmp_4;    //0 备用上  1 备用下
-            if (IConstant.STATE_01.equals(b41_34)) {   // 水泵启动
+            String b41_34 = "" + tmp_5 + tmp_4;
+            if (IConstant.STATE_01.equals(b41_34)) {     // 水泵启动
                 b41_3_up.setImageResource(R.drawable.ic_3_up_red);
                 b41_3_down.setImageResource(R.drawable.ic_3_mi_wh);
                 b41_45_up.setImageResource(R.drawable.ic_3_do_wh);
@@ -2051,27 +2047,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 b41_45_up.setImageResource(R.drawable.ic_3_do_red);
             }
 
-            if(tmp_5 == 1){    // 三臂展
-                b41_45_mid.setImageResource(R.drawable.ic_22_up_red);
-                b41_45_down.setImageResource(R.drawable.ic_22_do_wh);
-            }else {      // 三臂收
-                b41_45_mid.setImageResource(R.drawable.ic_22_up_wh);
-                b41_45_down.setImageResource(R.drawable.ic_22_do_red);
-            }
+
+        // 强制动作
+        if (tmp_6 == 1) {
+            b385_iv.setImageResource(R.drawable.ic_round_red);
+        } else {
+            b385_iv.setImageResource(R.drawable.ic_round_white);
+        }
+
 
         // 水炮照明
-        if (tmp_6 == 1) {
+        if (tmp_7 == 1) {
             b416_iv.setImageResource(R.drawable.ic_round_red);
         } else {
             b416_iv.setImageResource(R.drawable.ic_round_white);
         }
 
-        // 遥控器照明
-        if (tmp_7 == 1) {
-            b417_iv.setImageResource(R.drawable.ic_round_red);
-        } else {
-            b417_iv.setImageResource(R.drawable.ic_round_white);
-        }
+
 
         System.arraycopy(content, 45, temp_1, 0, 1);
         int temp_45 = bytes2int(temp_1);
