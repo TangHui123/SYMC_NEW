@@ -36,8 +36,8 @@ import cn.com.sany.symc.zg.ui.fragment.PasswordInputFragment;
 import cn.com.sany.symc.zg.util.CacheData;
 import cn.com.sany.symc.zg.util.LogUtil;
 import cn.com.sany.symc.zg.util.NumberBytes;
-
 import android.support.v4.content.ContextCompat;
+
 
 /**
  * 首页应用
@@ -285,6 +285,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private LinearLayout autoModeLL;
     // 臂架状态  自动展  自动收
     private TextView tv_boom;
+    // 紧急状态
+    private TextView stopStatus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -436,6 +438,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         autoModeLL = (LinearLayout) findViewById(R.id.autoModeLL);   //刹车
         tv_boom = (TextView) findViewById(R.id.tv_boom);             //方向盘转角
+        stopStatus = (TextView) findViewById(R.id.stopStatus);       // 紧急状态
 
     }
 
@@ -1144,6 +1147,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 tv_boom.setText(getString(R.string.auto_open));
             } else if(tmp_2 == 1){ // 自动收臂
                 tv_boom.setText(getString(R.string.auto_close));
+            }else{
+                tv_boom.setText("");
             }
 
             //泡沫罐液位
@@ -1233,13 +1238,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             //紧急停止
             if (tmp_7 == 1 ) {
-                tvStop1111.setText(getString(R.string.scram));
-                ivStop1111.setImageResource(R.drawable.ic_jt_use);
+                stopStatus.setText(getString(R.string.txt_stop));
             } else {
-                tvStop1111.setText(getString(R.string.shut_stop));
-                ivStop1111.setImageResource(R.drawable.ic_jt_stop);
+                stopStatus.setText("");
             }
-
 
             System.arraycopy(content,2,temp_1,0,1);
             float turretAngleL = Float.valueOf(binary(temp_1,10)).floatValue();//转塔角度L

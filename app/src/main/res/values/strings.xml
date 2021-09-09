@@ -63,6 +63,7 @@
     <string name="started">启动</string>
     <string name="scram">急停</string>
     <string name="stop">停止</string>
+    <string name="txt_stop">紧急停止</string>
     <string name="arm_spread">自动展</string>
     <string name="arm_shrink">自动收</string>
     <string name="arm_none"> </string>

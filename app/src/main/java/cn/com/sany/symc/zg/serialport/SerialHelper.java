@@ -734,53 +734,6 @@ public class SerialHelper {
 	}
 
 
-//    /***
-//	 *
-//	 * 向串口发送数据方法,主要是下发的视频、同步指令、发送不成功、再发一次
-//	 *
-//	 */
-//	private void startRequestDataTimer(){
-//
-//	    //发送数据定时器
-//		timer2 = new Timer();
-//		task2 = new TimerTask() {
-//			@Override
-//			public void run() {
-//
-//				try{
-//					DownDataEntity downDataEntity = null;
-//					for(String key:CacheData.getDownDataEntityMap().keySet()) {
-//						downDataEntity = CacheData.getDownDataEntityMap().get(key);
-//						long times = (new Date().getTime() - downDataEntity.getTime().getTime()) / 1000;
-//						//超过两秒没收到回复，重新下发
-//						if (times > 2) {
-//							LogUtil.d(TAG,"======Timer===Timer==========getCommand=====getSerial_id==========>"+NumberBytes.byteToInt(downDataEntity.getCommand())
-//									+ "" + NumberBytes.byteToInt(downDataEntity.getSerial_id()));
-//							CacheData.setMsg_info("======Timer===Timer==========getCommand=====getSerial_id=======>"+NumberBytes.byteToInt(downDataEntity.getCommand())
-//									+ "" + NumberBytes.byteToInt(downDataEntity.getSerial_id()) +  rail_id,7);
-//							CacheData.operateDownDataEntityMap(""+"" + NumberBytes.byteToInt(downDataEntity.getCommand())
-//									+ "" + NumberBytes.byteToInt(downDataEntity.getSerial_id()),null,false);
-//							switch(downDataEntity.getCommand()) {
-//								//显示屏下发视频录制配置信息
-//								case IConstant.COMMAND_DOWN_VIDEO: {
-//									sendRecordVideo(NumberBytes.intToByte(CacheData.getSerial_id()),false);
-//									break;
-//								}
-//
-//							}
-//						}
-//
-//					}
-//
-//				}catch (Exception e){
-//					LogUtil.e(TAG,"==============startRequestDataTimer====================>"+e.getMessage());
-//					e.printStackTrace();
-//				}
-//			}
-//		};
-//		timer2.schedule(task2,3000, IConstant.GetDeviceDataCycle);   //10005000
-//	}
-
 
 	public void close(){
 		if (mReadThread != null)

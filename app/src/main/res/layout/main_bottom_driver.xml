@@ -322,6 +322,22 @@
                 android:textColor="@color/white"
                 android:textSize="18sp" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="60dp"
+                android:textColor="@color/white"
+                android:text="紧急停止状态："
+                android:textSize="18sp"/>
+
+            <TextView
+                android:id="@+id/stopStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text=""
+                android:textSize="18sp"/>
+
         </LinearLayout>
 
 
